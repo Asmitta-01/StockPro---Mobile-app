@@ -108,7 +108,7 @@ class AppTheme {
     drawerTheme: const DrawerThemeData(backgroundColor: Color(0xffffffff)),
 
     /// Card Theme
-    cardTheme: const CardTheme(color: Color(0xfff0f0f0)),
+    cardTheme: const CardTheme(color: Color(0xffffffff), elevation: 0),
     cardColor: const Color(0xfff0f0f0),
 
     fontFamily: 'AfacadFlux',
@@ -178,7 +178,15 @@ class AppTheme {
     /// CheckBox theme
     checkboxTheme: CheckboxThemeData(
       checkColor: WidgetStateProperty.all(const Color(0xffeeeeee)),
-      fillColor: WidgetStateProperty.all(const Color(0xff3C4EC5)),
+      fillColor: WidgetStateProperty.resolveWith(
+        (states) {
+          if (states.contains(WidgetState.selected)) {
+            return const Color(0xff3C4EC5);
+          } else {
+            return Colors.transparent;
+          }
+        },
+      ),
     ),
 
     /// Radio theme
@@ -262,7 +270,7 @@ class AppTheme {
     textTheme: _getTextTheme(),
 
     /// Card Theme
-    cardTheme: const CardTheme(color: Color(0xff222327)),
+    cardTheme: const CardTheme(color: Color(0xff222327), elevation: 0),
     cardColor: const Color(0xff222327),
 
     /// Input (Text-Field) Theme
@@ -322,6 +330,20 @@ class AppTheme {
       indicatorSize: TabBarIndicatorSize.label,
       indicator: UnderlineTabIndicator(
         borderSide: BorderSide(color: Color(0xff069DEF), width: 2.0),
+      ),
+    ),
+
+    // CheckBox Theme
+    checkboxTheme: CheckboxThemeData(
+      checkColor: WidgetStateProperty.all(const Color(0xff464c52)),
+      fillColor: WidgetStateProperty.resolveWith(
+        (states) {
+          if (states.contains(WidgetState.selected)) {
+            return const Color(0xff3C4EC5);
+          } else {
+            return Colors.transparent;
+          }
+        },
       ),
     ),
 

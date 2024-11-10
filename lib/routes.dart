@@ -2,11 +2,11 @@ import 'package:get/get.dart';
 import 'package:stock_pro/controllers/auth/login_controller.dart';
 import 'package:stock_pro/controllers/auth/post_auth_controller.dart';
 import 'package:stock_pro/controllers/auth/signup_controller.dart';
-import 'package:stock_pro/controllers/home/manager_home_controller.dart';
+import 'package:stock_pro/controllers/home/owner_home_controller.dart';
 import 'package:stock_pro/views/auth/login_screen.dart';
 import 'package:stock_pro/views/auth/post_auth_screen.dart';
 import 'package:stock_pro/views/auth/signup_screen.dart';
-import 'package:stock_pro/views/home/manager_home_screen.dart';
+import 'package:stock_pro/views/home/owner_home_screen.dart';
 import 'package:stock_pro/views/splash_screen.dart';
 
 import 'controllers/splash_controller.dart';
@@ -51,8 +51,8 @@ class AppPages {
     ),
     GetPage(
       name: Routes.main,
-      page: () => const ManagerHomeScreen(),
-      binding: BindingsBuilder.put(() => ManagerHomeController()),
+      page: () => const OwnerHomeScreen(),
+      binding: BindingsBuilder.put(() => OwnerHomeController()),
     ),
   ];
 }

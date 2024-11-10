@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:stock_pro/models/helpers/language_model.dart';
@@ -31,7 +33,13 @@ class LoginController extends GetxController {
     Future.delayed(const Duration(seconds: 4), () {
       loggingIn = false;
       update();
-      Get.toNamed(Routes.accountComplete);
+
+      bool accountComplete = Random().nextBool();
+      if (!accountComplete) {
+        Get.toNamed(Routes.accountComplete);
+      } else {
+        Get.toNamed(Routes.main);
+      }
     });
   }
 
