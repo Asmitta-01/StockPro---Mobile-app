@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:stock_pro/controllers/home/owner_home_controller.dart';
 import 'package:stock_pro/utils/image_data.dart';
+import 'package:stock_pro/widgets/drawer_widget.dart';
 import 'package:stock_pro/widgets/getting_started_widget.dart';
 
 class OwnerHomeScreen extends GetView<OwnerHomeController> {
@@ -14,7 +15,10 @@ class OwnerHomeScreen extends GetView<OwnerHomeController> {
         return Scaffold(
           key: controller.scaffoldKey,
           drawerEnableOpenDragGesture: true,
-          drawer: Container(),
+          drawer: DrawerWidget(
+            currentPage: 1,
+            scaffoldKey: controller.scaffoldKey,
+          ),
           appBar: AppBar(
             shadowColor: Get.theme.colorScheme.onSurface.withAlpha(100),
             foregroundColor: Get.theme.colorScheme.onSurface.withAlpha(224),
