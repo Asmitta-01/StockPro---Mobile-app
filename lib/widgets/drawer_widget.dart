@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 import 'package:stock_pro/routes.dart';
 import 'package:stock_pro/utils/image_data.dart';
 
@@ -12,7 +13,7 @@ class DrawerWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Future<PackageInfo> packageInfo = PackageInfo.fromPlatform();
+    Future<PackageInfo> packageInfo = PackageInfo.fromPlatform();
 
     return Drawer(
       child: Column(
@@ -34,24 +35,17 @@ class DrawerWidget extends StatelessWidget {
                 children: [
                   Image.asset(ImageData.logo, width: 90),
                   const SizedBox(width: 12),
-                  // FutureBuilder(
-                  //   future: packageInfo,
-                  //   builder: (context, snapshot) {
-                  //     return snapshot.hasData
-                  //         ? Text(
-                  //             "v${snapshot.data!.version}",
-                  //             style: Get.textTheme.bodySmall,
-                  //           )
-                  //         : SizedBox(
-                  //             width: 8,
-                  //             height: 2,
-                  //             child: LinearProgressIndicator(
-                  //               color: theme.colorScheme.onSurface,
-                  //               minHeight: 2,
-                  //             ),
-                  //           );
-                  //   },
-                  // ),
+                  FutureBuilder(
+                    future: packageInfo,
+                    builder: (context, snapshot) {
+                      return snapshot.hasData
+                          ? Text(
+                              "v${snapshot.data!.version}",
+                              style: Get.textTheme.bodySmall,
+                            )
+                          : const SizedBox.shrink();
+                    },
+                  ),
                 ],
               ),
             ),
@@ -62,15 +56,15 @@ class DrawerWidget extends StatelessWidget {
   }
 
   ListView getDrawerItemsList() {
-    const divider = Divider(height: 10, thickness: 10);
+    const divider = Divider(height: 10, thickness: 8);
     return ListView(
       padding: const EdgeInsets.only(bottom: 8),
+      physics: const NeverScrollableScrollPhysics(),
       children: <Widget>[
         divider,
-        _singleDrawerItem(Icons.dashboard, "Accueil", Routes.main, 1),
+        _singleDrawerItem(Icons.dashboard, "home".tr, Routes.main, 1),
         divider,
-        _singleDrawerItem(
-            Icons.storage_rounded, "Articles", '/user/profile', 2),
+        _singleDrawerItem(Icons.storage_rounded, "items".tr, Routes.items, 2),
         _singleDrawerItem(Icons.switch_access_shortcut, "Operations",
             '/user/notifications', 3),
         _singleDrawerItem(Icons.notifications_rounded, "Notifications",
@@ -92,31 +86,25 @@ class DrawerWidget extends StatelessWidget {
       padding: const EdgeInsets.fromLTRB(16, 0, 16, 8),
       margin: EdgeInsets.zero,
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
-          Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: <Widget>[
-              Container(
-                padding: const EdgeInsets.all(10),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(50),
-                  color: Get.theme.cardColor,
-                ),
-                child: const Icon(Icons.person, size: 80),
-              ),
-              const SizedBox(height: 8.0),
-              Text("User name", style: Get.textTheme.titleLarge),
-              Text(
-                "user@email.com",
-                style: TextStyle(
-                  color: Get.theme.colorScheme.onSurface.withAlpha(150),
-                ),
-              )
-            ],
+          Container(
+            padding: const EdgeInsets.all(10),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(50),
+              color: Get.theme.cardColor,
+            ),
+            child: const Icon(Icons.person, size: 80),
           ),
+          const SizedBox(height: 8.0),
+          Text("User name", style: Get.textTheme.titleLarge),
+          Text(
+            "user@email.com",
+            style: TextStyle(
+              color: Get.theme.colorScheme.onSurface.withAlpha(150),
+            ),
+          )
         ],
       ),
     );
@@ -145,7 +133,6 @@ class DrawerWidget extends StatelessWidget {
     }
 
     return ListTile(
-      dense: true,
       contentPadding: const EdgeInsets.symmetric(horizontal: 16),
       leading: Icon(
         iconData,
@@ -164,9 +151,12 @@ class DrawerWidget extends StatelessWidget {
               : theme.colorScheme.onSurface,
         ),
       ),
+      dense: true,
       onTap: () {
-        Get.toNamed(destination);
-        scaffoldKey.currentState!.closeDrawer();
+        if (currentPage != position) {
+          Get.offNamed(destination);
+        }
+        scaffoldKey.currentState?.closeDrawer();
       },
     );
   }

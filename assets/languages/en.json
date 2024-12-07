@@ -59,7 +59,7 @@
     "fill_this_form": "Fill this form",
     "getting_started": "Getting started",
     "explore_all_the_possibilities_offered_by_our_app": "Explore all the possibilities offered by our app. Start gaining efficiency today !",
-    "add_your_first_item": "Add your first product",
+    "add_your_first_item": "Add your first item",
     "record_your_first_operation": "Record your first operation",
     "define_the_stock_alert_threshold_of_an_item": "Define the stock alert threshold of an item",
     "add_a_manager": "Add a manager for your shop",
@@ -76,5 +76,6 @@
     "total_items_present_in_your_shop": "Total number of items in your shop",
     "you_are_good_with_premium": "You're good with StockPremium",
     "get_premium_pass": "Get premium pass",
-    "premium_pass_intro_text": "Manage more than one shop, add more than one manager, get infinite items stock with the premium pass."
+    "premium_pass_intro_text": "Manage more than one shop, add more than one manager, get infinite items stock with the premium pass.",
+    "items": "Items"
 }
