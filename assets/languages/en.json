@@ -77,5 +77,17 @@
     "you_are_good_with_premium": "You're good with StockPremium",
     "get_premium_pass": "Get premium pass",
     "premium_pass_intro_text": "Manage more than one shop, add more than one manager, get infinite items stock with the premium pass.",
-    "items": "Items"
+    "items": "Items",
+    "item_name": "Item Name",
+    "item_price": "Item Price",
+    "item_quantity": "Item Quantity",
+    "please_enter_item_name": "Please enter item name",
+    "please_enter_item_price": "Please enter item price",
+    "please_enter_item_quantity": "Please enter item quantity",
+    "please_fill_in_the_item_details_below": "Please fill in the item details below to add an item to your shop.",
+    "description": "Description",
+    "please_enter_description": "Please enter description",
+    "item_description": "Description of the item",
+    "item_added_successfully": "Item added successfully",
+    "saving_item": "Saving item"
 }

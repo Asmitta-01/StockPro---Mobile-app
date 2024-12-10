@@ -77,5 +77,17 @@
     "you_are_good_with_premium": "Vous êtes meilleur avec StockPremium",
     "get_premium_pass": "Obtenir le pass",
     "premium_pass_intro_text": "Gérez plusieurs boutiques, ajoutez plusieurs gérant pour celles ci, ajoutez un nombre illimité d'articles dans vos boutiques. Tou cela grâce au pass premium.",
-    "items": "Articles"
+    "items": "Articles",
+    "item_name": "Nom de l'article",
+    "item_price": "Prix de l'article",
+    "item_quantity": "Quantité de l'article",
+    "please_enter_item_name": "Veuillez entrer le nom de l'article",
+    "please_enter_item_price": "Veuillez entrer le prix de l'article",
+    "please_enter_item_quantity": "Veuillez entrer la quantité de l'article",
+    "please_fill_in_the_item_details_below": "Renseignez les elements suivants de votre article pour l'enregistrer dans votre boutique.",
+    "description": "Description",
+    "please_enter_description": "Veuillez entrer la description",
+    "item_description": "Description de l'article",
+    "item_added_successfully": "Article ajouté avec succès",
+    "saving_item": "Enregistrement de l'article en cours"
 }

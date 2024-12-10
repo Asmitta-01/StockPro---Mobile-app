@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:stock_pro/models/item.dart';
+import 'package:stock_pro/routes.dart';
 
 class ItemsController extends GetxController {
   GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
@@ -12,5 +13,7 @@ class ItemsController extends GetxController {
     scaffoldKey.currentState!.openDrawer();
   }
 
-  void goToAddItemScreen() {}
+  void goToAddItemScreen() {
+    Get.toNamed(Routes.addItem);
+  }
 }
