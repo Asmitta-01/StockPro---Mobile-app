@@ -1,10 +1,18 @@
 class Item {
   int? id;
   String name;
-  String price;
+  double price;
   String? image;
   String description;
   int quantity;
+
+  int? _stockThreshold;
+
+  int get stockThreshold => _stockThreshold!;
+
+  set stockThreshold(int value) {
+    _stockThreshold = value;
+  }
 
   Item({
     this.id,

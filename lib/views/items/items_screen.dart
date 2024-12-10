@@ -19,6 +19,36 @@ class ItemsScreen extends GetView<ItemsController> {
               onTap: controller.openDrawer,
               child: const Icon(Icons.menu_rounded),
             ),
+            actions: controller.selectedItems.isNotEmpty
+                ? [
+                    IconButton(
+                      onPressed: null,
+                      icon: Text("${controller.selectedItems.length}"),
+                    ),
+                    IconButton(
+                      onPressed: controller.items.length ==
+                              controller.selectedItems.length
+                          ? controller.clearSelection
+                          : controller.selectAllItems,
+                      icon: Icon(
+                        controller.items.length ==
+                                controller.selectedItems.length
+                            ? Icons.deselect
+                            : Icons.select_all,
+                      ),
+                    ),
+                    IconButton(
+                      onPressed: controller.deleteSelectedItems,
+                      icon: const Icon(Icons.delete_outline),
+                    ),
+                  ]
+                : [
+                    if (controller.items.isNotEmpty)
+                      IconButton(
+                        onPressed: controller.goToAddItemScreen,
+                        icon: const Icon(Icons.add_circle_outline),
+                      ),
+                  ],
           ),
           drawerEnableOpenDragGesture: true,
           drawer: DrawerWidget(
@@ -34,16 +64,51 @@ class ItemsScreen extends GetView<ItemsController> {
   }
 
   ListView _buildItemsList(ItemsController controller) {
-    return ListView.builder(
+    return ListView.separated(
       itemCount: controller.items.length,
       shrinkWrap: true,
       itemBuilder: (context, index) {
         return ListTile(
           title: Text(controller.items[index].name),
-          subtitle: Text(controller.items[index].description),
-          trailing: Text(controller.items[index].price.toString()),
+          subtitle: Text(
+            controller.items[index].description,
+            overflow: TextOverflow.ellipsis,
+          ),
+          leading: controller.selectedItems.contains(controller.items[index])
+              ? CircleAvatar(
+                  backgroundColor: Get.theme.colorScheme.primary,
+                  child: Icon(
+                    Icons.check,
+                    color: Get.theme.colorScheme.onPrimary,
+                  ),
+                )
+              : CircleAvatar(
+                  child: Text(
+                    controller.items[index].name[0].toUpperCase(),
+                    style: Get.textTheme.bodyLarge,
+                  ),
+                ),
+          onTap: () {
+            if (controller.selectedItems.isEmpty) {
+              controller.goToItemDetailsScreen(controller.items[index]);
+            } else if (controller.selectedItems
+                .contains(controller.items[index])) {
+              controller.removeSelectedItem(controller.items[index]);
+            } else {
+              controller.selectItem(controller.items[index]);
+            }
+          },
+          onLongPress: () {
+            controller.selectItem(controller.items[index]);
+          },
+          trailing: Text(
+            controller.items[index].quantity.toString(),
+            style: Get.textTheme.bodyLarge,
+          ),
         );
       },
+      separatorBuilder: (BuildContext context, int index) =>
+          const Divider(height: 1),
     );
   }
 
