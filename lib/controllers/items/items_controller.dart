@@ -32,6 +32,27 @@ class ItemsController extends GetxController {
       quantity: 30,
       description: 'This is item 3',
     ),
+    Item(
+      id: 4,
+      name: 'Barre de fer de diamètre 16',
+      price: 4000,
+      quantity: 40,
+      description: 'This is item 4',
+    ),
+    Item(
+      id: 5,
+      name: 'Barre de fer de diamètre 20',
+      price: 5000,
+      quantity: 50,
+      description: 'This is item 5',
+    ),
+    Item(
+      id: 6,
+      name: 'Barre de fer de diamètre 25',
+      price: 6000,
+      quantity: 10,
+      description: 'This is item 6',
+    ),
   ];
 
   void openDrawer() {

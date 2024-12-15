@@ -457,13 +457,13 @@ class AppTheme {
       ),
       bodyMedium: TextStyle(
         fontFamily: 'AfacadFlux',
-        fontSize: 16,
+        fontSize: 16.5,
         fontWeight: FontWeight.w400,
         letterSpacing: 0.25,
       ),
       bodySmall: TextStyle(
         fontFamily: 'AfacadFlux',
-        fontSize: 12,
+        fontSize: 13,
         fontWeight: FontWeight.w400,
         letterSpacing: 0.4,
       ),

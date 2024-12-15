@@ -89,5 +89,8 @@
     "please_enter_description": "Please enter description",
     "item_description": "Description of the item",
     "item_added_successfully": "Item added successfully",
-    "saving_item": "Saving item"
+    "saving_item": "Saving item",
+    "operations": "Operations",
+    "saving_operation": "Saving operation",
+    "operation_saved": "Operation saved"
 }

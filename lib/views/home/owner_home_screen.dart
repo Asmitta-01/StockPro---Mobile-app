@@ -175,10 +175,7 @@ class OwnerHomeWidget extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Image.asset(
-              Get.isDarkMode ? ImageData.itemsDark : ImageData.items,
-              height: 70,
-            ),
+            Image.asset(ImageData.items, height: 70),
             const SizedBox(height: 6),
             Text(
               ownerHomeController.totalItems.toString(),

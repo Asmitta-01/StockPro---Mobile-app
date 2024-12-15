@@ -65,8 +65,8 @@ class DrawerWidget extends StatelessWidget {
         _singleDrawerItem(Icons.dashboard, "home".tr, Routes.main, 1),
         divider,
         _singleDrawerItem(Icons.storage_rounded, "items".tr, Routes.items, 2),
-        _singleDrawerItem(Icons.switch_access_shortcut, "Operations",
-            '/user/notifications', 3),
+        _singleDrawerItem(
+            Icons.sync_alt, "operations".tr, Routes.operations, 3),
         _singleDrawerItem(Icons.notifications_rounded, "Notifications",
             '/user/notifications', 4),
         _singleDrawerItem(

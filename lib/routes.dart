@@ -5,12 +5,16 @@ import 'package:stock_pro/controllers/auth/signup_controller.dart';
 import 'package:stock_pro/controllers/home/owner_home_controller.dart';
 import 'package:stock_pro/controllers/items/add_item_controller.dart';
 import 'package:stock_pro/controllers/items/items_controller.dart';
+import 'package:stock_pro/controllers/operations/add_operation_controller.dart';
+import 'package:stock_pro/controllers/operations/operations_controller.dart';
 import 'package:stock_pro/views/auth/login_screen.dart';
 import 'package:stock_pro/views/auth/post_auth_screen.dart';
 import 'package:stock_pro/views/auth/signup_screen.dart';
 import 'package:stock_pro/views/home/owner_home_screen.dart';
 import 'package:stock_pro/views/items/add_item_screen.dart';
 import 'package:stock_pro/views/items/items_screen.dart';
+import 'package:stock_pro/views/operations/add_operation_screen.dart';
+import 'package:stock_pro/views/operations/operations_screen.dart';
 import 'package:stock_pro/views/splash_screen.dart';
 
 import 'controllers/splash_controller.dart';
@@ -25,6 +29,9 @@ abstract class Routes {
 
   static const items = '/items';
   static const addItem = '$items/add';
+
+  static const operations = '/operations';
+  static const addOperation = '$operations/add';
 
   static const account = '/account';
   static const accountComplete = '/account/complete';
@@ -70,6 +77,18 @@ class AppPages {
           name: Routes.addItem.replaceFirst(Routes.items, ''),
           page: () => const AddItemScreen(),
           binding: BindingsBuilder.put(() => AddItemController()),
+        ),
+      ],
+    ),
+    GetPage(
+      name: Routes.operations,
+      page: () => const OperationsScreen(),
+      binding: BindingsBuilder.put(() => OperationsController()),
+      children: [
+        GetPage(
+          name: Routes.addOperation.replaceFirst(Routes.operations, ''),
+          page: () => const AddOperationScreen(),
+          binding: BindingsBuilder.put(() => AddOperationController()),
         ),
       ],
     ),

@@ -4,7 +4,8 @@ class ImageData {
   static const logoBlueBackground = 'assets/images/logoBlueBackground.png';
   static const logoDarkBackground = 'assets/images/logoDarkBackground.png';
   static const items = 'assets/images/items.png';
-  static const itemsDark = 'assets/images/items-dark.png';
+  static const noOperations = 'assets/images/no-operations.png';
+  static const noOperationsDark = 'assets/images/no-operations-dark.png';
   static const wallet = 'assets/images/wallet.png';
   static const walletDark = 'assets/images/wallet-dark.png';
   static const noItems = 'assets/images/no-items.png';
