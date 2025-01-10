@@ -7,12 +7,12 @@ class SplashController extends GetxController {
     _checkLoginStatus();
   }
 
-  void goToLoginScreen() {
+  void goToLoginView() {
     Get.close(1);
     Get.toNamed(Routes.login);
   }
 
-  void goToSignUpScreen() {
+  void goToSignUpView() {
     Get.toNamed(Routes.signUp);
   }
 

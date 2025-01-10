@@ -86,11 +86,11 @@ class ItemsController extends GetxController {
     update();
   }
 
-  void goToAddItemScreen() {
+  void goToAddItemView() {
     Get.toNamed(Routes.addItem);
   }
 
-  void goToItemDetailsScreen(ItemModel item) {
+  void goToItemDetailsView(ItemModel item) {
     // Get.toNamed(Routes.itemDetails, arguments: item);
   }
 }

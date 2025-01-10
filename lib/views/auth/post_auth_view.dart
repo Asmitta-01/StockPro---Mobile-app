@@ -4,8 +4,8 @@ import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:step_progress_indicator/step_progress_indicator.dart';
 import 'package:stock_pro/controllers/auth/post_auth_controller.dart';
 
-class PostAuthScreen extends GetView<PostAuthController> {
-  const PostAuthScreen({super.key});
+class PostAuthView extends GetView<PostAuthController> {
+  const PostAuthView({super.key});
 
   @override
   Widget build(BuildContext context) {

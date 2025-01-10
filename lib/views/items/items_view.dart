@@ -4,8 +4,8 @@ import 'package:stock_pro/controllers/items/items_controller.dart';
 import 'package:stock_pro/utils/image_data.dart';
 import 'package:stock_pro/widgets/drawer_widget.dart';
 
-class ItemsScreen extends GetView<ItemsController> {
-  const ItemsScreen({super.key});
+class ItemsView extends GetView<ItemsController> {
+  const ItemsView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +45,7 @@ class ItemsScreen extends GetView<ItemsController> {
                 : [
                     if (controller.items.isNotEmpty)
                       IconButton(
-                        onPressed: controller.goToAddItemScreen,
+                        onPressed: controller.goToAddItemView,
                         icon: const Icon(Icons.add_circle_outline),
                       ),
                   ],
@@ -90,7 +90,7 @@ class ItemsScreen extends GetView<ItemsController> {
                 ),
           onTap: () {
             if (controller.selectedItems.isEmpty) {
-              controller.goToItemDetailsScreen(controller.items[index]);
+              controller.goToItemDetailsView(controller.items[index]);
             } else if (controller.selectedItems
                 .contains(controller.items[index])) {
               controller.removeSelectedItem(controller.items[index]);
@@ -121,7 +121,7 @@ class ItemsScreen extends GetView<ItemsController> {
           Image.asset(
               Get.isDarkMode ? ImageData.noItemsDark : ImageData.noItems),
           ElevatedButton(
-            onPressed: controller.goToAddItemScreen,
+            onPressed: controller.goToAddItemView,
             child: Text("add_your_first_item".tr),
           )
         ],

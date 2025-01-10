@@ -28,7 +28,7 @@ class GettingStartedWidget extends StatelessWidget {
           trailing: controller.addedItem
               ? doneIcon
               : const Icon(Icons.chevron_right_rounded),
-          onTap: controller.goToAddItemScreen,
+          onTap: controller.goToAddItemView,
           title: Text("add_your_first_item".tr),
           leading: const Icon(Icons.add_circle_outline),
           contentPadding: EdgeInsets.zero,
@@ -37,7 +37,7 @@ class GettingStartedWidget extends StatelessWidget {
           trailing: controller.madeFirstOperation
               ? doneIcon
               : const Icon(Icons.chevron_right_rounded),
-          onTap: controller.goToAddOperationScreen,
+          onTap: controller.goToAddOperationView,
           title: Text("record_your_first_operation".tr),
           leading: const Icon(Icons.sell_outlined),
           contentPadding: EdgeInsets.zero,
@@ -46,7 +46,7 @@ class GettingStartedWidget extends StatelessWidget {
           trailing: controller.definedStockAlert
               ? doneIcon
               : const Icon(Icons.chevron_right_rounded),
-          onTap: controller.goToDefineAlertScreen,
+          onTap: controller.goToDefineAlertView,
           title: Text("define_the_stock_alert_threshold_of_an_item".tr),
           leading: const Icon(Icons.add_alert_outlined),
           contentPadding: EdgeInsets.zero,
@@ -55,7 +55,7 @@ class GettingStartedWidget extends StatelessWidget {
           trailing: controller.addedManager
               ? doneIcon
               : const Icon(Icons.chevron_right_rounded),
-          onTap: controller.goToAddManagerScreen,
+          onTap: controller.goToAddManagerView,
           title: Text("add_a_manager".tr),
           leading: const Icon(Icons.manage_accounts_outlined),
           contentPadding: EdgeInsets.zero,

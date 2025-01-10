@@ -43,11 +43,11 @@ class LoginController extends GetxController {
     });
   }
 
-  void goToRegisterScreen() {
+  void goToRegisterView() {
     Get.toNamed(Routes.signUp);
   }
 
-  void goToForgotPasswordScreen() {}
+  void goToForgotPasswordView() {}
 
   @override
   void onClose() {

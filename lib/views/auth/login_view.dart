@@ -4,8 +4,8 @@ import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:stock_pro/controllers/auth/login_controller.dart';
 import 'package:stock_pro/utils/image_data.dart';
 
-class LoginScreen extends GetView<LoginController> {
-  const LoginScreen({super.key});
+class LoginView extends GetView<LoginController> {
+  const LoginView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -108,7 +108,7 @@ class LoginScreen extends GetView<LoginController> {
               ),
               const SizedBox(height: 16),
               TextButton(
-                onPressed: controller.goToForgotPasswordScreen,
+                onPressed: controller.goToForgotPasswordView,
                 child: Text(
                   "forgot_password".tr,
                   style: Get.textTheme.titleMedium!
@@ -120,7 +120,7 @@ class LoginScreen extends GetView<LoginController> {
                 children: [
                   Expanded(
                     child: OutlinedButton(
-                      onPressed: controller.goToRegisterScreen,
+                      onPressed: controller.goToRegisterView,
                       child: Text(
                         'create_a_new_account'.tr,
                         style: const TextStyle(fontSize: 22),

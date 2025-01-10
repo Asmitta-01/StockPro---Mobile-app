@@ -4,8 +4,8 @@ import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:step_progress_indicator/step_progress_indicator.dart';
 import 'package:stock_pro/controllers/auth/signup_controller.dart';
 
-class SignUpScreen extends GetView<SignUpController> {
-  const SignUpScreen({super.key});
+class SignUpView extends GetView<SignUpController> {
+  const SignUpView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -51,7 +51,7 @@ class SignUpScreen extends GetView<SignUpController> {
               ),
               const Spacer(),
               TextButton(
-                onPressed: controller.goToLoginScreen,
+                onPressed: controller.goToLoginView,
                 child: Text(
                   "already_have_an_account".tr,
                   style: Get.textTheme.titleMedium!.copyWith(

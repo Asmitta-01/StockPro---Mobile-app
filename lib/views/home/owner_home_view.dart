@@ -5,8 +5,8 @@ import 'package:stock_pro/utils/image_data.dart';
 import 'package:stock_pro/widgets/drawer_widget.dart';
 import 'package:stock_pro/widgets/getting_started_widget.dart';
 
-class OwnerHomeScreen extends GetView<OwnerHomeController> {
-  const OwnerHomeScreen({super.key});
+class OwnerHomeView extends GetView<OwnerHomeController> {
+  const OwnerHomeView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -151,7 +151,7 @@ class OwnerHomeWidget extends StatelessWidget {
               children: [
                 Expanded(
                   child: OutlinedButton(
-                    onPressed: ownerHomeController.goToAddOperationScreen,
+                    onPressed: ownerHomeController.goToAddOperationView,
                     style: OutlinedButton.styleFrom(
                         padding: const EdgeInsets.symmetric(
                             vertical: 0, horizontal: 12)),
@@ -187,7 +187,7 @@ class OwnerHomeWidget extends StatelessWidget {
               textAlign: TextAlign.center,
             ),
             OutlinedButton(
-              onPressed: ownerHomeController.goToAddOperationScreen,
+              onPressed: ownerHomeController.goToAddOperationView,
               style: OutlinedButton.styleFrom(
                   padding:
                       const EdgeInsets.symmetric(vertical: 0, horizontal: 8)),

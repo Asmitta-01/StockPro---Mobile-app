@@ -63,7 +63,7 @@ class OperationsController extends GetxController {
     scaffoldKey.currentState!.openDrawer();
   }
 
-  void goToAddOperationScreen() {
+  void goToAddOperationView() {
     Get.toNamed(Routes.addOperation);
   }
 }

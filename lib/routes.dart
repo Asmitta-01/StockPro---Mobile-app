@@ -7,15 +7,15 @@ import 'package:stock_pro/controllers/items/add_item_controller.dart';
 import 'package:stock_pro/controllers/items/items_controller.dart';
 import 'package:stock_pro/controllers/operations/add_operation_controller.dart';
 import 'package:stock_pro/controllers/operations/operations_controller.dart';
-import 'package:stock_pro/views/auth/login_screen.dart';
-import 'package:stock_pro/views/auth/post_auth_screen.dart';
-import 'package:stock_pro/views/auth/signup_screen.dart';
-import 'package:stock_pro/views/home/owner_home_screen.dart';
-import 'package:stock_pro/views/items/add_item_screen.dart';
-import 'package:stock_pro/views/items/items_screen.dart';
-import 'package:stock_pro/views/operations/add_operation_screen.dart';
-import 'package:stock_pro/views/operations/operations_screen.dart';
-import 'package:stock_pro/views/splash_screen.dart';
+import 'package:stock_pro/views/auth/login_view.dart';
+import 'package:stock_pro/views/auth/post_auth_view.dart';
+import 'package:stock_pro/views/auth/signup_view.dart';
+import 'package:stock_pro/views/home/owner_home_view.dart';
+import 'package:stock_pro/views/items/add_item_view.dart';
+import 'package:stock_pro/views/items/items_view.dart';
+import 'package:stock_pro/views/operations/add_operation_view.dart';
+import 'package:stock_pro/views/operations/operations_view.dart';
+import 'package:stock_pro/views/splash_view.dart';
 
 import 'controllers/splash_controller.dart';
 
@@ -45,49 +45,49 @@ class AppPages {
   static final routes = [
     GetPage(
       name: Routes.splash,
-      page: () => const SplashScreen(),
+      page: () => const SplashView(),
       binding: BindingsBuilder.put(() => SplashController()),
     ),
     GetPage(
       name: Routes.login,
-      page: () => const LoginScreen(),
+      page: () => const LoginView(),
       binding: BindingsBuilder.put(() => LoginController()),
     ),
     GetPage(
       name: Routes.signUp,
-      page: () => const SignUpScreen(),
+      page: () => const SignUpView(),
       binding: BindingsBuilder.put(() => SignUpController()),
     ),
     GetPage(
       name: Routes.accountComplete,
-      page: () => const PostAuthScreen(),
+      page: () => const PostAuthView(),
       binding: BindingsBuilder.put(() => PostAuthController()),
     ),
     GetPage(
       name: Routes.main,
-      page: () => const OwnerHomeScreen(),
+      page: () => const OwnerHomeView(),
       binding: BindingsBuilder.put(() => OwnerHomeController()),
     ),
     GetPage(
       name: Routes.items,
-      page: () => const ItemsScreen(),
+      page: () => const ItemsView(),
       binding: BindingsBuilder.put(() => ItemsController()),
       children: [
         GetPage(
           name: Routes.addItem.replaceFirst(Routes.items, ''),
-          page: () => const AddItemScreen(),
+          page: () => const AddItemView(),
           binding: BindingsBuilder.put(() => AddItemController()),
         ),
       ],
     ),
     GetPage(
       name: Routes.operations,
-      page: () => const OperationsScreen(),
+      page: () => const OperationsView(),
       binding: BindingsBuilder.put(() => OperationsController()),
       children: [
         GetPage(
           name: Routes.addOperation.replaceFirst(Routes.operations, ''),
-          page: () => const AddOperationScreen(),
+          page: () => const AddOperationView(),
           binding: BindingsBuilder.put(() => AddOperationController()),
         ),
       ],

@@ -143,7 +143,7 @@ class SignUpController extends GetxController {
     }
   }
 
-  void goToLoginScreen() {
+  void goToLoginView() {
     Get.offNamed(Routes.login);
   }
 

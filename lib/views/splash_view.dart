@@ -7,8 +7,8 @@ import 'package:stock_pro/controllers/splash_controller.dart';
 import 'package:stock_pro/routes.dart';
 import 'package:stock_pro/utils/image_data.dart';
 
-class SplashScreen extends GetView<SplashController> {
-  const SplashScreen({super.key});
+class SplashView extends GetView<SplashController> {
+  const SplashView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -112,7 +112,7 @@ class SplashScreen extends GetView<SplashController> {
                 children: [
                   Expanded(
                     child: OutlinedButton(
-                      onPressed: controller.goToSignUpScreen,
+                      onPressed: controller.goToSignUpView,
                       child: Text(
                         'continue_with_email'.tr,
                         style: const TextStyle(fontSize: 22),
@@ -128,7 +128,7 @@ class SplashScreen extends GetView<SplashController> {
                 children: [
                   Expanded(
                     child: ElevatedButton(
-                      onPressed: controller.goToLoginScreen,
+                      onPressed: controller.goToLoginView,
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [

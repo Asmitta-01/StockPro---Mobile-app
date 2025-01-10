@@ -4,8 +4,8 @@ import 'package:stock_pro/controllers/operations/operations_controller.dart';
 import 'package:stock_pro/utils/image_data.dart';
 import 'package:stock_pro/widgets/drawer_widget.dart';
 
-class OperationsScreen extends GetView<OperationsController> {
-  const OperationsScreen({super.key});
+class OperationsView extends GetView<OperationsController> {
+  const OperationsView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +26,7 @@ class OperationsScreen extends GetView<OperationsController> {
                       icon: const Icon(Icons.filter_list),
                     ),
                     IconButton(
-                      onPressed: controller.goToAddOperationScreen,
+                      onPressed: controller.goToAddOperationView,
                       icon: const Icon(Icons.add_circle_outline),
                     ),
                   ]
@@ -60,7 +60,7 @@ class OperationsScreen extends GetView<OperationsController> {
             height: 48,
           ),
           ElevatedButton(
-            onPressed: controller.goToAddOperationScreen,
+            onPressed: controller.goToAddOperationView,
             child: Text("add_an_operation".tr),
           )
         ],

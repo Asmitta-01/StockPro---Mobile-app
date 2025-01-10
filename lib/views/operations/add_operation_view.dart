@@ -4,8 +4,8 @@ import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:stock_pro/controllers/operations/add_operation_controller.dart';
 import 'package:stock_pro/widgets/forms/operation_form.dart';
 
-class AddOperationScreen extends GetView<AddOperationController> {
-  const AddOperationScreen({super.key});
+class AddOperationView extends GetView<AddOperationController> {
+  const AddOperationView({super.key});
 
   @override
   Widget build(BuildContext context) {

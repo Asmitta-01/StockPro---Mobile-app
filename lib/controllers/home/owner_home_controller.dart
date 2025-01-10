@@ -25,22 +25,22 @@ class OwnerHomeController extends GetxController {
     scaffoldKey.currentState!.openDrawer();
   }
 
-  void goToAddItemScreen() {
+  void goToAddItemView() {
     addedItem = true;
     update();
   }
 
-  void goToAddOperationScreen() {
+  void goToAddOperationView() {
     madeFirstOperation = true;
     update();
   }
 
-  void goToDefineAlertScreen() {
+  void goToDefineAlertView() {
     definedStockAlert = true;
     update();
   }
 
-  void goToAddManagerScreen() {
+  void goToAddManagerView() {
     addedManager = true;
     update();
   }

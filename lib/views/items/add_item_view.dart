@@ -4,8 +4,8 @@ import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:stock_pro/controllers/items/add_item_controller.dart';
 import 'package:stock_pro/widgets/forms/item_form.dart';
 
-class AddItemScreen extends GetView<AddItemController> {
-  const AddItemScreen({super.key});
+class AddItemView extends GetView<AddItemController> {
+  const AddItemView({super.key});
 
   @override
   Widget build(BuildContext context) {
