@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:stock_pro/controllers/operations/add_operation_controller.dart';
+import 'package:stock_pro/widgets/forms/operation_form.dart';
 
 class AddOperationScreen extends GetView<AddOperationController> {
   const AddOperationScreen({super.key});
@@ -25,9 +26,22 @@ class AddOperationScreen extends GetView<AddOperationController> {
             ],
           ),
           body: ListView(
-            padding: const EdgeInsets.all(16.0),
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
             shrinkWrap: true,
-            children: [],
+            children: [
+              Text('please_fill_the_following_form'.tr),
+              const SizedBox(height: 18.0),
+              OperationForm(
+                formKey: controller.formKey,
+                invoiceController: controller.invoiceController,
+                amountController: controller.amountController,
+                commentController: controller.commentController,
+                dateController: controller.dateController,
+                typeController: controller.typeController,
+                transportCostController: controller.transportCostController,
+                transportTypeController: controller.transportTypeController,
+              ),
+            ],
           ),
         );
       },
