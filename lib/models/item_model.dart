@@ -1,4 +1,4 @@
-class Item {
+class ItemModel {
   int? id;
   String name;
   double price;
@@ -14,7 +14,7 @@ class Item {
     _stockThreshold = value;
   }
 
-  Item({
+  ItemModel({
     this.id,
     required this.name,
     required this.price,

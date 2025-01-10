@@ -1,8 +1,8 @@
 import 'package:stock_pro/models/enums/transport_method.dart';
 
-class Transport {
+class TransportModel {
   TransportMethod method;
   double cost;
 
-  Transport(this.method, this.cost);
+  TransportModel(this.method, this.cost);
 }
