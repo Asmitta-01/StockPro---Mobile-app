@@ -117,5 +117,14 @@
     "transport": "Transport",
     "save": "Save",
     "change": "Change",
-    "transport_method": "Transport method"
+    "transport_method": "Transport method",
+    "notifications": "Notifications",
+    "just_now": "Just now",
+    "a_minute_ago": "A minute ago",
+    "x_minutes_ago": "@x min ago",
+    "an_hour_ago": "An hour ago",
+    "x_hours_ago": "@x hours ago",
+    "yesterday": "Yesterday",
+    "x_days_ago": "@x days ago",
+    "no_notifications": "No notifications"
 }

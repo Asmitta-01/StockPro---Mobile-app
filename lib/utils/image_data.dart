@@ -6,6 +6,8 @@ class ImageData {
   static const items = 'assets/images/items.png';
   static const noOperations = 'assets/images/no-operations.png';
   static const noOperationsDark = 'assets/images/no-operations-dark.png';
+  static const notifications = 'assets/images/notifications.png';
+  static const notificationsDark = 'assets/images/notifications-dark.png';
   static const wallet = 'assets/images/wallet.png';
   static const walletDark = 'assets/images/wallet-dark.png';
   static const noItems = 'assets/images/no-items.png';

@@ -75,6 +75,8 @@ flutter:
     - assets/images/wallet.png
     - assets/images/wallet-dark.png
     - assets/images/items.png
+    - assets/images/notifications.png
+    - assets/images/notifications-dark.png
     - assets/images/no-operations.png
     - assets/images/no-operations-dark.png
     - assets/images/google.png

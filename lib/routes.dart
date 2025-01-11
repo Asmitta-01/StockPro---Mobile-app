@@ -5,6 +5,7 @@ import 'package:stock_pro/controllers/auth/signup_controller.dart';
 import 'package:stock_pro/controllers/home/owner_home_controller.dart';
 import 'package:stock_pro/controllers/items/add_item_controller.dart';
 import 'package:stock_pro/controllers/items/items_controller.dart';
+import 'package:stock_pro/controllers/notifications/notifications_controller.dart';
 import 'package:stock_pro/controllers/operations/add_operation_controller.dart';
 import 'package:stock_pro/controllers/operations/operations_controller.dart';
 import 'package:stock_pro/views/auth/login_view.dart';
@@ -13,6 +14,7 @@ import 'package:stock_pro/views/auth/signup_view.dart';
 import 'package:stock_pro/views/home/owner_home_view.dart';
 import 'package:stock_pro/views/items/add_item_view.dart';
 import 'package:stock_pro/views/items/items_view.dart';
+import 'package:stock_pro/views/notifications/notifications_view.dart';
 import 'package:stock_pro/views/operations/add_operation_view.dart';
 import 'package:stock_pro/views/operations/operations_view.dart';
 import 'package:stock_pro/views/splash_view.dart';
@@ -32,6 +34,8 @@ abstract class Routes {
 
   static const operations = '/operations';
   static const addOperation = '$operations/add';
+
+  static const notifications = '/notifications';
 
   static const account = '/account';
   static const accountComplete = '/account/complete';
@@ -91,6 +95,11 @@ class AppPages {
           binding: BindingsBuilder.put(() => AddOperationController()),
         ),
       ],
+    ),
+    GetPage(
+      name: Routes.notifications,
+      page: () => const NotificationsView(),
+      binding: BindingsBuilder.put(() => NotificationsController()),
     ),
   ];
 }
