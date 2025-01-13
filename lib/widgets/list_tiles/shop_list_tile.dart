@@ -20,8 +20,8 @@ class ShopListTile extends StatelessWidget {
     return ListTile(
       title: Text(shop.name),
       subtitle: Text(shop.categories.join(', ')),
-      leading: shop.logo.isNotEmpty
-          ? Image.network(shop.logo)
+      leading: shop.logo != null && shop.logo!.isNotEmpty
+          ? Image.network(shop.logo!)
           : Image.asset(!Get.isDarkMode ? ImageData.shop : ImageData.shopDark),
       trailing: shop.active
           ? Icon(Icons.check_circle, color: Get.theme.colorScheme.primary)
@@ -36,6 +36,7 @@ class ShopListTile extends StatelessWidget {
             shopModel: shop,
             onTapActive: setAsActive,
           ),
+          isScrollControlled: true,
           settings: RouteSettings(
               name: Routes.singleShop.replaceFirst(':id', "${shop.id}")),
         );

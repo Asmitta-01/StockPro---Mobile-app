@@ -38,7 +38,7 @@ class ShopBottomSheetState extends State<ShopBottomSheet> {
                 decoration: BoxDecoration(
                   borderRadius: const BorderRadius.all(Radius.circular(20)),
                   image: DecorationImage(
-                    image: NetworkImage(widget.shopModel.image),
+                    image: NetworkImage(widget.shopModel.image!),
                     fit: BoxFit.cover,
                   ),
                 ),
@@ -46,7 +46,7 @@ class ShopBottomSheetState extends State<ShopBottomSheet> {
 
               // Shop info
               Padding(
-                padding: const EdgeInsets.all(16.0),
+                padding: const EdgeInsets.only(top: 16),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -78,6 +78,7 @@ class ShopBottomSheetState extends State<ShopBottomSheet> {
                           )
                       ],
                     ),
+                    buildShopAddress(),
                     const SizedBox(height: 8),
                     buildCategories(),
                     const SizedBox(height: 24),
@@ -93,6 +94,27 @@ class ShopBottomSheetState extends State<ShopBottomSheet> {
           ),
         ],
       ),
+    );
+  }
+
+  Row buildShopAddress() {
+    return Row(
+      children: [
+        const Icon(Icons.location_on_outlined, size: 18),
+        const SizedBox(width: 4),
+        Text(widget.shopModel.address),
+        const SizedBox(width: 8),
+        if (widget.shopModel.website != null) ...[
+          const Icon(Icons.language, size: 18),
+          const SizedBox(width: 4),
+          Expanded(
+            child: Text(
+              widget.shopModel.website!,
+              overflow: TextOverflow.ellipsis,
+            ),
+          ),
+        ],
+      ],
     );
   }
 
