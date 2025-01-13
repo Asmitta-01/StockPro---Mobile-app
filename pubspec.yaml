@@ -77,6 +77,9 @@ flutter:
     - assets/images/items.png
     - assets/images/notifications.png
     - assets/images/notifications-dark.png
+    - assets/images/shop-dark.png
+    - assets/images/shop.png
+    - assets/images/shops-banner.png
     - assets/images/no-operations.png
     - assets/images/no-operations-dark.png
     - assets/images/google.png

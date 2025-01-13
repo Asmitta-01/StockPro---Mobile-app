@@ -69,8 +69,7 @@ class DrawerWidget extends StatelessWidget {
             Icons.sync_alt, "operations".tr, Routes.operations, 3),
         _singleDrawerItem(Icons.notifications_rounded, "notifications".tr,
             Routes.notifications, 4),
-        _singleDrawerItem(
-            Icons.store_rounded, "Mes boutiques", '/user/shops', 5),
+        _singleDrawerItem(Icons.store_rounded, "my_shops".tr, Routes.shops, 5),
         _singleDrawerItem(Icons.document_scanner_rounded, "Rapports", '', 6),
         divider,
         _singleDrawerItem(Icons.build_outlined, "Paramètres", '/setting', 7),

@@ -8,6 +8,7 @@ import 'package:stock_pro/controllers/items/items_controller.dart';
 import 'package:stock_pro/controllers/notifications/notifications_controller.dart';
 import 'package:stock_pro/controllers/operations/add_operation_controller.dart';
 import 'package:stock_pro/controllers/operations/operations_controller.dart';
+import 'package:stock_pro/controllers/shops/shops_controller.dart';
 import 'package:stock_pro/views/auth/login_view.dart';
 import 'package:stock_pro/views/auth/post_auth_view.dart';
 import 'package:stock_pro/views/auth/signup_view.dart';
@@ -17,6 +18,7 @@ import 'package:stock_pro/views/items/items_view.dart';
 import 'package:stock_pro/views/notifications/notifications_view.dart';
 import 'package:stock_pro/views/operations/add_operation_view.dart';
 import 'package:stock_pro/views/operations/operations_view.dart';
+import 'package:stock_pro/views/shops/shops_view.dart';
 import 'package:stock_pro/views/splash_view.dart';
 
 import 'controllers/splash_controller.dart';
@@ -39,6 +41,9 @@ abstract class Routes {
 
   static const account = '/account';
   static const accountComplete = '/account/complete';
+
+  static const shops = '/shops';
+  static const singleShop = '$shops/:id';
 }
 
 class AppPages {
@@ -100,6 +105,11 @@ class AppPages {
       name: Routes.notifications,
       page: () => const NotificationsView(),
       binding: BindingsBuilder.put(() => NotificationsController()),
+    ),
+    GetPage(
+      name: Routes.shops,
+      page: () => const ShopsView(),
+      binding: BindingsBuilder.put(() => ShopsController()),
     ),
   ];
 }

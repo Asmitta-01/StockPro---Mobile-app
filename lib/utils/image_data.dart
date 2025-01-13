@@ -12,6 +12,9 @@ class ImageData {
   static const walletDark = 'assets/images/wallet-dark.png';
   static const noItems = 'assets/images/no-items.png';
   static const noItemsDark = 'assets/images/no-items-dark.png';
+  static const shop = 'assets/images/shop.png';
+  static const shopDark = 'assets/images/shop-dark.png';
+  static const shopsBanner = 'assets/images/shops-banner.png';
   static const google = 'assets/images/google.png';
 
   static const french = 'assets/images/flags/french.jpg';

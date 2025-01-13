@@ -126,5 +126,13 @@
     "x_hours_ago": "Il y a @x heures",
     "yesterday": "Hier",
     "x_days_ago": "Il y'a @x jours",
-    "no_notifications": "Pas de notifications"
+    "no_notifications": "Pas de notifications",
+    "my_shops": "Mes boutiques",
+    "add_new_shop": "Ajouter une boutique",
+    "check_your_shop_list": "Consultez votre liste de boutiques",
+    "explore_new_options": "Explorez de nouvelles options et offres.",
+    "active": "Active",
+    "edit_shop": "Modifier",
+    "set_as_active": "Définir comme actif",
+    "can_not_perform_this_action_now": "Impossible d'effectuer cette action pour le moment"
 }
