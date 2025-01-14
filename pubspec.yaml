@@ -42,6 +42,7 @@ dependencies:
   intl: ^0.19.0
   package_info_plus: ^8.1.1
   flutter_typeahead: ^5.2.0
+  fl_chart: ^0.69.2
 
 dev_dependencies:
   flutter_test:
@@ -75,6 +76,8 @@ flutter:
     - assets/images/wallet.png
     - assets/images/wallet-dark.png
     - assets/images/items.png
+    - assets/images/items-alert.png
+    - assets/images/items-out-of-stock.png
     - assets/images/notifications.png
     - assets/images/notifications-dark.png
     - assets/images/shop-dark.png

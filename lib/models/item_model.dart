@@ -5,6 +5,7 @@ class ItemModel {
   String? image;
   String description;
   int quantity;
+  DateTime? _createdAt;
 
   int? _stockThreshold;
 
@@ -14,6 +15,10 @@ class ItemModel {
     _stockThreshold = value;
   }
 
+  DateTime get createdAt => _createdAt!;
+
+  double get estimatedStockValue => price * quantity;
+
   ItemModel({
     this.id,
     required this.name,
@@ -21,5 +26,7 @@ class ItemModel {
     this.image,
     required this.description,
     required this.quantity,
-  });
+  }) {
+    _createdAt = DateTime.now();
+  }
 }

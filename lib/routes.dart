@@ -8,6 +8,8 @@ import 'package:stock_pro/controllers/items/items_controller.dart';
 import 'package:stock_pro/controllers/notifications/notifications_controller.dart';
 import 'package:stock_pro/controllers/operations/add_operation_controller.dart';
 import 'package:stock_pro/controllers/operations/operations_controller.dart';
+import 'package:stock_pro/controllers/reports/reports_controller.dart';
+import 'package:stock_pro/controllers/reports/stock_reports_controller.dart';
 import 'package:stock_pro/controllers/shops/shops_controller.dart';
 import 'package:stock_pro/views/auth/login_view.dart';
 import 'package:stock_pro/views/auth/post_auth_view.dart';
@@ -18,6 +20,8 @@ import 'package:stock_pro/views/items/items_view.dart';
 import 'package:stock_pro/views/notifications/notifications_view.dart';
 import 'package:stock_pro/views/operations/add_operation_view.dart';
 import 'package:stock_pro/views/operations/operations_view.dart';
+import 'package:stock_pro/views/reports/reports_view.dart';
+import 'package:stock_pro/views/reports/stock_reports_view.dart';
 import 'package:stock_pro/views/shops/shops_view.dart';
 import 'package:stock_pro/views/splash_view.dart';
 
@@ -44,6 +48,9 @@ abstract class Routes {
 
   static const shops = '/shops';
   static const singleShop = '$shops/:id';
+
+  static const reports = '/reports';
+  static const stockReports = '$reports/stock';
 }
 
 class AppPages {
@@ -110,6 +117,18 @@ class AppPages {
       name: Routes.shops,
       page: () => const ShopsView(),
       binding: BindingsBuilder.put(() => ShopsController()),
+    ),
+    GetPage(
+      name: Routes.reports,
+      page: () => const ReportsView(),
+      binding: BindingsBuilder.put(() => ReportsController()),
+      children: [
+        GetPage(
+          name: Routes.stockReports.replaceFirst(Routes.reports, ''),
+          page: () => const StockReportsView(),
+          binding: BindingsBuilder.put(() => StockReportsController()),
+        ),
+      ],
     ),
   ];
 }
