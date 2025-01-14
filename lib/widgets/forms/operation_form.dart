@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:stock_pro/models/enums/operation_type.dart';
 import 'package:stock_pro/models/item_model.dart';
-import 'package:stock_pro/widgets/add_item_in_operation_widget.dart';
+import 'package:stock_pro/widgets/pick_item_widget.dart';
 import 'package:stock_pro/widgets/forms/transport_form.dart';
 
 class OperationForm extends StatefulWidget {
@@ -150,7 +150,12 @@ class _OperationFormState extends State<OperationForm> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text("items".tr),
-              AddItemInOperationWidget(items: items, onSelected: addItem)
+              PickItemWidget(
+                items: items,
+                onSelected: addItem,
+                buttonLabel: "add_an_item".tr,
+                buttonIcon: Icons.add,
+              )
             ],
           ),
           buildOperationItems(),
