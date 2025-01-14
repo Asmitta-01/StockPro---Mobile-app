@@ -156,5 +156,14 @@
     "estimated_value": "Valeur estimée",
     "total_items": "Total d'articles",
     "low_stock": "Stock bas",
-    "out_of_stock": "En rupture de stock"
+    "out_of_stock": "En rupture de stock",
+    "help_and_suggestions": "Aide & suggestions",
+    "need_help": "Besoin d'aide ?",
+    "help_we_are_here_for_you": "Nous sommes là pour vous aider ! Consultez notre FAQ pour trouver les réponses à vos questions les plus fréquentes. Si vous ne trouvez pas ce que vous cherchez, n'hésitez pas à nous contacter par email.",
+    "faq": "FAQ",
+    "contact_us": "Contactez-nous",
+    "send_a_mail_at_@x": "Envoyer un email à @x",
+    "cancel": "Annuler",
+    "support_request": "Demande d'assistance",
+    "an_error_occurred_while_launching_client": "Une erreur s'est produite lors du lancement du client"
 }

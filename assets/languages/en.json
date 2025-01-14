@@ -156,5 +156,14 @@
     "estimated_value": "Estimated value",
     "total_items": "Total items",
     "low_stock": "Low stock",
-    "out_of_stock": "Out of stock"
+    "out_of_stock": "Out of stock",
+    "help_and_suggestions": "Help & suggestions",
+    "need_help": "Need help ?",
+    "help_we_are_here_for_you": "We are here to help you ! Consult our FAQ to find the answers to your most frequent questions. If you can't find what you are looking for, do not hesitate to contact us by email.",
+    "faq": "FAQ",
+    "contact_us": "Contact us",
+    "send_a_mail_at_@x": "Send a mail to @x",
+    "cancel": "Cancel",
+    "support_request": "Support Request",
+    "an_error_occurred_while_launching_client": "An error occurred while launching client"
 }

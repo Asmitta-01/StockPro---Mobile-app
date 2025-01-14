@@ -2,6 +2,7 @@ import 'package:get/get.dart';
 import 'package:stock_pro/controllers/auth/login_controller.dart';
 import 'package:stock_pro/controllers/auth/post_auth_controller.dart';
 import 'package:stock_pro/controllers/auth/signup_controller.dart';
+import 'package:stock_pro/controllers/help/help_controller.dart';
 import 'package:stock_pro/controllers/home/owner_home_controller.dart';
 import 'package:stock_pro/controllers/items/add_item_controller.dart';
 import 'package:stock_pro/controllers/items/items_controller.dart';
@@ -14,6 +15,7 @@ import 'package:stock_pro/controllers/shops/shops_controller.dart';
 import 'package:stock_pro/views/auth/login_view.dart';
 import 'package:stock_pro/views/auth/post_auth_view.dart';
 import 'package:stock_pro/views/auth/signup_view.dart';
+import 'package:stock_pro/views/help/help_view.dart';
 import 'package:stock_pro/views/home/owner_home_view.dart';
 import 'package:stock_pro/views/items/add_item_view.dart';
 import 'package:stock_pro/views/items/items_view.dart';
@@ -51,6 +53,8 @@ abstract class Routes {
 
   static const reports = '/reports';
   static const stockReports = '$reports/stock';
+
+  static const help = '/help';
 }
 
 class AppPages {
@@ -129,6 +133,11 @@ class AppPages {
           binding: BindingsBuilder.put(() => StockReportsController()),
         ),
       ],
+    ),
+    GetPage(
+      name: Routes.help,
+      page: () => const HelpView(),
+      binding: BindingsBuilder.put(() => HelpController()),
     ),
   ];
 }
