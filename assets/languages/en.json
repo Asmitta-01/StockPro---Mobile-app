@@ -165,5 +165,18 @@
     "send_a_mail_at_@x": "Send a mail to @x",
     "cancel": "Cancel",
     "support_request": "Support Request",
-    "an_error_occurred_while_launching_client": "An error occurred while launching client"
+    "an_error_occurred_while_launching_client": "An error occurred while launching client",
+    "settings": "Settings",
+    "update": "Update",
+    "choose_your_language": "Choose your language",
+    "language_choice": "Language choice",
+    "language": "Language",
+    "theme": "Theme",
+    "system_theme": "System theme",
+    "dark_theme": "Dark theme",
+    "light_theme": "Light theme",
+    "theme_settings": "Theme settings",
+    "edit_your_informations": "Edit your informations",
+    "terms_of_use": "Terms of use",
+    "privacy_policy": "Privacy policy"
 }

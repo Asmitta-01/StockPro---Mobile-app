@@ -75,7 +75,8 @@ class DrawerWidget extends StatelessWidget {
         divider,
         _singleDrawerItem(
             Icons.help, "help_and_suggestions".tr, Routes.help, 7),
-        _singleDrawerItem(Icons.build_outlined, "Paramètres", '/setting', 8),
+        _singleDrawerItem(
+            Icons.build_outlined, "settings".tr, Routes.settings, 8),
         _singleDrawerItem(Icons.logout_rounded, "Déconnexion", '', 10),
       ],
     );

@@ -165,5 +165,18 @@
     "send_a_mail_at_@x": "Envoyer un email à @x",
     "cancel": "Annuler",
     "support_request": "Demande d'assistance",
-    "an_error_occurred_while_launching_client": "Une erreur s'est produite lors du lancement du client"
+    "an_error_occurred_while_launching_client": "Une erreur s'est produite lors du lancement du client",
+    "settings": "Paramètres",
+    "update": "Mettre à jour",
+    "choose_your_language": "Choisissez votre langue",
+    "language_choice": "Choix de la langue",
+    "language": "Langue",
+    "theme": "Thème",
+    "system_theme": "Thème de l'appareil",
+    "dark_theme": "Thème sombre",
+    "light_theme": "Thème clair",
+    "theme_settings": "Paramètres du thème",
+    "edit_your_informations": "Modifier vos informations",
+    "terms_of_use": "Conditions d'utilisation",
+    "privacy_policy": "Politique de confidentialité"
 }
