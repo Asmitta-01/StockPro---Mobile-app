@@ -6,6 +6,7 @@ class AppConstants {
   static const String appSupportMail = "tiwabrayan@gmail.com";
   static const String countryCode = '_country_code';
   static const String languageCode = '_language_code';
+  static const String themeMode = '_theme_mode';
 
   static List<LanguageModel> languages = [
     LanguageModel(

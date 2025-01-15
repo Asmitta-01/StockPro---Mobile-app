@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:intl/date_symbol_data_local.dart';
 import 'package:stock_pro/controllers/my_controller.dart';
 import 'package:stock_pro/routes.dart';
 import 'package:stock_pro/utils/constants.dart';
@@ -11,11 +10,6 @@ import 'package:stock_pro/utils/theme.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await init();
-
-  for (var element in AppConstants.languages) {
-    await initializeDateFormatting(
-        '${element.languageCode!}_ ${element.countryCode!}', null);
-  }
 
   runApp(const MyApp());
 }
@@ -41,7 +35,7 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         theme: AppTheme.appTheme,
         darkTheme: AppTheme.appThemeDark,
-        themeMode: ThemeMode.system,
+        themeMode: controller.themeMode,
       );
     });
   }

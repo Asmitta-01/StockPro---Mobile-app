@@ -11,8 +11,12 @@ class MyController extends GetxController implements GetxService {
   final SharedPreferences sharedPreferences;
   MyController({required this.sharedPreferences}) {
     loadCurrentLanguage();
+    loadCurrentThemeMode();
     loadTranslations();
   }
+
+  ThemeMode _themeMode = ThemeMode.system;
+  ThemeMode get themeMode => _themeMode;
 
   Locale _locale = Locale(AppConstants.languages[0].languageCode!,
       AppConstants.languages[0].countryCode);
@@ -67,5 +71,31 @@ class MyController extends GetxController implements GetxService {
 
   ThemeData getThemeData() {
     return Get.isDarkMode ? AppTheme.appThemeDark : AppTheme.appTheme;
+  }
+
+  void setThemeMode(ThemeMode themeMode) {
+    Get.changeThemeMode(themeMode);
+    _themeMode = themeMode;
+    _saveThemeMode(themeMode);
+    update();
+  }
+
+  void loadCurrentThemeMode() {
+    _themeMode = _getThemeModeFromSharedPref();
+    update();
+  }
+
+  ThemeMode _getThemeModeFromSharedPref() {
+    return ThemeMode.values.firstWhere(
+      (element) =>
+          element.toString().split('.').last ==
+          sharedPreferences.getString(AppConstants.themeMode),
+      orElse: () => ThemeMode.system,
+    );
+  }
+
+  void _saveThemeMode(ThemeMode themeMode) {
+    sharedPreferences.setString(
+        AppConstants.themeMode, themeMode.toString().split('.').last);
   }
 }
