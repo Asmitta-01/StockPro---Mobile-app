@@ -13,6 +13,7 @@ class SplashView extends GetView<SplashController> {
   @override
   Widget build(BuildContext context) {
     return PopScope(
+      canPop: false,
       onPopInvokedWithResult: (didPop, result) => controller.handlePopScope(),
       child: Scaffold(
         backgroundColor: Get.isDarkMode
@@ -40,11 +41,15 @@ class SplashView extends GetView<SplashController> {
               const Spacer(),
               GetBuilder<SplashController>(builder: (controller) {
                 if (controller.checkedStatus) {
-                  if (Get.routing.current == Routes.splash) {
-                    // ignore: use_build_context_synchronously
-                    Future.microtask(() => _showBottomSheet(context));
+                  if (Get.routing.current == Routes.splash &&
+                      !controller.sheetDisplayed) {
+                    Future.microtask(() {
+                      controller.setSheetDisplayed(true);
+                      // ignore: use_build_context_synchronously
+                      _showBottomSheet(context);
+                    });
                   }
-                  return Container();
+                  return const SizedBox.shrink();
                 } else {
                   return Padding(
                     padding: const EdgeInsets.only(bottom: 28),

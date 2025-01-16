@@ -5,8 +5,14 @@ import 'package:stock_pro/utils/constants.dart';
 
 class SplashController extends GetxController {
   bool checkedStatus = false;
+  bool sheetDisplayed = false;
   SplashController() {
     _initialize().then((_) => _checkLoginStatus());
+  }
+
+  void setSheetDisplayed(bool value) {
+    sheetDisplayed = value;
+    update();
   }
 
   void goToLoginView() {
@@ -19,11 +25,7 @@ class SplashController extends GetxController {
   }
 
   void handlePopScope() {
-    if (checkedStatus) {
-      Get.back(closeOverlays: true);
-    } else {
-      Get.back();
-    }
+    Get.back(closeOverlays: checkedStatus);
   }
 
   Future<void> _initialize() async {
