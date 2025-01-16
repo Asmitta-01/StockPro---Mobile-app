@@ -71,7 +71,6 @@ class SplashView extends GetView<SplashController> {
           topRight: Radius.circular(24),
         ),
       ),
-      constraints: BoxConstraints(maxHeight: Get.size.height * .3),
       backgroundColor: Get.isDarkMode
           ? Get.theme.colorScheme.surfaceContainer
           : Get.theme.colorScheme.surface,
@@ -82,6 +81,7 @@ class SplashView extends GetView<SplashController> {
         duration: const Duration(seconds: 1),
       ),
       enableDrag: false,
+      isScrollControlled: true,
       builder: (context) => IntrinsicHeight(
         child: Padding(
           padding: const EdgeInsets.all(24),

@@ -79,16 +79,20 @@ class PickItemWidget extends StatelessWidget {
                 .toList(),
           ),
           const SizedBox(height: 12),
-          Row(
-            children: [
-              Text("tap_in_the_field_to_show_suggestions".tr),
-              const SizedBox(width: 8),
-              Icon(
-                Icons.arrow_upward_rounded,
-                size: 16,
-                color: Get.theme.colorScheme.onSurface,
-              )
-            ],
+          Text.rich(
+              TextSpan(
+                  text: "tap_in_the_field_to_show_suggestions".tr,
+                  children: [
+                    const WidgetSpan(child: SizedBox(width: 8)),
+                    WidgetSpan(
+                        child: Icon(
+                          Icons.arrow_upward_rounded,
+                          size: 16,
+                          color: Get.theme.colorScheme.onSurface,
+                        ),
+                    ),
+                  ],
+              ),
           ),
         ],
       ),

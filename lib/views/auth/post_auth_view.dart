@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
@@ -61,7 +63,7 @@ class PostAuthView extends GetView<PostAuthController> {
             ),
             const SizedBox(height: 18),
             ConstrainedBox(
-              constraints: BoxConstraints(maxHeight: Get.size.height * .45),
+              constraints: BoxConstraints(maxHeight: max(400, Get.size.height * .45)),
               child: PageView(
                 controller: controller.pageController,
                 physics: const NeverScrollableScrollPhysics(),

@@ -100,9 +100,14 @@ class StockReportsView extends GetView<StockReportsController> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text(label,
+        Expanded(
+          child: Text(
+            label,
             style: Get.textTheme.bodyLarge!
-                .copyWith(fontWeight: FontWeight.normal)),
+                  .copyWith(fontWeight: FontWeight.normal), 
+            softWrap: true,
+          ),
+        ),
         Text(value, style: Get.textTheme.bodyLarge),
       ],
     );
@@ -112,9 +117,10 @@ class StockReportsView extends GetView<StockReportsController> {
     return GridView.count(
       shrinkWrap: true,
       crossAxisCount: 2,
-      childAspectRatio: 1.1,
+      childAspectRatio: Get.size.height < 700 ? 1 : 1.1,
       mainAxisSpacing: 10,
       crossAxisSpacing: 10,
+      physics: const ScrollPhysics(),
       padding: const EdgeInsets.symmetric(vertical: 16),
       children: [
         _buildStatCard(

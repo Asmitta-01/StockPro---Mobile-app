@@ -24,7 +24,7 @@ class DrawerWidget extends StatelessWidget {
             child: buildDrawerHeader(),
           ),
           Expanded(
-            flex: 5,
+            flex: Get.size.height < 700 ? 3 : 5,
             child: getDrawerItemsList(),
           ),
           Expanded(
@@ -59,7 +59,7 @@ class DrawerWidget extends StatelessWidget {
     const divider = Divider(height: 10, thickness: 8);
     return ListView(
       padding: const EdgeInsets.only(bottom: 8),
-      physics: const NeverScrollableScrollPhysics(),
+      // physics: const NeverScrollableScrollPhysics(),
       children: <Widget>[
         divider,
         _singleDrawerItem(Icons.dashboard, "home".tr, Routes.main, 1),
