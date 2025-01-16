@@ -11,70 +11,68 @@ class PostAuthView extends GetView<PostAuthController> {
   Widget build(BuildContext context) {
     return GetBuilder<PostAuthController>(builder: (controller) {
       return Scaffold(
-        body: Padding(
+        body: ListView(
+          shrinkWrap: true,
           padding: const EdgeInsets.only(left: 16, right: 16, top: 48),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Align(
-                alignment: Alignment.centerRight,
-                child: IconButton.filled(
-                  icon: const Icon(Icons.close_sharp),
-                  onPressed: controller.close,
-                  style: ButtonStyle(
-                      backgroundColor: WidgetStatePropertyAll(
-                          Get.theme.colorScheme.onSurface.withOpacity(.1)),
-                      iconColor: WidgetStatePropertyAll(
-                          Get.theme.colorScheme.onSurface)),
-                ),
+          children: [
+            Align(
+              alignment: Alignment.centerRight,
+              child: IconButton.filled(
+                icon: const Icon(Icons.close_sharp),
+                onPressed: controller.close,
+                style: ButtonStyle(
+                    backgroundColor: WidgetStatePropertyAll(
+                        Get.theme.colorScheme.onSurface.withOpacity(.1)),
+                    iconColor: WidgetStatePropertyAll(
+                        Get.theme.colorScheme.onSurface)),
               ),
-              const SizedBox(height: 18),
-              Text(
-                "finish_account_setup".tr,
-                style: Get.textTheme.headlineSmall!
-                    .copyWith(fontWeight: FontWeight.w700),
+            ),
+            const SizedBox(height: 18),
+            Text(
+              "finish_account_setup".tr,
+              style: Get.textTheme.headlineSmall!
+                  .copyWith(fontWeight: FontWeight.w700),
+            ),
+            const SizedBox(height: 12),
+            Text("to_complete_your_account_setup_please_select_your_user_type"
+                .tr),
+            const SizedBox(height: 20),
+            getInfoBox(),
+            const SizedBox(height: 16),
+            Text(
+              "step_i".trParams({
+                'a': "${controller.currentPage + 1}",
+                'b': controller.totalPages.toString()
+              }),
+              style: Get.textTheme.bodyMedium!
+                  .copyWith(fontWeight: FontWeight.bold),
+            ),
+            const SizedBox(height: 4),
+            SizedBox(
+              width: double.infinity,
+              child: StepProgressIndicator(
+                totalSteps: controller.totalPages,
+                currentStep: controller.currentPage + 1,
+                selectedColor: Get.theme.colorScheme.onSurface,
+                unselectedColor:
+                    Get.theme.colorScheme.onSurface.withOpacity(.2),
+                roundedEdges: const Radius.circular(10),
               ),
-              const SizedBox(height: 12),
-              Text("to_complete_your_account_setup_please_select_your_user_type"
-                  .tr),
-              const SizedBox(height: 20),
-              getInfoBox(),
-              const SizedBox(height: 16),
-              Text(
-                "step_i".trParams({
-                  'a': "${controller.currentPage + 1}",
-                  'b': controller.totalPages.toString()
-                }),
-                style: Get.textTheme.bodyMedium!
-                    .copyWith(fontWeight: FontWeight.bold),
+            ),
+            const SizedBox(height: 18),
+            ConstrainedBox(
+              constraints: BoxConstraints(maxHeight: Get.size.height * .45),
+              child: PageView(
+                controller: controller.pageController,
+                physics: const NeverScrollableScrollPhysics(),
+                children: [
+                  getFirstStepPage(),
+                  getSecondStepPage(),
+                  getThirdStepPage(),
+                ],
               ),
-              const SizedBox(height: 4),
-              SizedBox(
-                width: double.infinity,
-                child: StepProgressIndicator(
-                  totalSteps: controller.totalPages,
-                  currentStep: controller.currentPage + 1,
-                  selectedColor: Get.theme.colorScheme.onSurface,
-                  unselectedColor:
-                      Get.theme.colorScheme.onSurface.withOpacity(.2),
-                  roundedEdges: const Radius.circular(10),
-                ),
-              ),
-              const SizedBox(height: 18),
-              ConstrainedBox(
-                constraints: BoxConstraints(maxHeight: Get.size.height * .45),
-                child: PageView(
-                  controller: controller.pageController,
-                  physics: const NeverScrollableScrollPhysics(),
-                  children: [
-                    getFirstStepPage(),
-                    getSecondStepPage(),
-                    getThirdStepPage(),
-                  ],
-                ),
-              )
-            ],
-          ),
+            )
+          ],
         ),
       );
     });
