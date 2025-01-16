@@ -44,6 +44,9 @@ dependencies:
   flutter_typeahead: ^5.2.0
   fl_chart: ^0.69.2
   url_launcher: ^6.3.1
+  json_serializable: ^6.9.0
+  build_runner: ^2.4.13
+  json_annotation: ^4.9.0
 
 dev_dependencies:
   flutter_test:

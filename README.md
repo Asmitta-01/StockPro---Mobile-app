@@ -18,8 +18,12 @@ This app is perfect for retailers, wholesalers, and small businesses. It's easy 
 
 ## Technologies Used
 
-- Flutter framework
-- Dart programming language
+- Flutter (Channel stable, 3.24.3, on Microsoft Windows [version 10.0.26100.2894], locale fr-FR)
+- Windows Version 11
+- Android toolchain - develop for Android devices (Android SDK version 34.0.0)
+- Visual Studio - develop Windows apps (Visual Studio Community 2022 17.9.0)
+- Android Studio (version 2024.1)
+- VS Code (version 1.96.3)
 
 ## Getting Started
 
@@ -28,7 +32,8 @@ To run this project locally:
 1. Ensure you have Flutter installed on your machine.
 2. Clone this repository.
 3. Run `flutter pub get` to install dependencies.
-4. Connect a device or start an emulator.
-5. Run `flutter run` to start the app.
+4. Run `dart run build_runner build` to generate __*.g.dart__ files (Needed in models).
+5. Connect a device or start an emulator.
+6. Run `flutter run` to start the app.
 
 For more information on Flutter development, check out the [Flutter documentation](https://flutter.dev/docs).
