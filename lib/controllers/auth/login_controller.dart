@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:stock_pro/models/helpers/language_model.dart';
 import 'package:stock_pro/routes.dart';
 import 'package:stock_pro/utils/constants.dart';
+import 'package:stock_pro/widgets/language_bottom_sheet.dart';
 
 class LoginController extends GetxController {
   final formKey = GlobalKey<FormState>();
@@ -26,6 +27,11 @@ class LoginController extends GetxController {
     return AppConstants.languages.firstWhere(
         (element) => element.languageCode == Get.locale!.languageCode);
   }
+
+  showLanguageBottomSheet() => Get.bottomSheet(
+        LanguageBottomSheetWidget(),
+        settings: const RouteSettings(name: '${Routes.settings}/language'),
+      );
 
   void login() {
     loggingIn = true;

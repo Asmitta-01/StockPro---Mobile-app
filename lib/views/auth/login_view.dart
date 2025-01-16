@@ -22,7 +22,7 @@ class LoginView extends GetView<LoginController> {
               Column(
                 children: [
                   ElevatedButton(
-                    onPressed: () {},
+                    onPressed: controller.showLanguageBottomSheet,
                     style: ElevatedButton.styleFrom(
                       elevation: 0,
                       padding: const EdgeInsets.symmetric(horizontal: 8.0),
