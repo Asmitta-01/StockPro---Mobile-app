@@ -2,7 +2,7 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'item_model.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(fieldRename: FieldRename.snake)
 class ItemModel {
   int? id;
   String name;
@@ -10,17 +10,9 @@ class ItemModel {
   String? image;
   String description;
   int quantity;
-  DateTime? _createdAt;
+  final DateTime createdAt;
 
-  int? _stockThreshold;
-
-  int get stockThreshold => _stockThreshold!;
-
-  set stockThreshold(int value) {
-    _stockThreshold = value;
-  }
-
-  DateTime get createdAt => _createdAt!;
+  int stockThreshold = 0;
 
   double get estimatedStockValue => price * quantity;
 
@@ -31,9 +23,8 @@ class ItemModel {
     this.image,
     required this.description,
     required this.quantity,
-  }) {
-    _createdAt = DateTime.now();
-  }
+    required this.createdAt,
+  });
 
   factory ItemModel.fromJson(Map<String, dynamic> json) =>
       _$ItemModelFromJson(json);

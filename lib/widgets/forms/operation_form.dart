@@ -52,23 +52,7 @@ class _OperationFormState extends State<OperationForm> {
   OperationType selectedType = OperationType.incoming;
 
   bool deliveryIncluded = false;
-  final List<ItemModel> items = [
-    ItemModel(
-      id: 1,
-      name: 'Clou de diamètre 100',
-      price: 100,
-      quantity: 10,
-      description:
-          'Clou provenant des agences de fabrication de fers du pays. Il ne rouille pas.',
-    ),
-    ItemModel(
-      id: 2,
-      name: 'Sac de ciment',
-      price: 6000,
-      quantity: 20,
-      description: 'This is item 2',
-    )
-  ];
+  final List<ItemModel> items = [];
 
   Map<ItemModel, int> itemsXQuantity = {};
 
