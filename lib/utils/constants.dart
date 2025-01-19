@@ -3,6 +3,7 @@ import 'package:stock_pro/utils/image_data.dart';
 
 class AppConstants {
   static const String appName = "StockPro";
+  static const String appDatabaseName = "_stock_pro.db";
   static const String appSupportMail = "tiwabrayan@gmail.com";
   static const String countryCode = '_country_code';
   static const String languageCode = '_language_code';

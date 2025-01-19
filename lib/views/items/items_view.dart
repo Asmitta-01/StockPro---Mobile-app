@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:stock_pro/controllers/items/items_controller.dart';
 import 'package:stock_pro/utils/image_data.dart';
 import 'package:stock_pro/widgets/drawer_widget.dart';
@@ -43,6 +44,14 @@ class ItemsView extends GetView<ItemsController> {
                     ),
                   ]
                 : [
+                    if (controller.loadingItems)
+                      IconButton(
+                        onPressed: () {},
+                        icon: LoadingAnimationWidget.staggeredDotsWave(
+                          color: Get.theme.colorScheme.onSurface,
+                          size: 16,
+                        ),
+                      ),
                     if (controller.items.isNotEmpty)
                       IconButton(
                         onPressed: controller.goToAddItemView,
