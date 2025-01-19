@@ -49,17 +49,28 @@ class SplashView extends GetView<SplashController> {
                       _showBottomSheet(context);
                     });
                   }
-                  return const SizedBox.shrink();
-                } else {
-                  return Padding(
-                    padding: const EdgeInsets.only(bottom: 28),
-                    child: LoadingAnimationWidget.staggeredDotsWave(
-                      color: Get.theme.colorScheme.onPrimary,
-                      size: 38,
+
+                  return ElevatedButton(
+                    onPressed: () {
+                      controller.setSheetDisplayed(true);
+                      _showBottomSheet(context);
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Get.theme.colorScheme.surface,
+                      foregroundColor: Get.theme.colorScheme.primary,
+                      padding: EdgeInsets.symmetric(
+                          horizontal: Get.size.width * .25),
                     ),
+                    child: Text('start'.tr),
+                  );
+                } else {
+                  return LoadingAnimationWidget.staggeredDotsWave(
+                    color: Get.theme.colorScheme.onPrimary,
+                    size: 38,
                   );
                 }
               }),
+              const SizedBox(height: 28),
             ],
           ),
         ),
