@@ -13,22 +13,51 @@ class SnackbarHelper {
     required SnackbarType type,
     Duration? duration,
   }) {
+    final animationController = AnimationController(
+      vsync: Navigator.of(Get.context!).overlay as TickerProvider,
+      duration: duration ?? const Duration(seconds: 3),
+    );
+
+    animationController.forward();
+
     Get.showSnackbar(
       GetSnackBar(
-        message: message.tr,
+        // message: message.tr,
+        messageText: Text(
+          message.tr,
+          style: Get.textTheme.bodyMedium!
+              .copyWith(color: _getForegroundColor(type)),
+        ),
         icon: _getIcon(type),
         backgroundColor: _getBackgroundColor(type),
         duration: duration ?? const Duration(seconds: 3),
-        onTap: (snack) => Get.closeCurrentSnackbar(),
-        margin: const EdgeInsets.all(8),
-        borderRadius: 8,
-        snackPosition: SnackPosition.TOP,
+        onTap: (snack) {
+          Get.closeCurrentSnackbar();
+          animationController.dispose();
+        },
+        margin: const EdgeInsets.all(16),
+        // borderRadius: 8,
+        snackPosition: SnackPosition.BOTTOM,
         isDismissible: true,
         dismissDirection: DismissDirection.horizontal,
         forwardAnimationCurve: Curves.easeOutCirc,
         reverseAnimationCurve: Curves.easeInCirc,
+        showProgressIndicator: true,
+        progressIndicatorController: animationController,
       ),
     );
+  }
+
+  static Color _getForegroundColor(SnackbarType type) {
+    final theme = Get.theme;
+    switch (type) {
+      case SnackbarType.success:
+        return theme.colorScheme.onPrimary;
+      case SnackbarType.error:
+        return theme.colorScheme.onError;
+      case SnackbarType.info:
+        return theme.colorScheme.onSecondary;
+    }
   }
 
   static Icon _getIcon(SnackbarType type) {
