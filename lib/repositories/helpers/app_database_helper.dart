@@ -11,6 +11,7 @@ class AppDatabaseHelper extends DatabaseHelper {
           createTableQueries: [
             _createItemsTableQuery,
             _createShopsTableQuery,
+            _createOperationsTableQuery,
           ],
         );
 
@@ -25,6 +26,21 @@ class AppDatabaseHelper extends DatabaseHelper {
             active INTEGER NOT NULL,
             address TEXT NOT NULL,
             categories TEXT NOT NULL,
+            created_at TEXT NOT NULL
+          )
+          ''';
+  }
+
+  static String get _createOperationsTableQuery {
+    return '''
+          CREATE TABLE operations(
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            type TEXT NOT NULL,
+            comment TEXT,
+            invoice_number TEXT,
+            transport TEXT,
+            amount REAL NOT NULL,
+            items TEXT NOT NULL,
             created_at TEXT NOT NULL
           )
           ''';

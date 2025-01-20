@@ -14,6 +14,8 @@ class OperationForm extends StatefulWidget {
   final TextEditingController typeController;
   final TextEditingController transportCostController;
   final TextEditingController transportTypeController;
+  final Function(Map<ItemModel, int>) updateItemsFn;
+  final List<ItemModel> items;
 
   const OperationForm({
     super.key,
@@ -25,6 +27,8 @@ class OperationForm extends StatefulWidget {
     required this.typeController,
     required this.transportCostController,
     required this.transportTypeController,
+    required this.updateItemsFn,
+    required this.items,
   });
 
   @override
@@ -52,7 +56,6 @@ class _OperationFormState extends State<OperationForm> {
   OperationType selectedType = OperationType.incoming;
 
   bool deliveryIncluded = false;
-  final List<ItemModel> items = [];
 
   Map<ItemModel, int> itemsXQuantity = {};
 
@@ -135,7 +138,7 @@ class _OperationFormState extends State<OperationForm> {
             children: [
               Text("items".tr),
               PickItemWidget(
-                items: items,
+                items: widget.items,
                 onSelected: addItem,
                 buttonLabel: "add_an_item".tr,
                 buttonIcon: Icons.add,
@@ -301,6 +304,7 @@ class _OperationFormState extends State<OperationForm> {
       itemsXQuantity.update(item, (value) => value + 1, ifAbsent: () => 1);
     });
     Get.back();
+    widget.updateItemsFn(itemsXQuantity);
   }
 
   void setTransport() {

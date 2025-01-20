@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:stock_pro/controllers/operations/operations_controller.dart';
 import 'package:stock_pro/utils/image_data.dart';
 import 'package:stock_pro/widgets/drawer_widget.dart';
@@ -19,18 +20,26 @@ class OperationsView extends GetView<OperationsController> {
               onTap: controller.openDrawer,
               child: const Icon(Icons.menu_rounded),
             ),
-            actions: controller.operations.isNotEmpty
-                ? [
-                    IconButton(
-                      onPressed: () {},
-                      icon: const Icon(Icons.filter_list),
-                    ),
-                    IconButton(
-                      onPressed: controller.goToAddOperationView,
-                      icon: const Icon(Icons.add_circle_outline),
-                    ),
-                  ]
-                : [],
+            actions: [
+              if (controller.loadingOperations)
+                IconButton(
+                  onPressed: () {},
+                  icon: LoadingAnimationWidget.staggeredDotsWave(
+                    color: Get.theme.colorScheme.onSurface,
+                    size: 16,
+                  ),
+                ),
+              if (controller.operations.isNotEmpty) ...[
+                IconButton(
+                  onPressed: () {},
+                  icon: const Icon(Icons.filter_list),
+                ),
+                IconButton(
+                  onPressed: controller.goToAddOperationView,
+                  icon: const Icon(Icons.add_circle_outline),
+                ),
+              ]
+            ],
           ),
           drawerEnableOpenDragGesture: true,
           drawer: DrawerWidget(
@@ -73,22 +82,45 @@ class OperationsView extends GetView<OperationsController> {
       itemCount: controller.operations.length,
       shrinkWrap: true,
       itemBuilder: (context, index) {
-        return ListTile(
-          title: Text(
-              "${controller.operations[index].type.name.capitalize!} #${controller.operations[index].invoiceNumber}"),
-          subtitle: Text(
-            "${controller.operations[index].totalAmount} XAF",
-            overflow: TextOverflow.ellipsis,
+        return Dismissible(
+          key: UniqueKey(),
+          direction: DismissDirection.endToStart,
+          onDismissed: (_) {
+            controller.deleteOperation(controller.operations[index].id);
+          },
+          confirmDismiss: (_) => controller.showDeleteDialog(),
+          background: Container(
+            color: Colors.red,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                IconButton(
+                  onPressed: () {},
+                  icon: Icon(
+                    Icons.delete,
+                    color: Get.theme.colorScheme.onError,
+                  ),
+                ),
+              ],
+            ),
           ),
-          leading: Container(
-            width: 12,
-            height: double.infinity,
-            color: controller.operations[index].type.color,
+          child: ListTile(
+            title: Text(
+                "${controller.operations[index].type.name.capitalize!} #${controller.operations[index].invoiceNumber}"),
+            subtitle: Text(
+              "${controller.operations[index].totalAmount} XAF",
+              overflow: TextOverflow.ellipsis,
+            ),
+            leading: Container(
+              width: 12,
+              height: double.infinity,
+              color: controller.operations[index].type.color,
+            ),
+            horizontalTitleGap: 8,
+            trailing: controller.operations[index].transport != null
+                ? const Icon(Icons.local_shipping_outlined)
+                : null,
           ),
-          horizontalTitleGap: 8,
-          trailing: controller.operations[index].transport != null
-              ? const Icon(Icons.local_shipping_outlined)
-              : null,
         );
       },
       separatorBuilder: (BuildContext context, int index) =>

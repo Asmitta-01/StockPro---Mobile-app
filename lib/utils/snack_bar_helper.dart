@@ -43,6 +43,10 @@ class SnackbarHelper {
         forwardAnimationCurve: Curves.easeOutCirc,
         reverseAnimationCurve: Curves.easeInCirc,
         showProgressIndicator: true,
+        progressIndicatorValueColor:
+            AlwaysStoppedAnimation(_getBackgroundColor(type)),
+        progressIndicatorBackgroundColor:
+            Get.theme.colorScheme.surface.withOpacity(.9),
         progressIndicatorController: animationController,
       ),
     );

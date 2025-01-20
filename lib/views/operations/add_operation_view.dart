@@ -40,6 +40,8 @@ class AddOperationView extends GetView<AddOperationController> {
                 typeController: controller.typeController,
                 transportCostController: controller.transportCostController,
                 transportTypeController: controller.transportTypeController,
+                updateItemsFn: controller.updateItemsXQuantity,
+                items: controller.items,
               ),
             ],
           ),

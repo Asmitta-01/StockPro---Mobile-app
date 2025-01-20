@@ -1,69 +1,84 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:stock_pro/models/enums/operation_type.dart';
-import 'package:stock_pro/models/enums/transport_method.dart';
 import 'package:stock_pro/models/operation_model.dart';
-import 'package:stock_pro/models/transport_model.dart';
+import 'package:stock_pro/repositories/operation_repository.dart';
 import 'package:stock_pro/routes.dart';
+import 'package:stock_pro/utils/snack_bar_helper.dart';
 
 class OperationsController extends GetxController {
   GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
   final int pagePosition = 3;
 
-  List<OperationModel> operations = [
-    OperationModel(
-      id: 1,
-      createdAt: DateTime.now(),
-      type: OperationType.incoming,
-      amount: 34000,
-      invoiceNumber: "ST0001",
-      transport: TransportModel(TransportMethod.tricycle, 1000),
-    ),
-    OperationModel(
-      id: 2,
-      createdAt: DateTime.now(),
-      type: OperationType.outgoing,
-      amount: 3000,
-      invoiceNumber: "ST0002",
-    ),
-    OperationModel(
-      id: 3,
-      createdAt: DateTime.now(),
-      type: OperationType.incoming,
-      amount: 61000,
-      invoiceNumber: "ST0003",
-      transport: TransportModel(TransportMethod.tricycle, 1500),
-    ),
-    OperationModel(
-      id: 4,
-      createdAt: DateTime.now(),
-      type: OperationType.outgoing,
-      amount: 9000,
-      invoiceNumber: "ST0004",
-      transport: TransportModel(TransportMethod.moto, 500),
-    ),
-    OperationModel(
-      id: 5,
-      createdAt: DateTime.now(),
-      type: OperationType.outgoing,
-      amount: 140000,
-      invoiceNumber: "ST0005",
-      transport: TransportModel(TransportMethod.car, 5000),
-    ),
-    OperationModel(
-      id: 6,
-      createdAt: DateTime.now(),
-      type: OperationType.transfer,
-      amount: 90000,
-      invoiceNumber: "ST0006",
-    ),
-  ];
+  final OperationRepository _repository = Get.find();
+
+  bool loadingOperations = true;
+  List<OperationModel> operations = [];
+
+  OperationsController() {
+    _loadOperations();
+  }
+
+  void _loadOperations() async {
+    try {
+      operations = await _repository.getAll();
+    } catch (e, stackTrace) {
+      debugPrint(e.toString());
+      debugPrint(stackTrace.toString());
+      SnackbarHelper.showError("an_error_occurred_while_loading_data".tr);
+    }
+
+    loadingOperations = false;
+    update();
+  }
+
+  void deleteOperation(int id) async {
+    try {
+      await _repository.delete("id = ?", [id]);
+      operations.removeWhere((element) => element.id == id);
+      update();
+      SnackbarHelper.showInfo("operation_deleted".tr);
+    } catch (e, stackTrace) {
+      debugPrint(e.toString());
+      debugPrint(stackTrace.toString());
+      SnackbarHelper.showError("an_error_occurred_while_deleting_data".tr);
+    }
+  }
+
+  Future<bool> showDeleteDialog() async {
+    bool? result = await Get.dialog(
+      AlertDialog(
+        title: Text("delete_operation".tr),
+        content: Text("are_you_sure_you_want_to_delete_this_operation".tr),
+        actions: [
+          TextButton(
+            onPressed: () {
+              Get.back(result: false);
+            },
+            child: Text("cancel".tr),
+          ),
+          TextButton(
+            onPressed: () {
+              Get.back(result: true);
+              // deleteOperation(id);
+            },
+            child: Text("delete".tr),
+          ),
+        ],
+      ),
+    );
+
+    return result ?? false;
+  }
 
   void openDrawer() {
     scaffoldKey.currentState!.openDrawer();
   }
 
   void goToAddOperationView() {
-    Get.toNamed(Routes.addOperation);
+    Get.toNamed(Routes.addOperation)?.then((_) {
+      loadingOperations = true;
+      update();
+      _loadOperations();
+    });
   }
 }

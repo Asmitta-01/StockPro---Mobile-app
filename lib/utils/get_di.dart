@@ -3,6 +3,7 @@ import 'package:stock_pro/controllers/my_controller.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:stock_pro/repositories/helpers/app_database_helper.dart';
 import 'package:stock_pro/repositories/item_repository.dart';
+import 'package:stock_pro/repositories/operation_repository.dart';
 import 'package:stock_pro/repositories/shop_repository.dart';
 
 Future init() async {
@@ -15,9 +16,13 @@ Future init() async {
 
   ItemRepository itemRepository =
       ItemRepository(dbHelper: AppDatabaseHelper.instance);
-  Get.lazyPut(() => itemRepository);
+  Get.lazyPut(() => itemRepository, fenix: true);
 
   ShopRepository shopRepository =
       ShopRepository(dbHelper: AppDatabaseHelper.instance);
-  Get.lazyPut(() => shopRepository);
+  Get.lazyPut(() => shopRepository, fenix: true);
+
+  OperationRepository operationRepository =
+      OperationRepository(dbHelper: AppDatabaseHelper.instance);
+  Get.lazyPut(() => operationRepository, fenix: true);
 }
