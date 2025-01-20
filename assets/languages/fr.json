@@ -187,5 +187,8 @@
     "delete_operation": "Supprimer l'opération",
     "are_you_sure_you_want_to_delete_this_operation": "Êtes-vous sûr de vouloir supprimer cette opération?",
     "delete": "Supprimer",
-    "operation_deleted": "Opération supprimée"
+    "operation_deleted": "Opération supprimée",
+    "stock_threshold": "Seuil de stock",
+    "quantity_in_stock": "Quantité en stock",
+    "added": "Ajouté"
 }

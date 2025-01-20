@@ -33,6 +33,7 @@ abstract class Routes {
 
   static const items = '/items';
   static const addItem = '$items/add';
+  static const singleItem = '$items/:id';
 
   static const operations = '/operations';
   static const addOperation = '$operations/add';

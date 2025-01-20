@@ -4,6 +4,7 @@ import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:stock_pro/controllers/items/items_controller.dart';
 import 'package:stock_pro/utils/image_data.dart';
 import 'package:stock_pro/widgets/drawer_widget.dart';
+import 'package:stock_pro/widgets/list_tiles/item_list_tile.dart';
 
 class ItemsView extends GetView<ItemsController> {
   const ItemsView({super.key});
@@ -77,43 +78,16 @@ class ItemsView extends GetView<ItemsController> {
       itemCount: controller.items.length,
       shrinkWrap: true,
       itemBuilder: (context, index) {
-        return ListTile(
-          title: Text(controller.items[index].name),
-          subtitle: Text(
-            controller.items[index].description,
-            overflow: TextOverflow.ellipsis,
-          ),
-          leading: controller.selectedItems.contains(controller.items[index])
-              ? CircleAvatar(
-                  backgroundColor: Get.theme.colorScheme.primary,
-                  child: Icon(
-                    Icons.check,
-                    color: Get.theme.colorScheme.onPrimary,
-                  ),
-                )
-              : CircleAvatar(
-                  child: Text(
-                    controller.items[index].name[0].toUpperCase(),
-                    style: Get.textTheme.bodyLarge,
-                  ),
-                ),
-          onTap: () {
-            if (controller.selectedItems.isEmpty) {
-              controller.goToItemDetailsView(controller.items[index]);
-            } else if (controller.selectedItems
-                .contains(controller.items[index])) {
-              controller.removeSelectedItem(controller.items[index]);
-            } else {
-              controller.selectItem(controller.items[index]);
-            }
-          },
-          onLongPress: () {
-            controller.selectItem(controller.items[index]);
-          },
-          trailing: Text(
-            controller.items[index].quantity.toString(),
-            style: Get.textTheme.bodyLarge,
-          ),
+        return ItemListTile(
+          item: controller.items[index],
+          isSelected:
+              controller.selectedItems.contains(controller.items[index]),
+          onTap: controller.selectedItems.isEmpty
+              ? null
+              : controller.selectedItems.contains(controller.items[index])
+                  ? () => controller.removeSelectedItem(controller.items[index])
+                  : () => controller.selectItem(controller.items[index]),
+          onLongPress: () => controller.selectItem(controller.items[index]),
         );
       },
       separatorBuilder: (BuildContext context, int index) =>

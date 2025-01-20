@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:stock_pro/models/shop_model.dart';
 import 'package:stock_pro/routes.dart';
 import 'package:stock_pro/utils/image_data.dart';
-import 'package:stock_pro/widgets/shop_bottom_sheet.dart';
+import 'package:stock_pro/widgets/bottom_sheets/shop_bottom_sheet.dart';
 
 class ShopListTile extends StatelessWidget {
   const ShopListTile({

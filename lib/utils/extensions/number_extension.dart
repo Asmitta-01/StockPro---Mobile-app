@@ -6,6 +6,10 @@ extension NumberExtension on num {
           locale: Get.locale?.languageCode, name: 'XAF')
       .format(this);
 
+  String get toSimpleCurrency =>
+      NumberFormat.simpleCurrency(locale: Get.locale?.languageCode, name: 'XAF')
+          .format(this);
+
   String get compact =>
       NumberFormat.compact(locale: Get.locale?.languageCode).format(this);
 }
