@@ -1,7 +1,4 @@
 import 'package:get/get.dart';
-import 'package:stock_pro/controllers/auth/login_controller.dart';
-import 'package:stock_pro/controllers/auth/post_auth_controller.dart';
-import 'package:stock_pro/controllers/auth/signup_controller.dart';
 import 'package:stock_pro/controllers/help/help_controller.dart';
 import 'package:stock_pro/controllers/home/owner_home_controller.dart';
 import 'package:stock_pro/controllers/items/add_item_controller.dart';
@@ -13,9 +10,6 @@ import 'package:stock_pro/controllers/reports/reports_controller.dart';
 import 'package:stock_pro/controllers/reports/stock_reports_controller.dart';
 import 'package:stock_pro/controllers/settings/settings_controller.dart';
 import 'package:stock_pro/controllers/shops/shops_controller.dart';
-import 'package:stock_pro/views/auth/login_view.dart';
-import 'package:stock_pro/views/auth/post_auth_view.dart';
-import 'package:stock_pro/views/auth/signup_view.dart';
 import 'package:stock_pro/views/help/help_view.dart';
 import 'package:stock_pro/views/home/owner_home_view.dart';
 import 'package:stock_pro/views/items/add_item_view.dart';
@@ -34,8 +28,6 @@ import 'controllers/splash_controller.dart';
 abstract class Routes {
   Routes._();
 
-  static const login = '/login';
-  static const signUp = '/signup';
   static const main = '/';
   static const splash = '/splash';
 
@@ -48,7 +40,6 @@ abstract class Routes {
   static const notifications = '/notifications';
 
   static const account = '/account';
-  static const accountComplete = '/account/complete';
 
   static const shops = '/shops';
   static const singleShop = '$shops/:id';
@@ -71,21 +62,6 @@ class AppPages {
       name: Routes.splash,
       page: () => const SplashView(),
       binding: BindingsBuilder.put(() => SplashController()),
-    ),
-    GetPage(
-      name: Routes.login,
-      page: () => const LoginView(),
-      binding: BindingsBuilder.put(() => LoginController()),
-    ),
-    GetPage(
-      name: Routes.signUp,
-      page: () => const SignUpView(),
-      binding: BindingsBuilder.put(() => SignUpController()),
-    ),
-    GetPage(
-      name: Routes.accountComplete,
-      page: () => const PostAuthView(),
-      binding: BindingsBuilder.put(() => PostAuthController()),
     ),
     GetPage(
       name: Routes.main,
