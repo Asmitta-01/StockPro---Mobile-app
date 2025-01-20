@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:stock_pro/controllers/splash_controller.dart';
-import 'package:stock_pro/routes.dart';
 import 'package:stock_pro/utils/image_data.dart';
+import 'package:stock_pro/widgets/forms/shop_form.dart';
 
 class SplashView extends GetView<SplashController> {
   const SplashView({super.key});
@@ -41,18 +41,8 @@ class SplashView extends GetView<SplashController> {
               const Spacer(),
               GetBuilder<SplashController>(builder: (controller) {
                 if (controller.checkedStatus) {
-                  if (Get.routing.current == Routes.splash &&
-                      !controller.sheetDisplayed) {
-                    Future.microtask(() {
-                      controller.setSheetDisplayed(true);
-                      // ignore: use_build_context_synchronously
-                      _showBottomSheet(context);
-                    });
-                  }
-
                   return ElevatedButton(
                     onPressed: () {
-                      controller.setSheetDisplayed(true);
                       _showBottomSheet(context);
                     },
                     style: ElevatedButton.styleFrom(
@@ -90,8 +80,6 @@ class SplashView extends GetView<SplashController> {
       backgroundColor: Get.isDarkMode
           ? Get.theme.colorScheme.surfaceContainer
           : Get.theme.colorScheme.surface,
-      isDismissible: false,
-      barrierColor: Colors.transparent,
       sheetAnimationStyle: AnimationStyle(
         curve: Curves.easeIn,
         duration: const Duration(seconds: 1),
@@ -100,66 +88,22 @@ class SplashView extends GetView<SplashController> {
       isScrollControlled: true,
       builder: (context) => IntrinsicHeight(
         child: Padding(
-          padding: const EdgeInsets.all(24),
+          padding: MediaQuery.of(context)
+              .viewInsets
+              .copyWith(left: 24, right: 24, top: 24),
           child: Column(
             children: [
-              Row(
-                children: [
-                  Expanded(
-                    child: ElevatedButton(
-                      onPressed: () {},
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Image.asset(ImageData.google, height: 24),
-                          const SizedBox(width: 4),
-                          Text(
-                            'continue_with_google'.tr,
-                            style: const TextStyle(fontSize: 22),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ],
+              Container(
+                height: 4,
+                width: 40,
+                decoration: BoxDecoration(
+                  color: Get.theme.colorScheme.onSurface,
+                  borderRadius: const BorderRadius.all(Radius.circular(40)),
+                ),
               ),
-              const SizedBox(height: 8),
-              Row(
-                children: [
-                  Expanded(
-                    child: OutlinedButton(
-                      onPressed: controller.goToSignUpView,
-                      child: Text(
-                        'continue_with_email'.tr,
-                        style: const TextStyle(fontSize: 22),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 4),
-              const Divider(),
-              const SizedBox(height: 4),
-              Row(
-                children: [
-                  Expanded(
-                    child: ElevatedButton(
-                      onPressed: controller.goToLoginView,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          const Icon(Icons.mail_outline_sharp),
-                          const SizedBox(width: 4),
-                          Text(
-                            'login'.tr,
-                            style: const TextStyle(fontSize: 22),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ],
-              ),
+              const SizedBox(height: 18),
+              ShopForm(fn: controller.createShop),
+              const SizedBox(height: 18),
             ],
           ),
         ),

@@ -1,4 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:stock_pro/models/converters/integer_bool_converter.dart';
+import 'package:stock_pro/models/converters/string_list_converter.dart';
 
 part 'shop_model.g.dart';
 
@@ -10,18 +12,22 @@ class ShopModel {
   String? logo;
   String? website;
   String address;
-  List<String> categories;
-  bool active;
   DateTime createdAt;
+
+  @StringListConverter()
+  List<String> categories;
+
+  @IntegerBoolConverter()
+  bool active;
 
   ShopModel({
     required this.id,
     required this.name,
-    required this.image,
+    this.image,
     this.website,
     required this.address,
     this.active = false,
-    required this.logo,
+    this.logo,
     required this.categories,
     required this.createdAt,
   });

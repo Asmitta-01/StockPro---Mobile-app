@@ -4,7 +4,13 @@ import 'package:get/get.dart';
 class ShopForm extends StatefulWidget {
   const ShopForm({super.key, required this.fn});
 
-  final void Function(String, String, String?) fn;
+  /// Callback function that handles form data processing.
+  ///
+  /// This function takes three parameters:
+  /// - First parameter: Shop's name
+  /// - Second parameter: Shop's website (can be null)
+  /// - Third parameter: Shop's address
+  final void Function(String, String?, String) fn;
 
   @override
   ShopFormState createState() => ShopFormState();
@@ -61,13 +67,14 @@ class ShopFormState extends State<ShopForm> {
           ),
           const SizedBox(height: 8),
           TextFormField(
-            controller: websiteController,
+            controller: addressController,
             keyboardType: TextInputType.url,
             textInputAction: TextInputAction.next,
             decoration: InputDecoration(
               hintText: "town_of_the_shop".tr,
               labelText: "shop_address".tr,
             ),
+            validator: validateField,
           ),
           const SizedBox(height: 8),
           Row(
@@ -86,7 +93,13 @@ class ShopFormState extends State<ShopForm> {
   }
 
   void submitForm() {
-    if (_formKey.currentState!.validate()) {}
+    if (_formKey.currentState!.validate()) {
+      widget.fn(
+        nameController.text,
+        websiteController.text,
+        addressController.text,
+      );
+    }
   }
 
   @override
