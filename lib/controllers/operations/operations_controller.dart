@@ -21,6 +21,7 @@ class OperationsController extends GetxController {
   void _loadOperations() async {
     try {
       operations = await _repository.getAll();
+      operations.sort((a, b) => b.createdAt.compareTo(a.createdAt));
     } catch (e, stackTrace) {
       debugPrint(e.toString());
       debugPrint(stackTrace.toString());
