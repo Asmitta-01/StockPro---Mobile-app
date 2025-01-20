@@ -21,7 +21,7 @@ part 'operation_model.g.dart';
 /// and quantities, which can be compared against the actual amount for verification.
 @JsonSerializable()
 class OperationModel {
-  int id;
+  int? id;
   DateTime createdAt;
   OperationType type;
   double amount;
@@ -35,7 +35,7 @@ class OperationModel {
   Map<ItemModel, int> items = {};
 
   OperationModel({
-    required this.id,
+    this.id,
     required this.createdAt,
     required this.type,
     required this.amount,
