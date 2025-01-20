@@ -86,7 +86,7 @@ class OperationsView extends GetView<OperationsController> {
           key: UniqueKey(),
           direction: DismissDirection.endToStart,
           onDismissed: (_) {
-            controller.deleteOperation(controller.operations[index].id);
+            controller.deleteOperation(controller.operations[index].id!);
           },
           confirmDismiss: (_) => controller.showDeleteDialog(),
           background: Container(

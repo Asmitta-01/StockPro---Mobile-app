@@ -357,6 +357,7 @@ class _OperationFormState extends State<OperationForm> {
               ),
               onTap: () {
                 setState(() {
+                  widget.typeController.text = type.name;
                   selectedType = type;
                 });
                 Get.back();

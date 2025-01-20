@@ -18,8 +18,7 @@ class AddOperationController extends GetxController {
   final invoiceController = TextEditingController();
   final amountController = TextEditingController();
   final commentController = TextEditingController();
-  final dateController =
-      TextEditingController(text: DateTime.now().toString().split(" ")[0]);
+  final dateController = TextEditingController(text: DateTime.now().toString());
   final typeController = TextEditingController();
   final transportCostController = TextEditingController();
   final transportTypeController = TextEditingController();
@@ -52,17 +51,22 @@ class AddOperationController extends GetxController {
       savingOperation = true;
       update();
 
+      String invoiceNumber = invoiceController.text.isEmpty
+          ? 'SP${DateTime.now().millisecondsSinceEpoch.toString().substring(7)}'
+          : invoiceController.text;
+
       OperationModel operation = OperationModel(
-        invoiceNumber: invoiceController.text,
+        invoiceNumber: invoiceNumber,
         amount: double.parse(amountController.text),
         comment: commentController.text,
         createdAt: DateTime.parse(dateController.text),
         type: OperationType.fromString(typeController.text),
-        id: 0,
-        transport: TransportModel(
-          TransportMethod.fromString(transportTypeController.text),
-          double.tryParse(transportCostController.text) ?? 0.0,
-        ),
+        transport: transportTypeController.text.isEmpty
+            ? null
+            : TransportModel(
+                TransportMethod.fromString(transportTypeController.text),
+                double.tryParse(transportCostController.text) ?? 0.0,
+              ),
       );
       operation.items = _itemsXQuantity;
 
