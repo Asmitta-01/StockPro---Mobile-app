@@ -11,7 +11,7 @@ class OwnerHomeController extends GetxController {
   final ItemRepository _itemRepository = Get.find();
   final OperationRepository _operationRepository = Get.find();
 
-  bool definedStockAlert = false, addedManager = false;
+  bool definedStockAlert = false, readFAQ = false;
 
   late bool passedAll;
 
@@ -37,6 +37,10 @@ class OwnerHomeController extends GetxController {
           .where(
               (model) => DateUtils.isSameDay(model.createdAt, DateTime.now()))
           .length;
+
+      definedStockAlert = (await _itemRepository
+              .query(where: 'stock_threshold <> ?', whereArgs: [0]))
+          .isNotEmpty;
     } catch (e) {
       debugPrint(e.toString());
       SnackbarHelper.showError("an_error_occurred_during_the_process".tr);
@@ -46,7 +50,7 @@ class OwnerHomeController extends GetxController {
   }
 
   bool passedAllSteps() {
-    return addedItem && madeFirstOperation && definedStockAlert && addedManager;
+    return addedItem && madeFirstOperation && definedStockAlert && readFAQ;
   }
 
   void openDrawer() {
@@ -70,13 +74,15 @@ class OwnerHomeController extends GetxController {
   }
 
   void goToDefineAlertView() {
-    definedStockAlert = true;
-    update();
+    if (!definedStockAlert) {
+      Get.toNamed(Routes.items, arguments: {'definedStockAlert': true});
+    }
   }
 
-  void goToAddManagerView() {
-    addedManager = true;
-    update();
+  void goToFAQView() {
+    if (readFAQ) {
+      Get.toNamed(Routes.help);
+    }
   }
 
   void closeGettingStarted() {

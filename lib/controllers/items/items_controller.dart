@@ -6,6 +6,7 @@ import 'package:stock_pro/repositories/helpers/database_exception_handler.dart';
 import 'package:stock_pro/repositories/item_repository.dart';
 import 'package:stock_pro/routes.dart';
 import 'package:stock_pro/utils/snack_bar_helper.dart';
+import 'package:stock_pro/widgets/bottom_sheets/item_bottom_sheet.dart';
 import 'package:stock_pro/widgets/dialogs/ongoing_request_dialog.dart';
 
 class ItemsController extends GetxController {
@@ -19,10 +20,15 @@ class ItemsController extends GetxController {
   List<ItemModel> items = [];
 
   ItemsController() {
-    _loadItems();
+    _loadItems().then((_) {
+      var args = Get.arguments;
+      if (args != null && args['definedStockAlert'] == true) {
+        _showItemWithNoThreshold();
+      }
+    });
   }
 
-  void _loadItems() async {
+  Future<void> _loadItems() async {
     items = await _repository.getAll().catchError((_) {
       return <ItemModel>[];
     });
@@ -78,6 +84,22 @@ class ItemsController extends GetxController {
       update();
       _loadItems();
     });
+  }
+
+  void _showItemWithNoThreshold() {
+    final item =
+        items.firstWhereOrNull((element) => element.stockThreshold == 0);
+    if (item == null) return;
+
+    Get.bottomSheet(
+      ItemBottomSheet(
+        item: item,
+        onUpdateThreshold: updateThreshold,
+      ),
+      isScrollControlled: true,
+      settings: RouteSettings(
+          name: Routes.singleItem.replaceFirst(':id', "${item.id}")),
+    );
   }
 
   void updateThreshold(ItemModel item, int threshold) async {
