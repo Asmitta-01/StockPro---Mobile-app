@@ -190,5 +190,11 @@
     "operation_deleted": "Opération supprimée",
     "stock_threshold": "Seuil de stock",
     "quantity_in_stock": "Quantité en stock",
-    "added": "Ajouté"
+    "added": "Ajouté",
+    "record_already_exists": "Un enregistrement avec cet identifiant existe déjà",
+    "the_requested_table_does_not_exist": "La table demandée n'existe pas",
+    "database_connection_closed": "La connexion à la base de données est fermée",
+    "invalid_sql_syntax": "Syntaxe SQL non valide",
+    "required_field_cannot_be_null": "Le champ requis ne peut pas être nul",
+    "database_error_occurred": "Une erreur de base de données s'est produite"
 }

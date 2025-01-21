@@ -190,5 +190,11 @@
     "operation_deleted": "Operation deleted",
     "stock_threshold": "Stock Threshold",
     "quantity_in_stock": "Quantity in Stock",
-    "added": "Added"
+    "added": "Added",
+    "record_already_exists": "A record with this unique identifier already exists",
+    "the_requested_table_does_not_exist": "The requested table does not exist",
+    "database_connection_closed": "Database connection is closed",
+    "invalid_sql_syntax": "Invalid SQL syntax",
+    "required_field_cannot_be_null": "Required field cannot be null",
+    "database_error_occurred": "Database error occurred"
 }
