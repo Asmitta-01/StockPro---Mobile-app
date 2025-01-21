@@ -9,7 +9,7 @@ class DialogHelper {
   static const _defaultDuration = Duration(milliseconds: 500);
   static const _defaultRadius = 40.0;
   static const _smallRadius = 8.0;
-  static const _defaultPadding = 16.0;
+  static const _defaultPadding = 15.0;
 
   static BoxDecoration _buildRoundedDecoration(Color color, double radius) {
     return BoxDecoration(
@@ -72,6 +72,7 @@ class DialogHelper {
     BuildContext context, {
     required String title,
     String content = "",
+    Widget contentWidget = const SizedBox.shrink(),
     required VoidCallback primaryAction,
     required VoidCallback secondaryAction,
     required String primaryActionLabel,
@@ -79,6 +80,11 @@ class DialogHelper {
     bool isDanger = false,
     IconData? iconData,
   }) {
+    assert(
+      content.isEmpty || contentWidget == const SizedBox.shrink(),
+      "You can't provide both content and contentWidget",
+    );
+
     final theme = Get.theme;
 
     showDialog(
@@ -87,6 +93,7 @@ class DialogHelper {
         theme: theme,
         title: title,
         content: content,
+        contentWidget: contentWidget,
         primaryAction: primaryAction,
         secondaryAction: secondaryAction,
         primaryActionLabel: primaryActionLabel,
@@ -233,6 +240,7 @@ class _ActionDialogContent extends StatelessWidget {
   final ThemeData theme;
   final String title;
   final String content;
+  final Widget contentWidget;
   final VoidCallback primaryAction;
   final VoidCallback secondaryAction;
   final String primaryActionLabel;
@@ -250,6 +258,7 @@ class _ActionDialogContent extends StatelessWidget {
     required this.secondaryActionLabel,
     this.isDanger = false,
     this.iconData,
+    required this.contentWidget,
   });
 
   @override
@@ -301,9 +310,11 @@ class _ActionDialogContent extends StatelessWidget {
   Widget _buildContent() {
     return Container(
       margin: const EdgeInsets.only(top: 8),
-      child: RichText(
-        text: TextSpan(style: Get.textTheme.bodyMedium, text: content),
-      ),
+      child: contentWidget != const SizedBox.shrink()
+          ? contentWidget
+          : RichText(
+              text: TextSpan(style: Get.textTheme.bodyMedium, text: content),
+            ),
     );
   }
 

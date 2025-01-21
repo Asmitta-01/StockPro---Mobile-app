@@ -196,5 +196,10 @@
     "database_connection_closed": "Database connection is closed",
     "invalid_sql_syntax": "Invalid SQL syntax",
     "required_field_cannot_be_null": "Required field cannot be null",
-    "database_error_occurred": "Database error occurred"
+    "database_error_occurred": "Database error occurred",
+    "failed_to_update_threshold": "Failed to update item threshold",
+    "update_stock_threshold": "Update stock threshold",
+    "updating_item": "Updating item",
+    "item_updated_successfully": "Item updated successfully",
+    "threshold_updated_successfully": "Threshold updated successfully"
 }

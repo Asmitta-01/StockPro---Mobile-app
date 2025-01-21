@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sqflite/sqflite.dart';
 import 'package:stock_pro/models/item_model.dart';
+import 'package:stock_pro/repositories/helpers/database_exception_handler.dart';
 import 'package:stock_pro/repositories/item_repository.dart';
 import 'package:stock_pro/routes.dart';
+import 'package:stock_pro/utils/snack_bar_helper.dart';
+import 'package:stock_pro/widgets/dialogs/ongoing_request_dialog.dart';
 
 class ItemsController extends GetxController {
   GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
@@ -20,7 +24,6 @@ class ItemsController extends GetxController {
 
   void _loadItems() async {
     items = await _repository.getAll().catchError((_) {
-      Get.snackbar('Error', 'Failed to load items');
       return <ItemModel>[];
     });
     loadingItems = false;
@@ -66,7 +69,42 @@ class ItemsController extends GetxController {
     });
   }
 
-  void goToItemDetailsView(ItemModel item) {
-    // Get.toNamed(Routes.itemDetails, arguments: item);
+  void updateThreshold(ItemModel item, int threshold) async {
+    if (item.stockThreshold == threshold) {
+      return;
+    }
+
+    _showLoader('updating_item'.tr);
+
+    item.stockThreshold = threshold;
+    try {
+      await _repository.update(item, "id = ?", [item.id]);
+      items[items.indexWhere((element) => element.id == item.id)] = item;
+      SnackbarHelper.showSuccess(
+        "threshold_updated_successfully".tr,
+        duration: const Duration(seconds: 2),
+      );
+      if (Get.isOverlaysOpen) Get.close(1);
+    } on DatabaseException catch (e) {
+      DatabaseExceptionHandler.handleException(e);
+    } catch (_) {
+      SnackbarHelper.showError("failed_to_update_threshold".tr);
+    } finally {
+      update();
+      _hideLoader();
+    }
   }
+
+  void _showLoader(String text) {
+    Get.dialog(
+      PopScope(
+        canPop: false,
+        child: OngoingRequestDialog(text: text),
+      ),
+      barrierDismissible: false,
+      name: "Dialog - $text",
+    );
+  }
+
+  void _hideLoader() => Get.close(1);
 }

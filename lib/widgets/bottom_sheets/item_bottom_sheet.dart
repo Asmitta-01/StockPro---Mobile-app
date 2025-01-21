@@ -3,10 +3,11 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:stock_pro/models/item_model.dart';
 import 'package:stock_pro/utils/extensions/number_extension.dart';
+import 'package:stock_pro/widgets/dialogs/dialog_helper.dart';
 
 class ItemBottomSheet extends StatelessWidget {
   final ItemModel item;
-  final void Function()? onUpdateThreshold;
+  final void Function(ItemModel, int)? onUpdateThreshold;
 
   const ItemBottomSheet({
     super.key,
@@ -95,11 +96,13 @@ class ItemBottomSheet extends StatelessWidget {
                         const SizedBox(width: 8),
                         if (onUpdateThreshold != null)
                           InkWell(
-                            onTap: onUpdateThreshold,
+                            onTap: _showThresholdDialog,
                             child: Text(
                               'update'.tr,
                               style: TextStyle(
-                                color: Get.theme.colorScheme.primary,
+                                color: item.quantity <= item.stockThreshold
+                                    ? Get.theme.colorScheme.error
+                                    : Get.theme.colorScheme.primary,
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
@@ -111,7 +114,7 @@ class ItemBottomSheet extends StatelessWidget {
               ),
               Expanded(
                 child: Text(
-                  '${'added'.tr}: ${DateFormat('MMMM d, y', Get.locale?.languageCode).format(item.createdAt)}',
+                  '${'added'.tr}: ${DateFormat('MMMM d, y', Get.locale?.languageCode).format(item.createdAt).capitalize}',
                   style: Get.textTheme.bodySmall!.copyWith(
                     color: Colors.grey,
                   ),
@@ -123,5 +126,31 @@ class ItemBottomSheet extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  void _showThresholdDialog() {
+    final textEditingController =
+        TextEditingController(text: item.stockThreshold.toString());
+    DialogHelper.showActionDialog(
+      Get.context!,
+      title: 'update_stock_threshold'.tr,
+      primaryAction: () =>
+          _updateThreshold(int.parse(textEditingController.text)),
+      contentWidget: TextField(
+        controller: textEditingController,
+        keyboardType: TextInputType.number,
+        decoration: InputDecoration(
+          labelText: 'stock_threshold'.tr,
+        ),
+      ),
+      secondaryAction: Get.back,
+      primaryActionLabel: 'update'.tr,
+      secondaryActionLabel: 'cancel'.tr,
+    );
+  }
+
+  void _updateThreshold(int value) {
+    Get.back();
+    onUpdateThreshold!(item, value);
   }
 }

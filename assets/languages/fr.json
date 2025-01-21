@@ -196,5 +196,10 @@
     "database_connection_closed": "La connexion à la base de données est fermée",
     "invalid_sql_syntax": "Syntaxe SQL non valide",
     "required_field_cannot_be_null": "Le champ requis ne peut pas être nul",
-    "database_error_occurred": "Une erreur de base de données s'est produite"
+    "database_error_occurred": "Une erreur de base de données s'est produite",
+    "failed_to_update_threshold": "Échec de la mise à jour du seuil de l'article",
+    "update_stock_threshold": "Mettre à jour le seuil de stock",
+    "updating_item": "Mise à jour de l'article",
+    "item_updated_successfully": "Article mis à jour avec succès",
+    "threshold_updated_successfully": "Seuil mis à jour avec succès"
 }
