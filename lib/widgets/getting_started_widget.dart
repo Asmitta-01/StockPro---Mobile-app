@@ -52,12 +52,12 @@ class GettingStartedWidget extends StatelessWidget {
           contentPadding: EdgeInsets.zero,
         ),
         ListTile(
-          trailing: controller.addedManager
+          trailing: controller.readFAQ
               ? doneIcon
               : const Icon(Icons.chevron_right_rounded),
-          onTap: controller.goToAddManagerView,
-          title: Text("add_a_manager".tr),
-          leading: const Icon(Icons.manage_accounts_outlined),
+          onTap: controller.goToFAQView,
+          title: Text("read_the_faq".tr),
+          leading: const Icon(Icons.read_more_outlined),
           contentPadding: EdgeInsets.zero,
         ),
         const SizedBox(height: 28),

@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:stock_pro/models/faq_item_model.dart';
 import 'package:stock_pro/utils/constants.dart';
+import 'package:stock_pro/utils/snack_bar_helper.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class HelpController extends GetxController {
   GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
   final int pagePosition = 7;
+
+  final SharedPreferences prefs = Get.find();
 
   final List<FAQItemModel> items = [
     FAQItemModel(
@@ -41,6 +45,20 @@ class HelpController extends GetxController {
           'Vous recevrez des notifications lorsque de nouvelles mises à jour seront disponibles sur le Google Play Store.',
     ),
   ];
+
+  HelpController() {
+    if (prefs.getBool(AppConstants.firstTimeHelp) ?? true) {
+      prefs.setBool(AppConstants.firstTimeHelp, false);
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        Future.delayed(const Duration(milliseconds: 500), () {
+          SnackbarHelper.showInfo(
+            'consult_our_faqs_regularly'.tr,
+            icon: Icons.help_outline_outlined,
+          );
+        });
+      });
+    }
+  }
 
   void openDrawer() {
     scaffoldKey.currentState!.openDrawer();

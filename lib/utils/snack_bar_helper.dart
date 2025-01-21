@@ -12,6 +12,7 @@ class SnackbarHelper {
     required String message,
     required SnackbarType type,
     Duration? duration,
+    IconData? icon,
   }) {
     final animationController = AnimationController(
       vsync: Navigator.of(Get.context!).overlay as TickerProvider,
@@ -28,7 +29,9 @@ class SnackbarHelper {
           style: Get.textTheme.bodyMedium!
               .copyWith(color: _getForegroundColor(type)),
         ),
-        icon: _getIcon(type),
+        icon: icon != null
+            ? Icon(icon, color: Get.theme.colorScheme.onPrimary)
+            : _getIcon(type),
         backgroundColor: _getBackgroundColor(type),
         duration: duration ?? const Duration(seconds: 3),
         onTap: (snack) {
@@ -107,11 +110,16 @@ class SnackbarHelper {
     );
   }
 
-  static void showInfo(String message, {Duration? duration}) {
+  static void showInfo(
+    String message, {
+    Duration? duration,
+    IconData? icon,
+  }) {
     show(
       message: message,
       type: SnackbarType.info,
       duration: duration,
+      icon: icon,
     );
   }
 }

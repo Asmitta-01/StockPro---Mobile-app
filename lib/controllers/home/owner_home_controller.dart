@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:stock_pro/repositories/item_repository.dart';
 import 'package:stock_pro/repositories/operation_repository.dart';
 import 'package:stock_pro/routes.dart';
+import 'package:stock_pro/utils/constants.dart';
 import 'package:stock_pro/utils/snack_bar_helper.dart';
 
 class OwnerHomeController extends GetxController {
@@ -10,8 +12,9 @@ class OwnerHomeController extends GetxController {
 
   final ItemRepository _itemRepository = Get.find();
   final OperationRepository _operationRepository = Get.find();
+  final SharedPreferences prefs = Get.find();
 
-  bool definedStockAlert = false, readFAQ = false;
+  bool definedStockAlert = false;
 
   late bool passedAll;
 
@@ -21,6 +24,7 @@ class OwnerHomeController extends GetxController {
 
   bool get addedItem => totalItems > 0;
   bool get madeFirstOperation => totalOperations > 0;
+  bool get readFAQ => !(prefs.getBool(AppConstants.firstTimeHelp) ?? true);
 
   OwnerHomeController() {
     _initialize();
@@ -80,7 +84,7 @@ class OwnerHomeController extends GetxController {
   }
 
   void goToFAQView() {
-    if (readFAQ) {
+    if (!readFAQ) {
       Get.toNamed(Routes.help);
     }
   }
