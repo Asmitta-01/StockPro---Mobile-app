@@ -12,6 +12,7 @@ class ItemListTile extends StatelessWidget {
     this.onLongPress,
     required this.isSelected,
     this.onUpdateThreshold,
+    this.onEditItem,
   });
 
   final ItemModel item;
@@ -19,6 +20,7 @@ class ItemListTile extends StatelessWidget {
   final Function()? onTap;
   final Function()? onLongPress;
   final Function(ItemModel, int)? onUpdateThreshold;
+  final Function(ItemModel)? onEditItem;
 
   @override
   Widget build(BuildContext context) {
@@ -61,6 +63,7 @@ class ItemListTile extends StatelessWidget {
       ItemBottomSheet(
         item: item,
         onUpdateThreshold: onUpdateThreshold,
+        onEditItem: onEditItem,
       ),
       isScrollControlled: true,
       settings: RouteSettings(

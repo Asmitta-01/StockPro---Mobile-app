@@ -2,6 +2,7 @@ import 'package:get/get.dart';
 import 'package:stock_pro/controllers/help/help_controller.dart';
 import 'package:stock_pro/controllers/home/owner_home_controller.dart';
 import 'package:stock_pro/controllers/items/add_item_controller.dart';
+import 'package:stock_pro/controllers/items/edit_item_controller.dart';
 import 'package:stock_pro/controllers/items/items_controller.dart';
 import 'package:stock_pro/controllers/notifications/notifications_controller.dart';
 import 'package:stock_pro/controllers/operations/add_operation_controller.dart';
@@ -13,6 +14,7 @@ import 'package:stock_pro/controllers/shops/shops_controller.dart';
 import 'package:stock_pro/views/help/help_view.dart';
 import 'package:stock_pro/views/home/owner_home_view.dart';
 import 'package:stock_pro/views/items/add_item_view.dart';
+import 'package:stock_pro/views/items/edit_item_view.dart';
 import 'package:stock_pro/views/items/items_view.dart';
 import 'package:stock_pro/views/notifications/notifications_view.dart';
 import 'package:stock_pro/views/operations/add_operation_view.dart';
@@ -34,6 +36,7 @@ abstract class Routes {
   static const items = '/items';
   static const addItem = '$items/add';
   static const singleItem = '$items/:id';
+  static const editItem = '$items/:id/edit';
 
   static const operations = '/operations';
   static const addOperation = '$operations/add';
@@ -78,6 +81,11 @@ class AppPages {
           name: Routes.addItem.replaceFirst(Routes.items, ''),
           page: () => const AddItemView(),
           binding: BindingsBuilder.put(() => AddItemController()),
+        ),
+        GetPage(
+          name: Routes.editItem.replaceFirst(Routes.items, ''),
+          page: () => const EditItemView(),
+          binding: BindingsBuilder.put(() => EditItemController()),
         ),
       ],
     ),

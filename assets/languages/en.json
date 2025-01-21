@@ -201,5 +201,8 @@
     "update_stock_threshold": "Update stock threshold",
     "updating_item": "Updating item",
     "item_updated_successfully": "Item updated successfully",
-    "threshold_updated_successfully": "Threshold updated successfully"
+    "threshold_updated_successfully": "Threshold updated successfully",
+    "edit_item": "Edit item",
+    "change_your_item_information_with_ease": "Change your product information with ease. Update the title, description, price and all other characteristics of your article for a better presentation.",
+    "edit": "Edit"
 }

@@ -89,6 +89,7 @@ class ItemsView extends GetView<ItemsController> {
                   : () => controller.selectItem(controller.items[index]),
           onLongPress: () => controller.selectItem(controller.items[index]),
           onUpdateThreshold: controller.updateThreshold,
+          onEditItem: controller.goToEditItemView,
         );
       },
       separatorBuilder: (BuildContext context, int index) =>

@@ -69,6 +69,17 @@ class ItemsController extends GetxController {
     });
   }
 
+  void goToEditItemView(ItemModel item) {
+    Get.toNamed(
+      Routes.editItem.replaceFirst(':id', item.id.toString()),
+      arguments: item,
+    )?.then((_) {
+      loadingItems = true;
+      update();
+      _loadItems();
+    });
+  }
+
   void updateThreshold(ItemModel item, int threshold) async {
     if (item.stockThreshold == threshold) {
       return;

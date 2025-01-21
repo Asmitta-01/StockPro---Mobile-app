@@ -201,5 +201,8 @@
     "update_stock_threshold": "Mettre à jour le seuil de stock",
     "updating_item": "Mise à jour de l'article",
     "item_updated_successfully": "Article mis à jour avec succès",
-    "threshold_updated_successfully": "Seuil mis à jour avec succès"
+    "threshold_updated_successfully": "Seuil mis à jour avec succès",
+    "edit_item": "Modifier l'article",
+    "change_your_item_information_with_ease": "Modifiez les informations de votre produit en toute simplicité. Mettez à jour le titre, la description, le prix et toutes les autres caractéristiques de votre article pour une présentation optimale.",
+    "edit": "Modifier"
 }
