@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:stock_pro/models/item_model.dart';
 import 'package:stock_pro/repositories/item_repository.dart';
 import 'package:stock_pro/utils/snack_bar_helper.dart';
-import 'package:stock_pro/widgets/ongoing_request_dialog.dart';
+import 'package:stock_pro/widgets/dialogs/ongoing_request_dialog.dart';
 
 class AddItemController extends GetxController {
   final formKey = GlobalKey<FormState>();

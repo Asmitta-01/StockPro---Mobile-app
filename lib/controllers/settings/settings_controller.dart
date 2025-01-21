@@ -4,7 +4,7 @@ import 'package:stock_pro/controllers/my_controller.dart';
 import 'package:stock_pro/routes.dart';
 import 'package:stock_pro/utils/constants.dart';
 import 'package:stock_pro/widgets/bottom_sheets/language_bottom_sheet.dart';
-import 'package:stock_pro/widgets/theme_picker_dialog.dart';
+import 'package:stock_pro/widgets/dialogs/theme_picker_dialog.dart';
 
 class SettingsController extends GetxController {
   final MyController _myController = Get.find();
