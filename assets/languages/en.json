@@ -207,5 +207,12 @@
     "edit": "Edit",
     "read_the_faq": "Read the FAQ",
     "consult_our_faqs_regularly": "Consult our FAQs regularly for the latest updates.",
-    "not_enough_quantity": "Not enough quantity"
+    "not_enough_quantity": "Not enough quantity",
+    "made_on": "Made on",
+    "details": "Details",
+    "sub_total": "Sub-total",
+    "total": "Total",
+    "qty": "Qty",
+    "show_unit_prices": "Show unit prices",
+    "hide": "Hide"
 }

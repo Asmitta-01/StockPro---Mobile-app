@@ -4,6 +4,7 @@ import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:stock_pro/controllers/operations/operations_controller.dart';
 import 'package:stock_pro/utils/image_data.dart';
 import 'package:stock_pro/widgets/drawer_widget.dart';
+import 'package:stock_pro/widgets/list_tiles/operation_list_tile.dart';
 
 class OperationsView extends GetView<OperationsController> {
   const OperationsView({super.key});
@@ -104,22 +105,8 @@ class OperationsView extends GetView<OperationsController> {
               ],
             ),
           ),
-          child: ListTile(
-            title: Text(
-                "${controller.operations[index].type.name.capitalize!} #${controller.operations[index].invoiceNumber}"),
-            subtitle: Text(
-              "${controller.operations[index].totalAmount} XAF",
-              overflow: TextOverflow.ellipsis,
-            ),
-            leading: Container(
-              width: 12,
-              height: double.infinity,
-              color: controller.operations[index].type.color,
-            ),
-            horizontalTitleGap: 8,
-            trailing: controller.operations[index].transport != null
-                ? const Icon(Icons.local_shipping_outlined)
-                : null,
+          child: OperationListTile(
+            operationModel: controller.operations[index],
           ),
         );
       },

@@ -207,5 +207,12 @@
     "edit": "Modifier",
     "read_the_faq": "Lire la FAQ pour répondre à vos questions",
     "consult_our_faqs_regularly": "Consultez régulièrement nos FAQ pour les dernières mises à jour.",
-    "not_enough_quantity": "Pas assez de quantité"
+    "not_enough_quantity": "Pas assez de quantité",
+    "made_on": "Fait le",
+    "details": "Détails",
+    "sub_total": "Sous-total",
+    "total": "Total",
+    "qty": "Qté",
+    "show_unit_prices": "Afficher les prix unitaires",
+    "hide": "Cacher"
 }
