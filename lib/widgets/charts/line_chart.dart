@@ -1,9 +1,26 @@
+import 'dart:math';
+
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:stock_pro/utils/extensions/number_extension.dart';
 
 class LineChartWidget extends StatelessWidget {
-  const LineChartWidget({super.key});
+  const LineChartWidget(
+      {super.key,
+      required this.data1,
+      required this.data2,
+      required this.data1Color,
+      required this.data2Color,
+      required this.labels});
+
+  final List<double> data1;
+  final List<double> data2;
+
+  final Color data1Color;
+  final Color data2Color;
+
+  final List<String> labels;
 
   @override
   Widget build(BuildContext context) {
@@ -28,8 +45,8 @@ class LineChartWidget extends StatelessWidget {
         borderData: borderData,
         lineBarsData: lineBarsData1,
         minX: 0,
-        maxX: 14,
-        maxY: 4,
+        maxX: max(data1.length.toDouble(), data2.length.toDouble()) - 1,
+        maxY: max(data1.reduce(max), data2.reduce(max)),
         minY: 0,
       );
 
@@ -62,73 +79,46 @@ class LineChartWidget extends StatelessWidget {
       ];
 
   Widget leftTitleWidgets(double value, TitleMeta meta) {
-    const style = TextStyle(
-      fontWeight: FontWeight.bold,
-      fontSize: 14,
-    );
-    String text;
-    switch (value.toInt()) {
-      case 1:
-        text = '1m';
-        break;
-      case 2:
-        text = '2m';
-        break;
-      case 3:
-        text = '3m';
-        break;
-      case 4:
-        text = '5m';
-        break;
-      case 5:
-        text = '6m';
-        break;
-      default:
-        return Container();
-    }
+    if (value == 0) return const SizedBox.shrink();
 
     return SideTitleWidget(
       axisSide: meta.axisSide,
       child: Text(
-        text,
-        style: style,
+        (value * 1000).compact,
+        style: Get.textTheme.bodySmall!.copyWith(fontWeight: FontWeight.w600),
         textAlign: TextAlign.center,
       ),
     );
   }
 
-  SideTitles leftTitles() => SideTitles(
-        getTitlesWidget: leftTitleWidgets,
-        showTitles: true,
-        interval: 1,
-        reservedSize: 40,
-      );
+  SideTitles leftTitles() {
+    return SideTitles(
+      getTitlesWidget: leftTitleWidgets,
+      showTitles: true,
+      // interval: data1.reduce(max) / 5,
+      reservedSize: 40,
+    );
+  }
 
   Widget bottomTitleWidgets(double value, TitleMeta meta) {
     const style = TextStyle(
       fontWeight: FontWeight.bold,
       fontSize: 16,
     );
-    Widget text;
-    switch (value.toInt()) {
-      case 2:
-        text = const Text('SEPT', style: style);
-        break;
-      case 7:
-        text = const Text('OCT', style: style);
-        break;
-      case 12:
-        text = const Text('DEC', style: style);
-        break;
-      default:
-        text = const Text('');
-        break;
+    for (var label in labels) {
+      if (value.toInt() == int.parse(label)) {
+        return SideTitleWidget(
+          axisSide: meta.axisSide,
+          space: 10,
+          child: Text(label, style: style),
+        );
+      }
     }
 
     return SideTitleWidget(
       axisSide: meta.axisSide,
       space: 10,
-      child: text,
+      child: const SizedBox.shrink(),
     );
   }
 
@@ -154,39 +144,32 @@ class LineChartWidget extends StatelessWidget {
 
   LineChartBarData get lineChartBarData1_1 => LineChartBarData(
         isCurved: true,
-        color: Get.theme.colorScheme.secondary,
-        barWidth: 4,
+        color: data1Color,
+        barWidth: 3,
         isStrokeCapRound: true,
         dotData: const FlDotData(show: false),
         belowBarData: BarAreaData(show: false),
-        spots: const [
-          FlSpot(1, 1),
-          FlSpot(3, 1.5),
-          FlSpot(5, 1.4),
-          FlSpot(7, 3.4),
-          FlSpot(10, 2),
-          FlSpot(12, 2.2),
-          FlSpot(13, 1.8),
-        ],
+        spots: data1
+            .asMap()
+            .entries
+            .map((e) => FlSpot(e.key.toDouble(), e.value))
+            .toList(),
       );
 
   LineChartBarData get lineChartBarData1_2 => LineChartBarData(
         isCurved: true,
-        color: Get.theme.colorScheme.tertiary,
-        barWidth: 4,
+        color: data2Color,
+        barWidth: 3,
         isStrokeCapRound: true,
         dotData: const FlDotData(show: false),
         belowBarData: BarAreaData(
           show: false,
-          color: Get.theme.colorScheme.tertiary.withOpacity(0),
+          color: data2Color.withOpacity(0),
         ),
-        spots: const [
-          FlSpot(1, 1),
-          FlSpot(3, 2.8),
-          FlSpot(7, 1.2),
-          FlSpot(10, 2.8),
-          FlSpot(12, 2.6),
-          FlSpot(13, 3.9),
-        ],
+        spots: data2
+            .asMap()
+            .entries
+            .map((e) => FlSpot(e.key.toDouble(), e.value))
+            .toList(),
       );
 }

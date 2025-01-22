@@ -219,5 +219,6 @@
     "you_are_going_to_delete_the_following_items": "Vous allez supprimer définitivement les articles suivants",
     "creating_new_stores_is_not_supported_on_version_of_the_application": "La création de nouvelles boutiques n'est pas prise en charge sur cette version de l'application. Veuillez télécharger la version en ligne pour bénéficier de toutes les fonctionnalités de StockPro.",
     "shop_updated": "Boutique mise à jour",
-    "offline_version": "Version Hors-ligne"
+    "offline_version": "Version Hors-ligne",
+    "there_s_no_enough_data_for_the_analysis": "Il n'y a pas de suffisamment de données pour l'analyse"
 }

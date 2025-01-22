@@ -203,6 +203,8 @@ class ReportsView extends GetView<ReportsController> {
   }
 
   Widget buildIncomesDelta() {
+    final color1 = Get.theme.colorScheme.secondary;
+    final color2 = Get.theme.colorScheme.outline;
     return Card(
       elevation: 2,
       child: Padding(
@@ -210,17 +212,53 @@ class ReportsView extends GetView<ReportsController> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              "operations_amounts".tr,
-              style: Get.textTheme.titleMedium!
-                  .copyWith(fontWeight: FontWeight.w700),
+            Row(
+              children: [
+                Text(
+                  "operations_amounts".tr,
+                  style: Get.textTheme.titleMedium!
+                      .copyWith(fontWeight: FontWeight.w700),
+                ),
+                const SizedBox(width: 8),
+                CircleAvatar(
+                  radius: 6,
+                  backgroundColor: color1,
+                ),
+              ],
             ),
-            Text("vs_estimated_amounts".tr),
+            Row(
+              children: [
+                Text("vs_estimated_amounts".tr),
+                const SizedBox(width: 8),
+                CircleAvatar(
+                  radius: 6,
+                  backgroundColor: color2,
+                ),
+              ],
+            ),
             const SizedBox(height: 16),
-            const LineChartWidget(),
+            if (controller.lineDataOperationsAmounts.length < 5)
+              _noDataWidget()
+            else
+              LineChartWidget(
+                data1: controller.lineDataOperationsAmounts,
+                data2: controller.lineDataOperationsEstimatedAmounts,
+                data2Color: color2,
+                data1Color: color1,
+                labels: ["1", "2", "3", "4", "5"],
+              ),
           ],
         ),
       ),
+    );
+  }
+
+  Container _noDataWidget() {
+    return Container(
+      color: Get.theme.colorScheme.onSurface.withOpacity(.05),
+      padding: const EdgeInsets.all(16),
+      alignment: Alignment.center,
+      child: Text("there_s_no_enough_data_for_the_analysis".tr),
     );
   }
 
