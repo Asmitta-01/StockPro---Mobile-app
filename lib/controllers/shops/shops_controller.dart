@@ -4,6 +4,7 @@ import 'package:sqflite/sqflite.dart';
 import 'package:stock_pro/models/shop_model.dart';
 import 'package:stock_pro/repositories/helpers/database_exception_handler.dart';
 import 'package:stock_pro/repositories/shop_repository.dart';
+import 'package:stock_pro/routes.dart';
 
 class ShopsController extends GetxController {
   GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
@@ -19,6 +20,7 @@ class ShopsController extends GetxController {
 
   void _loadShops() async {
     try {
+      shops.clear();
       shops.addAll(await _repository.getAll());
       update();
     } on DatabaseException catch (e) {
@@ -36,6 +38,16 @@ class ShopsController extends GetxController {
       update();
     }
     Get.back();
+  }
+
+  void goToEditShopView(ShopModel shop) {
+    Get.close(1);
+    Get.toNamed(
+      Routes.editShop.replaceFirst(':id', shop.id.toString()),
+      arguments: shop,
+    )?.then((_) {
+      _loadShops();
+    });
   }
 
   void openDrawer() {

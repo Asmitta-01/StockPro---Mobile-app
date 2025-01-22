@@ -10,10 +10,12 @@ class ShopListTile extends StatelessWidget {
     super.key,
     required this.shop,
     this.setAsActive,
+    this.goToEditShopScreen,
   });
 
   final ShopModel shop;
   final void Function()? setAsActive;
+  final void Function(ShopModel shop)? goToEditShopScreen;
 
   @override
   Widget build(BuildContext context) {
@@ -35,6 +37,9 @@ class ShopListTile extends StatelessWidget {
           ShopBottomSheet(
             shopModel: shop,
             onTapActive: setAsActive,
+            onEdit: goToEditShopScreen != null
+                ? () => goToEditShopScreen!(shop)
+                : null,
           ),
           isScrollControlled: true,
           settings: RouteSettings(

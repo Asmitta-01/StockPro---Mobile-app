@@ -10,6 +10,7 @@ import 'package:stock_pro/controllers/operations/operations_controller.dart';
 import 'package:stock_pro/controllers/reports/reports_controller.dart';
 import 'package:stock_pro/controllers/reports/stock_reports_controller.dart';
 import 'package:stock_pro/controllers/settings/settings_controller.dart';
+import 'package:stock_pro/controllers/shops/edit_shop_controller.dart';
 import 'package:stock_pro/controllers/shops/shops_controller.dart';
 import 'package:stock_pro/views/help/help_view.dart';
 import 'package:stock_pro/views/home/owner_home_view.dart';
@@ -22,6 +23,7 @@ import 'package:stock_pro/views/operations/operations_view.dart';
 import 'package:stock_pro/views/reports/reports_view.dart';
 import 'package:stock_pro/views/reports/stock_reports_view.dart';
 import 'package:stock_pro/views/settings/settings_view.dart';
+import 'package:stock_pro/views/shops/edit_shop_view.dart';
 import 'package:stock_pro/views/shops/shops_view.dart';
 import 'package:stock_pro/views/splash_view.dart';
 
@@ -47,6 +49,7 @@ abstract class Routes {
 
   static const shops = '/shops';
   static const singleShop = '$shops/:id';
+  static const editShop = '$shops/:id/edit';
 
   static const reports = '/reports';
   static const stockReports = '$reports/stock';
@@ -110,6 +113,13 @@ class AppPages {
       name: Routes.shops,
       page: () => const ShopsView(),
       binding: BindingsBuilder.put(() => ShopsController()),
+      children: [
+        GetPage(
+          name: Routes.editShop.replaceFirst(Routes.shops, ''),
+          page: () => const EditShopView(),
+          binding: BindingsBuilder.put(() => EditShopController()),
+        ),
+      ],
     ),
     GetPage(
       name: Routes.reports,

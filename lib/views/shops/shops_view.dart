@@ -41,8 +41,7 @@ class ShopsView extends GetView<ShopsController> {
               child: Text(
                 "creating_new_stores_is_not_supported_on_version_of_the_application"
                     .tr,
-                style: Get.textTheme.bodyLarge!.copyWith(
-                  fontWeight: FontWeight.w500,
+                style: Get.textTheme.bodyMedium!.copyWith(
                   color: Get.theme.colorScheme.error,
                 ),
               ),
@@ -92,6 +91,7 @@ class ShopsView extends GetView<ShopsController> {
         return ShopListTile(
           shop: shop,
           setAsActive: () => controller.setShopAsActive(shop.id),
+          goToEditShopScreen: controller.goToEditShopView,
         );
       },
     );

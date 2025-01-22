@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:stock_pro/models/shop_model.dart';
 
 class ShopForm extends StatefulWidget {
-  const ShopForm({super.key, required this.fn});
+  const ShopForm({super.key, required this.fn, this.shopModel});
 
   /// Callback function that handles form data processing.
   ///
@@ -11,6 +12,8 @@ class ShopForm extends StatefulWidget {
   /// - Second parameter: Shop's website (can be null)
   /// - Third parameter: Shop's address
   final void Function(String, String?, String) fn;
+
+  final ShopModel? shopModel;
 
   @override
   ShopFormState createState() => ShopFormState();
@@ -22,6 +25,16 @@ class ShopFormState extends State<ShopForm> {
   TextEditingController addressController = TextEditingController();
 
   final _formKey = GlobalKey<FormState>();
+
+  @override
+  void initState() {
+    super.initState();
+    if (widget.shopModel != null) {
+      nameController.text = widget.shopModel!.name;
+      websiteController.text = widget.shopModel!.website ?? "";
+      addressController.text = widget.shopModel!.address;
+    }
+  }
 
   String? validateField(String? value) {
     if (value == null || value.isEmpty) {
