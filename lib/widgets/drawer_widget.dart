@@ -78,7 +78,6 @@ class DrawerWidget extends StatelessWidget {
             Icons.help, "help_and_suggestions".tr, Routes.help, 7),
         _singleDrawerItem(
             Icons.build_outlined, "settings".tr, Routes.settings, 8),
-        _singleDrawerItem(Icons.logout_rounded, "Déconnexion", '', 10),
       ],
     );
   }
@@ -115,25 +114,6 @@ class DrawerWidget extends StatelessWidget {
   Widget _singleDrawerItem(
       IconData iconData, String title, String destination, int position) {
     ThemeData theme = Get.theme;
-
-    if (position == 10) {
-      return ListTile(
-        dense: true,
-        contentPadding: const EdgeInsets.symmetric(horizontal: 16),
-        tileColor: theme.colorScheme.secondary.withAlpha(10),
-        leading: Icon(iconData, size: 22, color: theme.colorScheme.secondary),
-        title: Text(
-          title,
-          style: theme.textTheme.bodyLarge!.copyWith(
-            fontWeight: FontWeight.w500,
-            letterSpacing: 0.2,
-            color: theme.colorScheme.secondary,
-          ),
-        ),
-        onTap: () {},
-      );
-    }
-
     return ListTile(
       contentPadding: const EdgeInsets.symmetric(horizontal: 16),
       leading: Icon(
