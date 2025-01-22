@@ -31,15 +31,26 @@ class ShopsView extends GetView<ShopsController> {
             buildBanner(),
             const SizedBox(height: 16),
             addNewShopButton(),
+            Container(
+              margin: const EdgeInsets.only(top: 12),
+              padding: const EdgeInsets.all(12),
+              decoration: BoxDecoration(
+                color: Get.theme.colorScheme.error.withOpacity(.1),
+                borderRadius: BorderRadius.circular(16),
+              ),
+              child: Text(
+                "creating_new_stores_is_not_supported_on_version_of_the_application"
+                    .tr,
+                style: Get.textTheme.bodyLarge!.copyWith(
+                  fontWeight: FontWeight.w500,
+                  color: Get.theme.colorScheme.error,
+                ),
+              ),
+            ),
             const SizedBox(height: 16),
             Text(
               "check_your_shop_list".tr,
               style: Get.textTheme.titleLarge,
-            ),
-            Text(
-              "explore_new_options".tr,
-              style: Get.textTheme.bodyLarge!
-                  .copyWith(fontWeight: FontWeight.w300),
             ),
             const SizedBox(height: 16),
             buildShopList(),
@@ -63,7 +74,12 @@ class ShopsView extends GetView<ShopsController> {
   }
 
   Widget addNewShopButton() => ElevatedButton(
-      onPressed: controller.addNewShop, child: Text('add_new_shop'.tr));
+        onPressed: null,
+        style: ElevatedButton.styleFrom(
+          side: const BorderSide(color: Colors.transparent),
+        ),
+        child: Text('add_new_shop'.tr),
+      );
 
   Widget buildShopList() {
     return ListView.separated(

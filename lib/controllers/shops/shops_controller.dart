@@ -1,43 +1,30 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sqflite/sqflite.dart';
 import 'package:stock_pro/models/shop_model.dart';
+import 'package:stock_pro/repositories/helpers/database_exception_handler.dart';
+import 'package:stock_pro/repositories/shop_repository.dart';
 
 class ShopsController extends GetxController {
   GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
   final int pagePosition = 5;
 
-  final List<ShopModel> shops = [
-    ShopModel(
-      id: 1,
-      name: "ABC Quincaillerie",
-      image: "https://picsum.photos/500",
-      logo: null,
-      website: "https://my-website.com",
-      address: "Buea, Front Diva",
-      categories: ["Health", "Office"],
-      createdAt: DateTime.now(),
-    ),
-    ShopModel(
-      id: 2,
-      name: "Supérette DNY",
-      image: "https://picsum.photos/400",
-      logo: "",
-      website: "https://my-second-website.com",
-      address: "Buea, Back low coast",
-      active: true,
-      categories: ["Grocery", "Bakery", "Dairy"],
-      createdAt: DateTime.now(),
-    ),
-    ShopModel(
-      id: 3,
-      name: "Pharmacie de la cote",
-      image: "https://picsum.photos/500",
-      address: "Kribi",
-      logo: "",
-      categories: ["Pharmacy"],
-      createdAt: DateTime.now(),
-    ),
-  ];
+  final ShopRepository _repository = Get.find();
+
+  final List<ShopModel> shops = [];
+
+  ShopsController() {
+    _loadShops();
+  }
+
+  void _loadShops() async {
+    try {
+      shops.addAll(await _repository.getAll());
+      update();
+    } on DatabaseException catch (e) {
+      DatabaseExceptionHandler.handleException(e);
+    }
+  }
 
   void setShopAsActive(int id) {
     for (var shop in shops) {
@@ -49,21 +36,6 @@ class ShopsController extends GetxController {
       update();
     }
     Get.back();
-  }
-
-  void addNewShop() {
-    Get.showSnackbar(
-      GetSnackBar(
-        message: "can_not_perform_this_action_now".tr,
-        icon: Icon(
-          Icons.block,
-          color: Get.theme.colorScheme.onError,
-        ),
-        backgroundColor: Get.theme.colorScheme.error,
-        duration: const Duration(seconds: 3),
-        onTap: (snack) => Get.closeCurrentSnackbar(),
-      ),
-    );
   }
 
   void openDrawer() {

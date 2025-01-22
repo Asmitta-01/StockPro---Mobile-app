@@ -3,10 +3,12 @@ import 'package:get/get.dart';
 import 'package:stock_pro/models/shop_model.dart';
 
 class ShopBottomSheet extends StatefulWidget {
-  const ShopBottomSheet({super.key, required this.shopModel, this.onTapActive});
+  const ShopBottomSheet(
+      {super.key, required this.shopModel, this.onTapActive, this.onEdit});
 
   final ShopModel shopModel;
   final void Function()? onTapActive;
+  final void Function()? onEdit;
 
   @override
   State<StatefulWidget> createState() => ShopBottomSheetState();
@@ -31,18 +33,18 @@ class ShopBottomSheetState extends State<ShopBottomSheet> {
           Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              // Banner image
-              Container(
-                height: 200,
-                width: double.infinity,
-                decoration: BoxDecoration(
-                  borderRadius: const BorderRadius.all(Radius.circular(20)),
-                  image: DecorationImage(
-                    image: NetworkImage(widget.shopModel.image!),
-                    fit: BoxFit.cover,
+              if (widget.shopModel.image != null)
+                Container(
+                  height: 200,
+                  width: double.infinity,
+                  decoration: BoxDecoration(
+                    borderRadius: const BorderRadius.all(Radius.circular(20)),
+                    image: DecorationImage(
+                      image: NetworkImage(widget.shopModel.image!),
+                      fit: BoxFit.cover,
+                    ),
                   ),
                 ),
-              ),
 
               // Shop info
               Padding(
@@ -143,34 +145,34 @@ class ShopBottomSheetState extends State<ShopBottomSheet> {
   Row buildActionButtons() {
     return Row(
       children: [
-        OutlinedButton.icon(
-          onPressed: () {
-            // Edit shop logic
-          },
-          style: OutlinedButton.styleFrom(
-            backgroundColor: Get.theme.colorScheme.primary.withOpacity(.2),
-            foregroundColor: Get.theme.colorScheme.primary,
-            padding: const EdgeInsets.symmetric(horizontal: 12),
-            side: BorderSide.none,
-            shape: RoundedRectangleBorder(
-              side: BorderSide(color: Get.theme.colorScheme.primary),
-              borderRadius: BorderRadius.circular(50),
+        if (widget.onEdit != null)
+          OutlinedButton.icon(
+            onPressed: widget.onEdit,
+            style: OutlinedButton.styleFrom(
+              backgroundColor: Get.theme.colorScheme.primary.withOpacity(.2),
+              foregroundColor: Get.theme.colorScheme.primary,
+              padding: const EdgeInsets.symmetric(horizontal: 12),
+              side: BorderSide.none,
+              shape: RoundedRectangleBorder(
+                side: BorderSide(color: Get.theme.colorScheme.primary),
+                borderRadius: BorderRadius.circular(50),
+              ),
             ),
+            label: Text('edit_shop'.tr),
+            icon: const Icon(Icons.edit),
+            iconAlignment: IconAlignment.end,
           ),
-          label: Text('edit_shop'.tr),
-          icon: const Icon(Icons.edit),
-          iconAlignment: IconAlignment.end,
-        ),
         const SizedBox(width: 16),
-        Expanded(
-          child: ElevatedButton(
-            onPressed: widget.onTapActive,
-            child: Text(
-              'set_as_active'.tr,
-              overflow: TextOverflow.ellipsis,
+        if (!widget.shopModel.active)
+          Expanded(
+            child: ElevatedButton(
+              onPressed: widget.onTapActive,
+              child: Text(
+                'set_as_active'.tr,
+                overflow: TextOverflow.ellipsis,
+              ),
             ),
           ),
-        ),
       ],
     );
   }
