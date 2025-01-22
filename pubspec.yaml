@@ -73,6 +73,7 @@ flutter:
   uses-material-design: true
 
   assets:
+    - assets/images/app-icon.png
     - assets/images/logo.png
     - assets/images/logoDark.png
     - assets/images/logoBlueBackground.png
@@ -86,6 +87,8 @@ flutter:
     - assets/images/items-out-of-stock.png
     - assets/images/notifications.png
     - assets/images/notifications-dark.png
+    - assets/images/operation-in.png
+    - assets/images/operation-out.png
     - assets/images/shop-dark.png
     - assets/images/shop.png
     - assets/images/shops-banner.png
