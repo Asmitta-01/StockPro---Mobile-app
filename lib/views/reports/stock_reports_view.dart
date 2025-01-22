@@ -18,7 +18,7 @@ class StockReportsView extends GetView<StockReportsController> {
             title: Text('stock_reports'.tr),
             actions: [
               IconButton(
-                onPressed: () {},
+                onPressed: controller.exportToExcel,
                 icon: const Icon(Icons.share),
               ),
             ],
@@ -104,7 +104,7 @@ class StockReportsView extends GetView<StockReportsController> {
           child: Text(
             label,
             style: Get.textTheme.bodyLarge!
-                  .copyWith(fontWeight: FontWeight.normal), 
+                .copyWith(fontWeight: FontWeight.normal),
             softWrap: true,
           ),
         ),
