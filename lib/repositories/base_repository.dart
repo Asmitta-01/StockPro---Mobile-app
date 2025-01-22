@@ -82,6 +82,8 @@ abstract class BaseRepository<T> {
     return List.generate(maps.length, (index) => fromMap(maps[index]));
   }
 
+  /// Performs a batch insert operation for multiple items into the database table.
+  /// This method is more efficient than individual inserts when dealing with multiple records.
   Future<void> batch(List<T> items) async {
     final Database db = await dbHelper.database;
     final Batch batch = db.batch();
@@ -91,6 +93,22 @@ abstract class BaseRepository<T> {
         tableName,
         toMap(item),
         conflictAlgorithm: ConflictAlgorithm.replace,
+      );
+    }
+
+    await batch.commit(noResult: true);
+  }
+
+  /// Performs a batch delete operation to remove multiple items from the database table.
+  Future<void> batchDelete(List<T> items) async {
+    final Database db = await dbHelper.database;
+    final Batch batch = db.batch();
+
+    for (var item in items) {
+      batch.delete(
+        tableName,
+        where: "id = ?",
+        whereArgs: [(item as dynamic).id],
       );
     }
 

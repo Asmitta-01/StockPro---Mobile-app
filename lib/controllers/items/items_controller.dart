@@ -7,6 +7,7 @@ import 'package:stock_pro/repositories/item_repository.dart';
 import 'package:stock_pro/routes.dart';
 import 'package:stock_pro/utils/snack_bar_helper.dart';
 import 'package:stock_pro/widgets/bottom_sheets/item_bottom_sheet.dart';
+import 'package:stock_pro/widgets/dialogs/dialog_helper.dart';
 import 'package:stock_pro/widgets/dialogs/ongoing_request_dialog.dart';
 
 class ItemsController extends GetxController {
@@ -63,9 +64,54 @@ class ItemsController extends GetxController {
   }
 
   void deleteSelectedItems() {
-    items.removeWhere((item) => selectedItems.contains(item));
-    selectedItems.clear();
-    update();
+    _confirmItemsDeletion();
+    return;
+  }
+
+  void _confirmItemsDeletion() {
+    DialogHelper.showActionDialog(
+      Get.context!,
+      title: "Confirm items deletions",
+      contentWidget: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Text("${'you_are_going_to_delete_the_following_items'.tr}: "),
+          const SizedBox(height: 4),
+          ListView.builder(
+            itemCount: selectedItems.length,
+            shrinkWrap: true,
+            itemBuilder: (context, index) =>
+                Text("\u2022 ${selectedItems[index].name}"),
+          )
+        ],
+      ),
+      primaryAction: () {
+        _deleteItems().then((_) {
+          items.removeWhere((item) => selectedItems.contains(item));
+          selectedItems.clear();
+          update();
+        });
+      },
+      secondaryAction: () {
+        selectedItems.clear();
+        update();
+        Get.back();
+      },
+      primaryActionLabel: "delete".tr,
+      secondaryActionLabel: "cancel".tr,
+      isDanger: true,
+    );
+  }
+
+  Future<void> _deleteItems() async {
+    try {
+      await _repository.batchDelete(items);
+    } on DatabaseException catch (e) {
+      DatabaseExceptionHandler.handleException(e);
+    } catch (error) {
+      SnackbarHelper.showError(
+          "an_unexpected_error_occurred_during_the_deletion".tr);
+    }
   }
 
   void goToAddItemView() {

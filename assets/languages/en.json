@@ -214,5 +214,7 @@
     "total": "Total",
     "qty": "Qty",
     "show_unit_prices": "Show unit prices",
-    "hide": "Hide"
+    "hide": "Hide",
+    "an_unexpected_error_occurred_during_the_deletion": "An unexpected error occurred during the deletion",
+    "you_are_going_to_delete_the_following_items": "You are going to permanently delete the following items"
 }

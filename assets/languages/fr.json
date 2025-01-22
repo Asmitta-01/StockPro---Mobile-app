@@ -214,5 +214,7 @@
     "total": "Total",
     "qty": "Qté",
     "show_unit_prices": "Afficher les prix unitaires",
-    "hide": "Cacher"
+    "hide": "Cacher",
+    "an_unexpected_error_occurred_during_the_deletion": "Une erreur inattendue est survenue lors de la suppression",
+    "you_are_going_to_delete_the_following_items": "Vous allez supprimer définitivement les articles suivants"
 }

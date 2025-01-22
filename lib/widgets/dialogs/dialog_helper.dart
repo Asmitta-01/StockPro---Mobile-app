@@ -347,15 +347,13 @@ class _ActionDialogContent extends StatelessWidget {
     required bool isSecondary,
   }) {
     final Color backgroundColor = isSecondary
-        ? (isDanger ? theme.colorScheme.secondary : theme.colorScheme.primary)
+        ? (isDanger ? theme.colorScheme.error : theme.colorScheme.primary)
             .withAlpha(30)
-        : (isDanger ? theme.colorScheme.secondary : theme.colorScheme.primary);
+        : (isDanger ? theme.colorScheme.error : theme.colorScheme.primary);
 
     final Color textColor = isSecondary
-        ? (isDanger ? theme.colorScheme.secondary : theme.colorScheme.primary)
-        : (isDanger
-            ? theme.colorScheme.onSecondary
-            : theme.colorScheme.onPrimary);
+        ? (isDanger ? theme.colorScheme.error : theme.colorScheme.primary)
+        : (isDanger ? theme.colorScheme.onError : theme.colorScheme.onPrimary);
 
     return ElevatedButton(
       style: DialogHelper._buildButtonStyle(backgroundColor: backgroundColor),
