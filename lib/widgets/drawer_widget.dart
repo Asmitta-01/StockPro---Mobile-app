@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:stock_pro/routes.dart';
+import 'package:stock_pro/utils/constants.dart';
 import 'package:stock_pro/utils/image_data.dart';
 
 class DrawerWidget extends StatelessWidget {
@@ -67,8 +68,8 @@ class DrawerWidget extends StatelessWidget {
         _singleDrawerItem(Icons.storage_rounded, "items".tr, Routes.items, 2),
         _singleDrawerItem(
             Icons.sync_alt, "operations".tr, Routes.operations, 3),
-        _singleDrawerItem(Icons.notifications_rounded, "notifications".tr,
-            Routes.notifications, 4),
+        // _singleDrawerItem(Icons.notifications_rounded, "notifications".tr,
+        //     Routes.notifications, 4),
         _singleDrawerItem(Icons.store_rounded, "my_shops".tr, Routes.shops, 5),
         _singleDrawerItem(
             Icons.document_scanner_rounded, "reports".tr, Routes.reports, 6),
@@ -96,12 +97,12 @@ class DrawerWidget extends StatelessWidget {
               borderRadius: BorderRadius.circular(50),
               color: Get.theme.cardColor,
             ),
-            child: const Icon(Icons.person, size: 80),
+            child: Image.asset(ImageData.appIcon, width: 80),
           ),
           const SizedBox(height: 8.0),
-          Text("User name", style: Get.textTheme.titleLarge),
+          Text(AppConstants.appName, style: Get.textTheme.titleLarge),
           Text(
-            "user@email.com",
+            "offline_version".tr,
             style: TextStyle(
               color: Get.theme.colorScheme.onSurface.withAlpha(150),
             ),

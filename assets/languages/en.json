@@ -218,5 +218,6 @@
     "an_unexpected_error_occurred_during_the_deletion": "An unexpected error occurred during the deletion",
     "you_are_going_to_delete_the_following_items": "You are going to permanently delete the following items",
     "creating_new_stores_is_not_supported_on_version_of_the_application": "Creating new stores is not supported on this version of the application. Please download the online version to benefit from all the features of StockPro.",
-    "shop_updated": "Shop updated"
+    "shop_updated": "Shop updated",
+    "offline_version": "Offline version"
 }
