@@ -32,6 +32,7 @@ class ItemsController extends GetxController {
     items = await _repository.getAll().catchError((_) {
       return <ItemModel>[];
     });
+    items.sort((a, b) => a.name.compareTo(b.name));
     loadingItems = false;
     update();
   }
