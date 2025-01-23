@@ -4,6 +4,8 @@ import 'package:stock_pro/utils/image_data.dart';
 class AppConstants {
   static const String appName = "StockPro";
   static const String appDatabaseName = "_stock_pro.db";
+  static const String backupDatabaseName = "_backup_stock_pro.db";
+  static const String appFolderPath = "/storage/emulated/0/StockPro";
   static const String appSupportMail = "tiwabrayan@gmail.com";
   static const String firstTimeHelp = '_first_time_help';
   static const String countryCode = '_country_code';

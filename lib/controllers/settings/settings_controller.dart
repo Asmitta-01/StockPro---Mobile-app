@@ -20,17 +20,17 @@ class SettingsController extends GetxController {
   void _initializeData() {
     items = [
       {
-        'label': 'edit_your_informations',
-        'icon': Icons.manage_accounts_outlined,
+        'label': 'backup_and_restore',
+        'icon': Icons.backup_outlined,
         'subtitle': null,
-        'action': navigateToProfile
+        'action': goToBackupView
       },
-      {
-        'label': 'notifications',
-        'icon': Icons.edit_notifications_outlined,
-        'subtitle': null,
-        'action': () {}
-      },
+      // {
+      //   'label': 'notifications',
+      //   'icon': Icons.edit_notifications_outlined,
+      //   'subtitle': null,
+      //   'action': () {}
+      // },
       {
         'label': 'language',
         'icon': Icons.language_outlined,
@@ -59,12 +59,8 @@ class SettingsController extends GetxController {
     update();
   }
 
-  Future<void> navigateToProfile() async {
-    final result = await Get.toNamed("");
-
-    if (result == true) {
-      _initializeData();
-    }
+  void goToBackupView() {
+    Get.toNamed(Routes.settingsBackup);
   }
 
   String _getThemeMode() {
