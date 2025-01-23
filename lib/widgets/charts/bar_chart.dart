@@ -88,11 +88,15 @@ class BarChartWidget extends StatelessWidget {
 
   FlBorderData get borderData => FlBorderData(show: false);
 
-  List<BarChartGroupData> get barGroups => barData
-      .map((value) => BarChartGroupData(
-            x: barData.indexOf(value),
-            barRods: [BarChartRodData(toY: value, color: barColor)],
-            // showingTooltipIndicators: [0],
-          ))
-      .toList();
+  List<BarChartGroupData> get barGroups {
+    return barData
+        .asMap()
+        .entries
+        .map((entry) => BarChartGroupData(
+              x: entry.key,
+              barRods: [BarChartRodData(toY: entry.value, color: barColor)],
+              // showingTooltipIndicators: [0],
+            ))
+        .toList();
+  }
 }
