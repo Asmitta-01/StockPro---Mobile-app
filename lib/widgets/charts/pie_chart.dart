@@ -94,9 +94,16 @@ class _PieChartWidgetState extends State<PieChartWidget> {
         return PieChartSectionData(
           color: widget.colors[i],
           value: widget.values[i],
-          title: '',
+          showTitle: false,
+          badgeWidget: isTouched
+              ? Chip(
+                  padding: EdgeInsets.zero,
+                  label: Text(widget.values[i].toStringAsFixed(0)),
+                  backgroundColor: Get.theme.colorScheme.surface,
+                )
+              : null,
           radius: (widget.values[i] / maximum) * 80,
-          titlePositionPercentageOffset: 0.55,
+          badgePositionPercentageOffset: 1,
           borderSide: isTouched
               ? BorderSide(color: Get.theme.colorScheme.surface, width: 6)
               : const BorderSide(color: Colors.transparent),

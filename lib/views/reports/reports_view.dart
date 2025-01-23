@@ -276,11 +276,14 @@ class ReportsView extends GetView<ReportsController> {
                   .copyWith(fontWeight: FontWeight.w700),
             ),
             Text("last_x_days".trParams({'x': '7'})),
-            PieChartWidget(
-              colors: controller.pieColors,
-              values: controller.pieData,
-              labels: controller.pieLabels,
-            ),
+            if (controller.mostSoldItems.length < 3)
+              _noDataWidget()
+            else
+              PieChartWidget(
+                colors: controller.pieColors,
+                values: controller.mostSoldItemsValues,
+                labels: controller.mostSoldItemsLabels,
+              ),
           ],
         ),
       ),

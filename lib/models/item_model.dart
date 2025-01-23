@@ -30,4 +30,14 @@ class ItemModel {
       _$ItemModelFromJson(json);
 
   Map<String, dynamic> toJson() => _$ItemModelToJson(this);
+
+  @override
+  int get hashCode => Object.hash(id, createdAt);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+
+    return other is ItemModel && other.id == id && other.createdAt == createdAt;
+  }
 }
