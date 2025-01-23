@@ -104,6 +104,7 @@ flutter:
     - assets/images/google.png
     - assets/images/flags/english.png
     - assets/images/flags/french.jpg
+    
     - assets/languages/en.json
     - assets/languages/fr.json
 
@@ -112,6 +113,9 @@ flutter:
 
     - assets/data/terms_of_use/terms.en.md
     - assets/data/terms_of_use/terms.fr.md
+
+    - assets/data/privacy_policy/privacy.fr.md
+    - assets/data/privacy_policy/privacy.en.md
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images

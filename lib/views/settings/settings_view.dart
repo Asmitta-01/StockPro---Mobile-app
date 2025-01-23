@@ -44,10 +44,12 @@ class SettingsView extends GetView<SettingsController> {
           onTap: item['action'],
           title: Text("${item['label']}".tr),
           subtitle: item['subtitle'] != null ? Text(item['subtitle']()) : null,
-          trailing: Icon(
-            Icons.chevron_right_outlined,
-            color: Get.theme.colorScheme.onSurface.withOpacity(.3),
-          ),
+          trailing: item['subtitle'] == null
+              ? Icon(
+                  Icons.chevron_right_outlined,
+                  color: Get.theme.colorScheme.onSurface.withOpacity(.3),
+                )
+              : null,
         );
       },
       separatorBuilder: (context, index) => const Divider(height: 1),

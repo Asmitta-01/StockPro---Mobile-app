@@ -53,7 +53,7 @@ class SettingsController extends GetxController {
         'label': 'privacy_policy',
         'icon': Icons.security,
         'subtitle': null,
-        'action': () => Get.toNamed("Routes.about")
+        'action': goToPrivacyPolicyView
       }
     ];
     update();
@@ -65,6 +65,10 @@ class SettingsController extends GetxController {
 
   void goToTermsOfUseView() {
     Get.toNamed(Routes.settingsTerms);
+  }
+
+  void goToPrivacyPolicyView() {
+    Get.toNamed(Routes.settingsPrivacy);
   }
 
   String _getThemeMode() {
