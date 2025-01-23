@@ -68,7 +68,7 @@ class DialogHelper {
     );
   }
 
-  static void showActionDialog(
+  static Future<void> showActionDialog(
     BuildContext context, {
     required String title,
     String content = "",
@@ -79,7 +79,7 @@ class DialogHelper {
     required String secondaryActionLabel,
     bool isDanger = false,
     IconData? iconData,
-  }) {
+  }) async {
     assert(
       content.isEmpty || contentWidget == null,
       "You can't provide both content and contentWidget",
@@ -87,7 +87,7 @@ class DialogHelper {
 
     final theme = Get.theme;
 
-    showDialog(
+    await showDialog(
       context: context,
       builder: (context) => _ActionDialogContent(
         theme: theme,
