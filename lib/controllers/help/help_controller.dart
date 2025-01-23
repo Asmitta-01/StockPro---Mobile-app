@@ -5,6 +5,7 @@ import 'package:stock_pro/models/faq_item_model.dart';
 import 'package:stock_pro/repositories/faq_item_repository.dart';
 import 'package:stock_pro/utils/constants.dart';
 import 'package:stock_pro/utils/snack_bar_helper.dart';
+import 'package:stock_pro/widgets/dialogs/dialog_helper.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class HelpController extends GetxController {
@@ -46,19 +47,20 @@ class HelpController extends GetxController {
   }
 
   void showSendMailConfirmDialog() {
-    Get.defaultDialog(
+    DialogHelper.showActionDialog(
+      Get.context!,
       title: 'contact_us'.tr,
-      middleText: "${"send_a_mail_at_@x".trParams({
-            'x': AppConstants.appSupportMail
-          })} ?",
-      textConfirm: 'continue'.tr,
-      textCancel: 'cancel'.tr,
-      confirmTextColor: Colors.white,
-      onConfirm: () {
+      primaryAction: () {
         Get.back();
         _launchEmail();
       },
-      onCancel: Get.back,
+      iconData: Icons.mail_outline,
+      secondaryAction: Get.back,
+      primaryActionLabel: 'continue'.tr,
+      secondaryActionLabel: 'cancel'.tr,
+      content: "${"send_a_mail_at_@x".trParams({
+            'x': AppConstants.appSupportMail
+          })} ?",
     );
   }
 
