@@ -72,7 +72,7 @@ class DialogHelper {
     BuildContext context, {
     required String title,
     String content = "",
-    Widget contentWidget = const SizedBox.shrink(),
+    Widget? contentWidget,
     required VoidCallback primaryAction,
     required VoidCallback secondaryAction,
     required String primaryActionLabel,
@@ -81,7 +81,7 @@ class DialogHelper {
     IconData? iconData,
   }) {
     assert(
-      content.isEmpty || contentWidget == const SizedBox.shrink(),
+      content.isEmpty || contentWidget == null,
       "You can't provide both content and contentWidget",
     );
 
@@ -93,7 +93,7 @@ class DialogHelper {
         theme: theme,
         title: title,
         content: content,
-        contentWidget: contentWidget,
+        contentWidget: contentWidget ?? const SizedBox.shrink(),
         primaryAction: primaryAction,
         secondaryAction: secondaryAction,
         primaryActionLabel: primaryActionLabel,
@@ -310,7 +310,7 @@ class _ActionDialogContent extends StatelessWidget {
   Widget _buildContent() {
     return Container(
       margin: const EdgeInsets.only(top: 8),
-      child: contentWidget != const SizedBox.shrink()
+      child: content.isEmpty
           ? contentWidget
           : RichText(
               text: TextSpan(style: Get.textTheme.bodyMedium, text: content),
