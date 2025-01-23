@@ -135,13 +135,14 @@ class ReportsView extends GetView<ReportsController> {
                     ],
                   ),
                   const SizedBox(width: 24),
-                  Expanded(
-                    child: BarChartWidget(
-                      barData: controller.outgoingOperationsAmountsPerDay,
-                      barColor: Get.theme.colorScheme.secondary,
-                      labels: controller.pastDaysLabels,
+                  if (controller.outgoingOperationsAmountsPerDay.isNotEmpty)
+                    Expanded(
+                      child: BarChartWidget(
+                        barData: controller.outgoingOperationsAmountsPerDay,
+                        barColor: Get.theme.colorScheme.secondary,
+                        labels: controller.pastDaysLabels,
+                      ),
                     ),
-                  ),
                 ],
               ),
           ],
@@ -203,13 +204,14 @@ class ReportsView extends GetView<ReportsController> {
                     ],
                   ),
                   const SizedBox(width: 24),
-                  Expanded(
-                    child: BarChartWidget(
-                      barColor: Get.theme.colorScheme.primary,
-                      barData: controller.incomingOperationsAmountsPerDay,
-                      labels: controller.pastDaysLabels,
+                  if (controller.incomingOperationsAmountsPerDay.isNotEmpty)
+                    Expanded(
+                      child: BarChartWidget(
+                        barColor: Get.theme.colorScheme.primary,
+                        barData: controller.incomingOperationsAmountsPerDay,
+                        labels: controller.pastDaysLabels,
+                      ),
                     ),
-                  ),
                 ],
               ),
           ],

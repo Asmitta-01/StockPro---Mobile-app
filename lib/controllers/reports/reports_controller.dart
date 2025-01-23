@@ -167,10 +167,10 @@ class ReportsController extends GetxController {
       _operations.map((e) => e.estimatedAmount / 1000).toList();
 
   double get outgoingOperationsAverage =>
-      outgoingOperationsAmountsPerDay.reduce((v, e) => v + e) /
+      outgoingOperationsAmountsPerDay.fold(0.0, (v, e) => v + e) /
       _outgoingOperationsByDay.length;
   double get incomingOperationsAverage =>
-      incomingOperationsAmountsPerDay.reduce((v, e) => v + e) /
+      incomingOperationsAmountsPerDay.fold(0.0, (v, e) => v + e) /
       _incomingOperationsByDay.length;
 
   void openDrawer() {
