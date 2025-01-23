@@ -11,6 +11,7 @@ import 'package:stock_pro/controllers/reports/reports_controller.dart';
 import 'package:stock_pro/controllers/reports/stock_reports_controller.dart';
 import 'package:stock_pro/controllers/settings/backup_controller.dart';
 import 'package:stock_pro/controllers/settings/settings_controller.dart';
+import 'package:stock_pro/controllers/settings/terms_of_use_controller.dart';
 import 'package:stock_pro/controllers/shops/edit_shop_controller.dart';
 import 'package:stock_pro/controllers/shops/shops_controller.dart';
 import 'package:stock_pro/views/help/help_view.dart';
@@ -25,6 +26,7 @@ import 'package:stock_pro/views/reports/reports_view.dart';
 import 'package:stock_pro/views/reports/stock_reports_view.dart';
 import 'package:stock_pro/views/settings/backup_view.dart';
 import 'package:stock_pro/views/settings/settings_view.dart';
+import 'package:stock_pro/views/settings/terms_of_use_view.dart';
 import 'package:stock_pro/views/shops/edit_shop_view.dart';
 import 'package:stock_pro/views/shops/shops_view.dart';
 import 'package:stock_pro/views/splash_view.dart';
@@ -60,6 +62,7 @@ abstract class Routes {
 
   static const settings = '/settings';
   static const settingsBackup = '$settings/backup';
+  static const settingsTerms = '$settings/terms';
 }
 
 class AppPages {
@@ -150,6 +153,11 @@ class AppPages {
           name: Routes.settingsBackup.replaceFirst(Routes.settings, ''),
           page: () => const BackupView(),
           binding: BindingsBuilder.put(() => BackupController()),
+        ),
+        GetPage(
+          name: Routes.settingsTerms.replaceFirst(Routes.settings, ''),
+          page: () => const TermsOfUseView(),
+          binding: BindingsBuilder.put(() => TermsOfUseController()),
         ),
       ],
     ),

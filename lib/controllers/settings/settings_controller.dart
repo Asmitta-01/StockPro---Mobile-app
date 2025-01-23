@@ -47,7 +47,7 @@ class SettingsController extends GetxController {
         'label': 'terms_of_use',
         'icon': Icons.article_outlined,
         'subtitle': null,
-        'action': () => Get.toNamed("Routes.about")
+        'action': goToTermsOfUseView
       },
       {
         'label': 'privacy_policy',
@@ -61,6 +61,10 @@ class SettingsController extends GetxController {
 
   void goToBackupView() {
     Get.toNamed(Routes.settingsBackup);
+  }
+
+  void goToTermsOfUseView() {
+    Get.toNamed(Routes.settingsTerms);
   }
 
   String _getThemeMode() {
