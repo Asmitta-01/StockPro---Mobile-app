@@ -15,6 +15,7 @@ class OwnerHomeController extends GetxController {
   final SharedPreferences prefs = Get.find();
 
   bool definedStockAlert = false;
+  bool justOpened = true;
 
   late bool passedAll;
 
@@ -29,6 +30,7 @@ class OwnerHomeController extends GetxController {
   OwnerHomeController() {
     _initialize();
     passedAll = passedAllSteps();
+    justOpened = false;
   }
 
   void _initialize() async {
@@ -50,6 +52,11 @@ class OwnerHomeController extends GetxController {
       SnackbarHelper.showError("an_error_occurred_during_the_process".tr);
     }
 
+    if (passedAllSteps()) {
+      passedAll = true;
+    }
+
+    justOpened = false;
     update();
   }
 
