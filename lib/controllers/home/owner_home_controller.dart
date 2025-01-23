@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:stock_pro/models/operation_model.dart';
 import 'package:stock_pro/repositories/item_repository.dart';
 import 'package:stock_pro/repositories/operation_repository.dart';
 import 'package:stock_pro/routes.dart';
@@ -18,6 +19,9 @@ class OwnerHomeController extends GetxController {
   bool justOpened = true;
 
   late bool passedAll;
+
+  List<OperationModel> latestOperations = [];
+  final int limit = 2;
 
   int totalItems = 0;
   int totalOperations = 0;
@@ -38,6 +42,7 @@ class OwnerHomeController extends GetxController {
       totalItems = (await _itemRepository.getAll()).length;
 
       final operations = await _operationRepository.getAll();
+      latestOperations = operations.take(limit).toList();
       totalOperations = operations.length;
       dailyOperations = operations
           .where(
@@ -100,6 +105,4 @@ class OwnerHomeController extends GetxController {
     passedAll = true;
     update();
   }
-
-  void getPremium() {}
 }

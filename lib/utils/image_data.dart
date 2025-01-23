@@ -1,5 +1,7 @@
 class ImageData {
   static const appIcon = "assets/images/app-icon.png";
+  static const calendar = "assets/images/calendar.png";
+  static const calendarDark = "assets/images/calendar-dark.png";
   static const logo = "assets/images/logo.png";
   static const logoDark = "assets/images/logoDark.png";
   static const logoBlueBackground = 'assets/images/logoBlueBackground.png';

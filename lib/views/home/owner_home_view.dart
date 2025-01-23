@@ -4,6 +4,7 @@ import 'package:stock_pro/controllers/home/owner_home_controller.dart';
 import 'package:stock_pro/utils/image_data.dart';
 import 'package:stock_pro/widgets/drawer_widget.dart';
 import 'package:stock_pro/widgets/getting_started_widget.dart';
+import 'package:stock_pro/widgets/list_tiles/operation_list_tile.dart';
 
 class OwnerHomeView extends GetView<OwnerHomeController> {
   const OwnerHomeView({super.key});
@@ -28,12 +29,12 @@ class OwnerHomeView extends GetView<OwnerHomeController> {
               child: const Icon(Icons.menu_rounded),
             ),
             title: Text("home".tr),
-            actions: const [
-              Padding(
-                padding: EdgeInsets.only(right: 16),
-                child: InkWell(child: Icon(Icons.notifications_outlined)),
-              )
-            ],
+            // actions: const [
+            //   Padding(
+            //     padding: EdgeInsets.only(right: 16),
+            //     child: InkWell(child: Icon(Icons.notifications_outlined)),
+            //   )
+            // ],
           ),
           body: controller.passedAll
               ? OwnerHomeWidget(ownerHomeController: controller)
@@ -67,7 +68,7 @@ class OwnerHomeWidget extends StatelessWidget {
           shrinkWrap: true,
           children: [
             Text(
-              "${"hello".tr}, Paul",
+              "hello".tr,
               style: Get.textTheme.headlineSmall!
                   .copyWith(fontWeight: FontWeight.bold),
             ),
@@ -86,41 +87,7 @@ class OwnerHomeWidget extends StatelessWidget {
           ],
         ),
         spacing,
-        Container(
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-          color: Get.theme.colorScheme.primary,
-          child: _getPremiumCard(),
-        ),
       ],
-    );
-  }
-
-  Card _getPremiumCard() {
-    const spacing_ = SizedBox(height: 6);
-    return Card(
-      child: Container(
-        padding: cardPadding,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Image.asset(ImageData.logo, width: 120),
-            spacing_,
-            Text(
-              "you_are_good_with_premium".tr,
-              style: Get.textTheme.titleLarge!
-                  .copyWith(fontWeight: FontWeight.bold),
-            ),
-            spacing_,
-            Text("premium_pass_intro_text".tr),
-            spacing_,
-            ElevatedButton.icon(
-              onPressed: ownerHomeController.getPremium,
-              label: Text("get_premium_pass".tr),
-              icon: const Icon(Icons.diamond),
-            ),
-          ],
-        ),
-      ),
     );
   }
 
@@ -261,12 +228,28 @@ class OwnerHomeWidget extends StatelessWidget {
                 style: Get.textTheme.titleLarge!
                     .copyWith(fontWeight: FontWeight.bold),
               ),
-              const Icon(Icons.local_activity_outlined),
+              Image.asset(
+                Get.isDarkMode ? ImageData.calendarDark : ImageData.calendar,
+                height: 30,
+              ),
             ],
           ),
-          const SizedBox(height: 36),
+          ownerHomeController.latestOperations.isEmpty
+              ? const SizedBox.shrink()
+              : ListView.builder(
+                  shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
+                  itemCount: ownerHomeController.latestOperations.length,
+                  itemBuilder: (context, index) {
+                    return OperationListTile(
+                      operationModel:
+                          ownerHomeController.latestOperations[index],
+                    );
+                  },
+                ),
           Text(
-            "x_latest_operations_made".trParams({'x': "02"}),
+            "x_latest_operations_made"
+                .trParams({'x': ownerHomeController.limit.toString()}),
             style: TextStyle(
               color: Get.theme.colorScheme.onSurface.withOpacity(.5),
             ),

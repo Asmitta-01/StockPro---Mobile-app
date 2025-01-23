@@ -81,6 +81,8 @@ flutter:
 
   assets:
     - assets/images/app-icon.png
+    - assets/images/calendar.png
+    - assets/images/calendar-dark.png
     - assets/images/logo.png
     - assets/images/logoDark.png
     - assets/images/logoBlueBackground.png
