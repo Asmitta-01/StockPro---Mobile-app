@@ -1,0 +1,26 @@
+[
+    {
+        "question": "Quels types d'entreprises peuvent bénéficier de cette application ?",
+        "answer": "Cette application Android est conçue pour les entreprises de toutes tailles, y compris les détaillants, les grossistes et les petites entreprises."
+    },
+    {
+        "question": "Puis-je suivre différents types d'inventaire avec cette application ?",
+        "answer": "Oui, vous pouvez facilement ajouter, modifier et supprimer des articles d'inventaire de différents types dans l'application."
+    },
+    {
+        "question": "Comment l'application m'aide-t-elle à gérer les niveaux de stock ?",
+        "answer": "L'application vous permet de définir des alertes à faible stockage et de recevoir des notifications lorsque les niveaux de stock tombent en dessous d'un certain seuil."
+    },
+    {
+        "question": "Comment sauvegarder et restaurer mes données ?",
+        "answer": "L'application propose une fonctionnalité de sauvegarde automatique dans le cloud. Vous pouvez également effectuer des sauvegardes manuelles et les restaurer à tout moment."
+    },
+    {
+        "question": "Comment contacter le service client en cas de problème ?",
+        "answer": "Vous pouvez nous contacter par email à l'adresse tiwabrayan@gmail.com ou consulter notre centre d'aide en ligne."
+    },
+    {
+        "question": "Comment suis-je informé des mises à jour de l'application ?",
+        "answer": "Vous recevrez des notifications lorsque de nouvelles mises à jour seront disponibles sur le Google Play Store."
+    }
+]

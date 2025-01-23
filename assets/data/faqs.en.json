@@ -1,0 +1,26 @@
+[
+    {
+        "question": "What types of companies can benefit from this application ?",
+        "answer": "This Android application is designed for companies of all sizes, including retailers, wholesalers and small businesses."
+    },
+    {
+        "question": "Can I follow different types of inventory with this application ?",
+        "answer": "Yes, you can easily add, modify and delete inventory items of different types in the application."
+    },
+    {
+        "question": "How does the app help me manage stock levels?",
+        "answer": "The app allows you to monitor stock levels, set low-stock alerts, and receive notifications when stock levels fall below a certain threshold."
+    },
+    {
+        "question": "How to save and restore my data ?",
+        "answer": "The application offers automatic backup feature on your device. You can also make manual backups and restore them at any time."
+    },
+    {
+        "question": "How to contact customer service in the event of a problem ?",
+        "answer": "You can contact us by email at tiwabrayan@gmail.com or consult our online help center."
+    },
+    {
+        "question": "How am I informed of the application updates ?",
+        "answer": "You will receive notifications when new updates are available on the Google Play Store."
+    }
+]

@@ -102,6 +102,8 @@ flutter:
     - assets/images/flags/french.jpg
     - assets/languages/en.json
     - assets/languages/fr.json
+    - assets/data/faqs.en.json
+    - assets/data/faqs.fr.json
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:stock_pro/models/faq_item_model.dart';
+import 'package:stock_pro/repositories/faq_item_repository.dart';
 import 'package:stock_pro/utils/constants.dart';
 import 'package:stock_pro/utils/snack_bar_helper.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -10,41 +11,11 @@ class HelpController extends GetxController {
   GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
   final int pagePosition = 7;
 
+  final FaqItemRepository _repository = Get.find();
+
   final SharedPreferences prefs = Get.find();
 
-  final List<FAQItemModel> items = [
-    FAQItemModel(
-      question:
-          'Quels types d\'entreprises peuvent bénéficier de cette application ?',
-      answer:
-          'Cette application Android est conçue pour les entreprises de toutes tailles, y compris les détaillants, les grossistes et les petites entreprises.',
-    ),
-    FAQItemModel(
-      question:
-          'Puis-je suivre différents types d\'inventaire avec cette application ?',
-      answer:
-          'Oui, vous pouvez facilement ajouter, modifier et supprimer des articles d\'inventaire de différents types dans l\'application.',
-    ),
-    FAQItemModel(
-        question: "How does the app help me manage stock levels?",
-        answer:
-            "The app allows you to monitor stock levels in real-time, set low-stock alerts, and receive notifications when stock levels fall below a certain threshold."),
-    FAQItemModel(
-      question: 'Comment sauvegarder et restaurer mes données ?',
-      answer:
-          'L\'application propose une fonctionnalité de sauvegarde automatique dans le cloud. Vous pouvez également effectuer des sauvegardes manuelles et les restaurer à tout moment.',
-    ),
-    FAQItemModel(
-      question: 'Comment contacter le service client en cas de problème ?',
-      answer:
-          'Vous pouvez nous contacter par email à l\'adresse tiwabrayan@gmail.com ou consulter notre centre d\'aide en ligne.',
-    ),
-    FAQItemModel(
-      question: 'Comment suis-je informé des mises à jour de l\'application ?',
-      answer:
-          'Vous recevrez des notifications lorsque de nouvelles mises à jour seront disponibles sur le Google Play Store.',
-    ),
-  ];
+  List<FAQItemModel> items = [];
 
   HelpController() {
     if (prefs.getBool(AppConstants.firstTimeHelp) ?? true) {
@@ -57,6 +28,16 @@ class HelpController extends GetxController {
           );
         });
       });
+    }
+    _loadItems();
+  }
+
+  void _loadItems() async {
+    try {
+      items = await _repository.getAll();
+      update();
+    } catch (_) {
+      SnackbarHelper.showError('error_loading_faqs'.tr);
     }
   }
 
