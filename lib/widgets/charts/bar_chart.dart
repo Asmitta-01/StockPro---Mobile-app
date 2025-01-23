@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
+import 'package:stock_pro/utils/extensions/number_extension.dart';
 
 class BarChartWidget extends StatelessWidget {
   const BarChartWidget(
@@ -43,7 +44,7 @@ class BarChartWidget extends StatelessWidget {
             int rodIndex,
           ) {
             return BarTooltipItem(
-              rod.toY.round().toString(),
+              rod.toY.compact,
               TextStyle(color: barColor, fontWeight: FontWeight.bold),
             );
           },

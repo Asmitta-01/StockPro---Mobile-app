@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:stock_pro/controllers/reports/reports_controller.dart';
+import 'package:stock_pro/utils/extensions/number_extension.dart';
 import 'package:stock_pro/widgets/charts/bar_chart.dart';
 import 'package:stock_pro/widgets/charts/line_chart.dart';
 import 'package:stock_pro/widgets/charts/pie_chart.dart';
@@ -108,34 +109,41 @@ class ReportsView extends GetView<ReportsController> {
               ],
             ),
             const SizedBox(height: 16),
-            Row(
-              children: [
-                Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Text(
-                      "${controller.data1Average.toInt()}k",
-                      style: Get.textTheme.headlineLarge!.copyWith(
-                        color: Get.theme.colorScheme.secondary,
-                        fontWeight: FontWeight.w600,
+            if (controller.outgoingOperationsAmountsPerDay
+                    .where((amount) => amount == 0)
+                    .length >
+                (controller.pastDays / 2).ceil())
+              _noDataWidget()
+            else
+              Row(
+                children: [
+                  Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Text(
+                        controller.outgoingOperationsAverage.compact,
+                        style: Get.textTheme.headlineLarge!.copyWith(
+                          color: Get.theme.colorScheme.secondary,
+                          fontWeight: FontWeight.w600,
+                        ),
                       ),
-                    ),
-                    Text(
-                      "average".tr,
-                      style: TextStyle(color: Get.theme.colorScheme.secondary),
-                    ),
-                  ],
-                ),
-                const SizedBox(width: 24),
-                Expanded(
-                  child: BarChartWidget(
-                    barData: controller.barData1,
-                    barColor: Get.theme.colorScheme.secondary,
-                    labels: controller.barLabels,
+                      Text(
+                        "average".tr,
+                        style:
+                            TextStyle(color: Get.theme.colorScheme.secondary),
+                      ),
+                    ],
                   ),
-                ),
-              ],
-            ),
+                  const SizedBox(width: 24),
+                  Expanded(
+                    child: BarChartWidget(
+                      barData: controller.outgoingOperationsAmountsPerDay,
+                      barColor: Get.theme.colorScheme.secondary,
+                      labels: controller.pastDaysLabels,
+                    ),
+                  ),
+                ],
+              ),
           ],
         ),
       ),
@@ -162,40 +170,48 @@ class ReportsView extends GetView<ReportsController> {
                       style: Get.textTheme.titleMedium!
                           .copyWith(fontWeight: FontWeight.w700),
                     ),
-                    Text("last_x_days".trParams({'x': '7'})),
+                    Text("last_x_days"
+                        .trParams({'x': '${controller.pastDays}'})),
                   ],
                 ),
                 const Icon(Icons.keyboard_arrow_right),
               ],
             ),
             const SizedBox(height: 16),
-            Row(
-              children: [
-                Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Text(
-                      "${controller.data2Average.toInt()}k",
-                      style: Get.textTheme.headlineLarge!.copyWith(
-                        color: Get.theme.colorScheme.primary,
-                        fontWeight: FontWeight.w600,
+            if (controller.outgoingOperationsAmountsPerDay
+                    .where((amount) => amount == 0)
+                    .length >
+                (controller.pastDays / 2).ceil())
+              _noDataWidget()
+            else
+              Row(
+                children: [
+                  Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Text(
+                        controller.incomingOperationsAverage.compact,
+                        style: Get.textTheme.headlineLarge!.copyWith(
+                          color: Get.theme.colorScheme.primary,
+                          fontWeight: FontWeight.w600,
+                        ),
                       ),
-                    ),
-                    Text(
-                      "average".tr,
-                      style: TextStyle(color: Get.theme.colorScheme.primary),
-                    ),
-                  ],
-                ),
-                const SizedBox(width: 24),
-                Expanded(
+                      Text(
+                        "average".tr,
+                        style: TextStyle(color: Get.theme.colorScheme.primary),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(width: 24),
+                  Expanded(
                     child: BarChartWidget(
-                  barColor: Get.theme.colorScheme.primary,
-                  barData: controller.barData2,
-                  labels: controller.barLabels,
-                )),
-              ],
-            ),
+                      barColor: Get.theme.colorScheme.primary,
+                      barData: controller.incomingOperationsAmountsPerDay,
+                      labels: controller.pastDaysLabels,
+                    ),
+                  ),
+                ],
+              ),
           ],
         ),
       ),

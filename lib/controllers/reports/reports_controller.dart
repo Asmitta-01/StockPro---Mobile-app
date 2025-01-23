@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:stock_pro/models/enums/operation_type.dart';
 import 'package:stock_pro/models/item_model.dart';
 import 'package:stock_pro/models/operation_model.dart';
@@ -14,6 +15,8 @@ class ReportsController extends GetxController {
 
   final OperationRepository _operationRepository = Get.find();
   List<OperationModel> _operations = [];
+  Map<DateTime, List<OperationModel>> _incomingOperationsByDay = {};
+  Map<DateTime, List<OperationModel>> _outgoingOperationsByDay = {};
   Iterable<MapEntry<ItemModel, int>> mostSoldItems = [];
 
   /// Number of days to look back when calculating recent statistics.
@@ -27,19 +30,72 @@ class ReportsController extends GetxController {
   void _loadData() async {
     _operations = await _operationRepository.getAll();
     _loadMostSoldItems();
+    _loadIncomingOperations();
+    _loadOutgoingOperations();
   }
 
-  final List<double> barData1 = const [260, 200, 180, 170, 190, 240, 400];
-  final List<double> barData2 = const [160, 50, 90, 20, 190, 140, 200];
-  final List<String> barLabels = [
-    'Mon',
-    'Tue',
-    'Wed',
-    'Thu',
-    'Fri',
-    'Sat',
-    'Sun'
-  ];
+  /// Groups incoming operations by day within the specified time range.
+  ///
+  /// Filters operations where type is 'incoming' and created within [pastDays].
+  ///  Groups filtered operations by day using [_getOperationsByDay]
+  /// 3. Updates [_incomingOperationsByDay] with the grouped results
+  void _loadIncomingOperations() {
+    DateTime startDate = DateTime.now().subtract(Duration(days: pastDays));
+    final incomingOperations = _operations.where((e) {
+      var after = e.createdAt.isAfter(startDate);
+      return e.type == OperationType.incoming && after;
+    }).toList();
+
+    Map<DateTime, List<OperationModel>> operationsByDay =
+        _getOperationsByDay(startDate, incomingOperations);
+    _incomingOperationsByDay = operationsByDay;
+    update();
+  }
+
+  void _loadOutgoingOperations() {
+    DateTime startDate = DateTime.now().subtract(Duration(days: pastDays));
+    final outgoingOperations = _operations.where((e) {
+      var after = e.createdAt.isAfter(startDate);
+      return e.type == OperationType.outgoing && after;
+    }).toList();
+
+    Map<DateTime, List<OperationModel>> operationsByDay =
+        _getOperationsByDay(startDate, outgoingOperations);
+    _outgoingOperationsByDay = operationsByDay;
+    update();
+  }
+
+  /// Creates a map of operations grouped by day starting from [startDate].
+  ///
+  /// Parameters:
+  /// - [startDate]: The starting date to begin grouping operations
+  /// - [outgoingOperations]: List of operations to be grouped
+  ///
+  /// Returns a Map where:
+  /// - Key: DateTime object truncated to day (no time component)
+  /// - Value: List of operations that occurred on that day
+  ///
+  /// The map includes entries for all days in the [pastDays] range,
+  /// even if no operations occurred on a particular day (empty list).
+  Map<DateTime, List<OperationModel>> _getOperationsByDay(
+      DateTime startDate, List<OperationModel> outgoingOperations) {
+    Map<DateTime, List<OperationModel>> operationsByDay =
+        <DateTime, List<OperationModel>>{};
+    for (var i = 0; i < pastDays; i++) {
+      var date = startDate.add(Duration(days: i));
+      operationsByDay[DateTime(date.year, date.month, date.day)] = [];
+    }
+
+    for (var operation in outgoingOperations) {
+      var day = DateTime(
+        operation.createdAt.year,
+        operation.createdAt.month,
+        operation.createdAt.day,
+      );
+      operationsByDay[day]?.add(operation);
+    }
+    return operationsByDay;
+  }
 
   /// Calculates and updates the most frequently sold items based on outgoing
   /// operations made on the [pastDays].
@@ -77,6 +133,27 @@ class ReportsController extends GetxController {
     update();
   }
 
+  /// Returns a list of daily total amounts from outgoing operations.
+  List<double> get outgoingOperationsAmountsPerDay =>
+      _outgoingOperationsByDay.entries.map((e) {
+        return e.value.fold<double>(
+            0.0, (previousValue, element) => previousValue + element.amount);
+      }).toList();
+
+  /// Returns a list of daily total amounts from incoming operations.
+  /// Each element represents the sum of all operation amounts for a specific day.
+  List<double> get incomingOperationsAmountsPerDay =>
+      _incomingOperationsByDay.entries.map((e) {
+        return e.value.fold<double>(
+            0.0, (previousValue, element) => previousValue + element.amount);
+      }).toList();
+
+  /// Returns a list of day names (Mon, Tue, etc.) for the past operations.
+  List<String> get pastDaysLabels => _incomingOperationsByDay.entries
+      .map(
+          (e) => DateFormat.E(Get.locale?.toString()).format(e.key).capitalize!)
+      .toList();
+
   List<String> get mostSoldItemsLabels =>
       mostSoldItems.map((e) => e.key.name).toList();
   List<double> get mostSoldItemsValues =>
@@ -89,8 +166,12 @@ class ReportsController extends GetxController {
   List<double> get lineDataOperationsEstimatedAmounts =>
       _operations.map((e) => e.estimatedAmount / 1000).toList();
 
-  double get data1Average => barData1.reduce((v, e) => v + e) / barData1.length;
-  double get data2Average => barData2.reduce((v, e) => v + e) / barData2.length;
+  double get outgoingOperationsAverage =>
+      outgoingOperationsAmountsPerDay.reduce((v, e) => v + e) /
+      _outgoingOperationsByDay.length;
+  double get incomingOperationsAverage =>
+      incomingOperationsAmountsPerDay.reduce((v, e) => v + e) /
+      _incomingOperationsByDay.length;
 
   void openDrawer() {
     scaffoldKey.currentState!.openDrawer();
