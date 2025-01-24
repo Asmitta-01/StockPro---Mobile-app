@@ -16,7 +16,7 @@ class SplashController extends GetxController {
   }
 
   void goToMainView() {
-    Get.toNamed(Routes.main);
+    Get.offNamed(Routes.main);
   }
 
   void handlePopScope() {

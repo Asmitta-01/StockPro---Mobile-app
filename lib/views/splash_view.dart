@@ -13,7 +13,7 @@ class SplashView extends GetView<SplashController> {
   @override
   Widget build(BuildContext context) {
     return PopScope(
-      canPop: false,
+      canPop: controller.checkedStatus,
       onPopInvokedWithResult: (didPop, result) => controller.handlePopScope(),
       child: Scaffold(
         backgroundColor: Get.isDarkMode
