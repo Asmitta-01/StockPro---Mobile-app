@@ -5,6 +5,7 @@ import 'package:stock_pro/controllers/operations/operations_controller.dart';
 import 'package:stock_pro/utils/image_data.dart';
 import 'package:stock_pro/widgets/drawer_widget.dart';
 import 'package:stock_pro/widgets/list_tiles/operation_list_tile.dart';
+import 'package:stock_pro/widgets/popup_menu_widget.dart';
 
 class OperationsView extends GetView<OperationsController> {
   const OperationsView({super.key});
@@ -31,9 +32,45 @@ class OperationsView extends GetView<OperationsController> {
                   ),
                 ),
               if (controller.operations.isNotEmpty) ...[
+                Stack(
+                  alignment: Alignment.bottomRight,
+                  children: [
+                    PopupMenuWidget(
+                      items: controller.sortOptions,
+                      selectedItemIndex: controller.selectedOptionIndex,
+                      onSelectedOptionChanged: controller.sortData,
+                      icon: Icons.sort,
+                    ),
+                    Positioned(
+                      right: 8,
+                      bottom: 8,
+                      child: ClipRRect(
+                          borderRadius: BorderRadius.circular(20),
+                          child: Text(
+                            String.fromCharCode(controller.sortAscending
+                                ? Icons.arrow_upward.codePoint
+                                : Icons.arrow_downward.codePoint),
+                            style: TextStyle(
+                              inherit: false,
+                              fontSize: 18,
+                              color: Get.theme.colorScheme.primary,
+                              fontWeight: FontWeight.bold,
+                              fontFamily: controller.sortAscending
+                                  ? Icons.arrow_upward.fontFamily
+                                  : Icons.arrow_downward.fontFamily,
+                            ),
+                          )),
+                    ),
+                  ],
+                ),
                 IconButton(
-                  onPressed: () {},
-                  icon: const Icon(Icons.filter_list),
+                  onPressed: controller.toggleSortOrder,
+                  icon: Transform(
+                    alignment: Alignment.center,
+                    transform: Matrix4.rotationY(
+                        controller.sortAscending ? 0 : 3.14159),
+                    child: const Icon(Icons.sort_by_alpha),
+                  ),
                 ),
                 IconButton(
                   onPressed: controller.goToAddOperationView,

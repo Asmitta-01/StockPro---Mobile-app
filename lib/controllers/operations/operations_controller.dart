@@ -14,6 +14,14 @@ class OperationsController extends GetxController {
   bool loadingOperations = true;
   List<OperationModel> operations = [];
 
+  int selectedOptionIndex = 0;
+  final List<String> sortOptions = [
+    "date".tr,
+    "amount".tr,
+  ];
+
+  bool sortAscending = false;
+
   OperationsController() {
     _loadOperations();
   }
@@ -23,8 +31,8 @@ class OperationsController extends GetxController {
       operations = await _repository.getAll();
       operations.sort((a, b) => b.createdAt.compareTo(a.createdAt));
     } catch (e, stackTrace) {
-      debugPrint(e.toString());
-      debugPrint(stackTrace.toString());
+      Get.log(e.toString(), isError: true);
+      Get.log(stackTrace.toString(), isError: true);
       SnackbarHelper.showError("an_error_occurred_while_loading_data".tr);
     }
 
@@ -69,6 +77,34 @@ class OperationsController extends GetxController {
     );
 
     return result ?? false;
+  }
+
+  void sortData(int index) {
+    switch (index) {
+      case 0:
+        if (sortAscending) {
+          operations.sort((a, b) => b.createdAt.compareTo(a.createdAt));
+        } else {
+          operations.sort((a, b) => a.createdAt.compareTo(b.createdAt));
+        }
+        break;
+      case 1:
+        if (sortAscending) {
+          operations.sort((a, b) => b.amount.compareTo(a.amount));
+        } else {
+          operations.sort((a, b) => a.amount.compareTo(b.amount));
+        }
+        break;
+    }
+    selectedOptionIndex = index;
+    update();
+  }
+
+  void toggleSortOrder() {
+    sortAscending = !sortAscending;
+    update();
+
+    sortData(selectedOptionIndex);
   }
 
   void openDrawer() {

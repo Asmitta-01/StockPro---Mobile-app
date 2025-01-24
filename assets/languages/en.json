@@ -96,6 +96,7 @@
     "please_fill_the_following_form": "Please fill the following form to add an operation.",
     "pick_the_operation_execution_date": "Pick the operation execution date",
     "date": "Date",
+    "amount": "Amount",
     "invoice": "Invoice",
     "invoice_number": "Invoice number",
     "we_will_generate_one_if_it_is_empty": "We will generate one if it is empty",

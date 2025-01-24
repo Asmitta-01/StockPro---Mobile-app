@@ -96,6 +96,7 @@
     "please_fill_the_following_form": "Veuillez remplir le formulaire suivant pour ajouter une opération.",
     "pick_the_operation_execution_date": "Choisissez la date d'exécution de l'opération",
     "date": "Date",
+    "amount": "Montant",
     "invoice": "Facture",
     "invoice_number": "Numéro de facture",
     "we_will_generate_one_if_it_is_empty": "Nous générerons un numéro de facture automatiquement",
