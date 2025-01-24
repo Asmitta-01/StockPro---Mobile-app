@@ -33,7 +33,8 @@ To run this project locally:
 2. Clone this repository.
 3. Run `flutter pub get` to install dependencies.
 4. Run `dart run build_runner build` to generate __*.g.dart__ files (Needed in models).
-5. Connect a device or start an emulator.
-6. Run `flutter run` to start the app.
+5. If you're in debug mode, edit [android/app/build.gradle](./android/app/build.gradle#L50) and replace `signingConfig = signingConfigs.release` by `signingConfig = signingConfigs.debug`.
+6. Connect a device or start an emulator.
+7. Run `flutter run` to start the app.
 
 For more information on Flutter development, check out the [Flutter documentation](https://flutter.dev/docs).
