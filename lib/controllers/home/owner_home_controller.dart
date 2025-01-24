@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:stock_pro/models/enums/operation_type.dart';
 import 'package:stock_pro/models/operation_model.dart';
 import 'package:stock_pro/repositories/item_repository.dart';
 import 'package:stock_pro/repositories/operation_repository.dart';
@@ -20,6 +21,7 @@ class OwnerHomeController extends GetxController {
 
   late bool passedAll;
 
+  double dailyIncomes = 0.0;
   List<OperationModel> latestOperations = [];
   final int limit = 2;
 
@@ -44,10 +46,13 @@ class OwnerHomeController extends GetxController {
       final operations = await _operationRepository.getAll();
       latestOperations = operations.take(limit).toList();
       totalOperations = operations.length;
-      dailyOperations = operations
-          .where(
-              (model) => DateUtils.isSameDay(model.createdAt, DateTime.now()))
-          .length;
+
+      final dayOperations = operations.where(
+          (model) => DateUtils.isSameDay(model.createdAt, DateTime.now()));
+      dailyOperations = dayOperations.length;
+      dailyIncomes = dayOperations
+          .where((o) => o.type == OperationType.outgoing)
+          .fold(0.0, (previousValue, model) => previousValue + model.amount);
 
       definedStockAlert = (await _itemRepository
               .query(where: 'stock_threshold <> ?', whereArgs: [0]))

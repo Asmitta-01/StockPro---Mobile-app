@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:stock_pro/controllers/home/owner_home_controller.dart';
+import 'package:stock_pro/utils/extensions/number_extension.dart';
 import 'package:stock_pro/utils/image_data.dart';
 import 'package:stock_pro/widgets/drawer_widget.dart';
 import 'package:stock_pro/widgets/getting_started_widget.dart';
@@ -170,38 +171,52 @@ class OwnerHomeWidget extends StatelessWidget {
     );
   }
 
-  Card _buildGainsCard() {
-    return Card(
-      color: Get.theme.colorScheme.primary,
-      margin: EdgeInsets.zero,
-      child: Padding(
-        padding: cardPadding,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            const SizedBox.shrink(),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+  Widget _buildGainsCard() {
+    return Stack(
+      alignment: Alignment.center,
+      children: [
+        Card(
+          color: Get.theme.colorScheme.primary,
+          margin: EdgeInsets.only(left: Get.size.width * .1),
+          child: Padding(
+            padding: cardPadding,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(
-                  "you_have_gained".tr,
-                  style: TextStyle(color: Get.theme.colorScheme.onPrimary),
-                ),
-                Text(
-                  "100 000 XAF",
-                  style: Get.textTheme.headlineMedium!.copyWith(
-                      fontWeight: FontWeight.bold,
-                      color: Get.theme.colorScheme.onPrimary),
-                ),
-                Text(
-                  "today".tr.toLowerCase(),
-                  style: TextStyle(color: Get.theme.colorScheme.onPrimary),
-                ),
+                const SizedBox.shrink(),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "you_have_a_recipe".tr,
+                      style: TextStyle(color: Get.theme.colorScheme.onPrimary),
+                    ),
+                    Text(
+                      ownerHomeController.dailyIncomes < 1e6
+                          ? ownerHomeController.dailyIncomes.toSimpleCurrency
+                          : ownerHomeController.dailyIncomes.toCurrency,
+                      style: Get.textTheme.headlineMedium!.copyWith(
+                          fontWeight: FontWeight.bold,
+                          color: Get.theme.colorScheme.onPrimary),
+                    ),
+                    Text(
+                      "today".tr.toLowerCase(),
+                      style: TextStyle(color: Get.theme.colorScheme.onPrimary),
+                    ),
+                  ],
+                )
               ],
-            )
-          ],
+            ),
+          ),
         ),
-      ),
+        Positioned(
+          left: 0,
+          child: Image.asset(
+            ImageData.sellWindow,
+            width: Get.size.width * .38,
+          ),
+        )
+      ],
     );
   }
 
